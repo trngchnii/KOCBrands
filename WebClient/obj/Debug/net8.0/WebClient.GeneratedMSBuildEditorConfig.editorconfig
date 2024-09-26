@@ -18,12 +18,20 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = D:\FPT_FUDA\PRN231\KOCBrands\WebClient
 build_property._RazorSourceGeneratorDebug = 
 
+[D:/FPT_FUDA/PRN231/KOCBrands/WebClient/Views/Brand/EditProfile.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQnJhbmRcRWRpdFByb2ZpbGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/FPT_FUDA/PRN231/KOCBrands/WebClient/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/FPT_FUDA/PRN231/KOCBrands/WebClient/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/FPT_FUDA/PRN231/KOCBrands/WebClient/Views/Influencer/EditProfile.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW5mbHVlbmNlclxFZGl0UHJvZmlsZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/FPT_FUDA/PRN231/KOCBrands/WebClient/Views/Shared/Error.cshtml]
