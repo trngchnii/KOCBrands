@@ -1,3 +1,7 @@
 .vs/
 .vscode/
 *.bin
+*.obj
+*.suo
+*.user
+*.userprefs

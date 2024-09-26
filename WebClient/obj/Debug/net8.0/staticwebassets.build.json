@@ -1,11 +1,23 @@
 {
   "Version": 1,
-  "Hash": "row85Gegz+Q69Bd5kY6b3zcNqv/Y+b8jvaimUddIsis=",
+  "Hash": "Lmd7cO06XopTVttP7TZXPzW+vffmRiI0Yz0hOmCkFHg=",
   "Source": "WebClient",
   "BasePath": "_content/WebClient",
   "Mode": "Default",
   "ManifestType": "Build",
-  "ReferencedProjectsConfiguration": [],
+  "ReferencedProjectsConfiguration": [
+    {
+      "Identity": "D:\\FPT_FUDA\\PRN231\\KOCBrands\\api\\api.csproj",
+      "Version": 2,
+      "Source": "api",
+      "GetPublishAssetsTargets": "ComputeReferencedStaticWebAssetsPublishManifest;GetCurrentProjectPublishStaticWebAssetItems",
+      "AdditionalPublishProperties": "",
+      "AdditionalPublishPropertiesToRemove": "WebPublishProfileFile;TargetFramework",
+      "GetBuildAssetsTargets": "GetCurrentProjectBuildStaticWebAssetItems",
+      "AdditionalBuildProperties": "",
+      "AdditionalBuildPropertiesToRemove": "WebPublishProfileFile;TargetFramework"
+    }
+  ],
   "DiscoveryPatterns": [
     {
       "Name": "WebClient\\wwwroot",
