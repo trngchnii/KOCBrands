@@ -1,0 +1,197 @@
+@{
+    ViewData["Title"] = "Chỉnh sửa hồ sơ công ty";
+}
+
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chỉnh sửa hồ sơ công ty</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-size: 0.85em;
+            /* Thay đổi giá trị này để điều chỉnh kích thước font chữ cho toàn bộ trang */
+        }
+        .custom-button {
+            background-color: #FF6B00;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            /* Hiệu ứng chuyển màu */
+        }
+
+        .custom-button:hover {
+            background-color: #e65c00;
+            /* Màu tối hơn khi hover */
+        }
+
+        .avatar-upload {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            margin: auto;
+            background-color: #f8f9fa;
+            border-radius: 50%;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .avatar-upload img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+            transition: opacity 0.3s ease;
+        }
+
+        .avatar-upload:hover img {
+            opacity: 0.7;
+        }
+
+        .avatar-upload .upload-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 24px;
+            color: white;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .avatar-upload:hover .upload-icon {
+            opacity: 1;
+        }
+
+        .avatar-upload input[type="file"] {
+            display: none;
+        }
+
+    </style>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div class="container">
+        <h2 class="mt-4">Hồ Sơ Công Ty</h2>
+
+        <form>
+            <div class="row">
+                <!-- Phần bên trái: Thông tin công ty và liên hệ -->
+                <div class="col-md-8">
+                    <!-- Thông tin công ty -->
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h6>Thông tin công ty</h6>
+                            <div class="form-row">
+                                <div class="form-group col-md-4">
+                                    <label for="CompanyName">Tên công ty
+                                        <sup class="text-danger">*</sup>
+                                    </label>
+                                    <input type="text" class="form-control" id="CompanyName" placeholder="Nhập tên công ty"
+                                        required>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="TaxCode">Mã số thuế
+                                        <sup class="text-danger">*</sup>
+                                    </label>
+                                    <input type="text" class="form-control" id="TaxCode" placeholder="Vui lòng nhập mã số thuế"
+                                        required>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="CompanyAddress">Địa chỉ công ty
+                                        <sup class="text-danger">*</sup>
+                                    </label>
+                                    <input type="text" class="form-control" id="CompanyAddress"
+                                        placeholder="Nhập địa chỉ công ty" required>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Thông tin liên hệ -->
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h6>Thông tin liên hệ</h6>
+                            <div class="form-row">
+                                <div class="form-group col-md-4">
+                                    <label for="FullName">Họ và tên
+                                        <sup class="text-danger">*</sup>
+                                    </label>
+                                    <input type="text" class="form-control" id="FullName" placeholder="Nhập họ và tên" required>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="PhoneNumber">Số điện thoại
+                                        <sup class="text-danger">*</sup>
+                                    </label>
+                                    <input type="text" class="form-control" id="PhoneNumber" placeholder="Nhập số điện thoại"
+                                        required>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="Email">Mail liên hệ
+                                        <sup class="text-danger">*</sup>
+                                    </label>
+                                    <input type="email" class="form-control" id="Email" placeholder="Nhập email liên hệ"
+                                        required>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Phần bên phải: Ảnh đại diện -->
+                <div class="col-md-4">
+                    <div class="card mt-1">
+                        <div class="card-body my-4 text-center">
+                            <h6>Ảnh đại diện</h6>
+                            <div class="avatar-upload" id="avatarUpload">
+                                <img id="avatarImage" src="https://via.placeholder.com/150" class="img-thumbnail rounded-circle"
+                                    alt="Profile Picture">
+                                <i class="fas fa-camera upload-icon"></i>
+                                <input type="file" id="ProfilePicture" accept="image/*" onchange="loadImage(event)">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Giới thiệu công ty -->
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h6>Giới thiệu</h6>
+                    <div class="form-group">
+                        <textarea class="form-control" id="Description" rows="5"
+                            placeholder="Viết vài lời giới thiệu về công ty..."></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Nút cập nhật -->
+            <div class="form-group text-center">
+                <button type="submit" class="custom-button">Cập nhật</button>
+            </div>
+        </form>
+    </div>
+    <script>
+        // Hàm để tải ảnh lên và hiển thị ảnh đại diện mới
+        var loadImage = function (event) {
+            var image = document.getElementById('avatarImage');
+            image.src = URL.createObjectURL(event.target.files[0]);
+        };
+
+        // Khi người dùng nhấp vào avatar, hệ thống sẽ mở hộp thoại chọn file
+        document.getElementById('avatarUpload').addEventListener('click', function () {
+            document.getElementById('ProfilePicture').click();
+        });
+    </script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
