@@ -1,6 +1,11 @@
 .vs/
 .vscode/
+api/bin/
+api/obj/
+WebClient/bin/
+WebClient/obj/
 *.bin
 *.obj
 *.suo
 *.user
+*.userprefs
