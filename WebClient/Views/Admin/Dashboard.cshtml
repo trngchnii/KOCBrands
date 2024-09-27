@@ -1,8 +1,9 @@
 ﻿@section Styles {
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="~/css/admin_dashboard.css" />
 }
-
+@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
 <div class="cards">
     <div class="card blue">
         <div class="card-icon">
@@ -52,6 +53,7 @@
     </ul>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
     const ctx = document.getElementById("myChart").getContext("2d");
     const myChart = new Chart(ctx, {
