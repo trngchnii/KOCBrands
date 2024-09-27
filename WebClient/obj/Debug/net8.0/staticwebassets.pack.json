@@ -1,0 +1,609 @@
+{
+  "Files": [
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\WebClient.bundle.scp.css",
+      "PackagePath": "staticwebassets\\WebClient.bundle.scp.css"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\css\\site.css",
+      "PackagePath": "staticwebassets\\css\\site.css"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\favicon.ico",
+      "PackagePath": "staticwebassets\\favicon.ico"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\js\\site.js",
+      "PackagePath": "staticwebassets\\js\\site.js"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\_next\\static\\1hnPLuHKtEE3djqGttqdh\\_buildManifest.js",
+      "PackagePath": "staticwebassets\\lib\\_next\\static\\1hnPLuHKtEE3djqGttqdh\\_buildManifest.js"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\_next\\static\\1hnPLuHKtEE3djqGttqdh\\_ssgManifest.js",
+      "PackagePath": "staticwebassets\\lib\\_next\\static\\1hnPLuHKtEE3djqGttqdh\\_ssgManifest.js"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\_next\\static\\chunks\\2652-06035c8397ae42b6.js",
+      "PackagePath": "staticwebassets\\lib\\_next\\static\\chunks\\2652-06035c8397ae42b6.js"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\_next\\static\\chunks\\2811-bac25b6811973b58.js",
+      "PackagePath": "staticwebassets\\lib\\_next\\static\\chunks\\2811-bac25b6811973b58.js"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\_next\\static\\chunks\\3648-90861c0403d35c8d.js",
+      "PackagePath": "staticwebassets\\lib\\_next\\static\\chunks\\3648-90861c0403d35c8d.js"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\_next\\static\\chunks\\3736.620bcdb2b6a8f51d.js",
+      "PackagePath": "staticwebassets\\lib\\_next\\static\\chunks\\3736.620bcdb2b6a8f51d.js"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\_next\\static\\chunks\\4387-7edcd48e91b43062.js",
+      "PackagePath": "staticwebassets\\lib\\_next\\static\\chunks\\4387-7edcd48e91b43062.js"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\_next\\static\\chunks\\5357-89b56b1b0f9f7b50.js",
+      "PackagePath": "staticwebassets\\lib\\_next\\static\\chunks\\5357-89b56b1b0f9f7b50.js"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\_next\\static\\chunks\\6215-876b3cbd3dbf852a.js",
+      "PackagePath": "staticwebassets\\lib\\_next\\static\\chunks\\6215-876b3cbd3dbf852a.js"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\_next\\static\\chunks\\850c9274-61d37545a29dbe8e.js",
+      "PackagePath": "staticwebassets\\lib\\_next\\static\\chunks\\850c9274-61d37545a29dbe8e.js"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\_next\\static\\chunks\\9159-a893cf2c1ec19c94.js",
+      "PackagePath": "staticwebassets\\lib\\_next\\static\\chunks\\9159-a893cf2c1ec19c94.js"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\_next\\static\\chunks\\framework-79bce4a3a540b080.js",
+      "PackagePath": "staticwebassets\\lib\\_next\\static\\chunks\\framework-79bce4a3a540b080.js"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\_next\\static\\chunks\\main-b2de28873f649353.js",
+      "PackagePath": "staticwebassets\\lib\\_next\\static\\chunks\\main-b2de28873f649353.js"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\_next\\static\\chunks\\pages\\_app-55144b17220ce73e.js",
+      "PackagePath": "staticwebassets\\lib\\_next\\static\\chunks\\pages\\_app-55144b17220ce73e.js"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\_next\\static\\chunks\\pages\\components\\contact-fea80bae4ced5b04.js",
+      "PackagePath": "staticwebassets\\lib\\_next\\static\\chunks\\pages\\components\\contact-fea80bae4ced5b04.js"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\_next\\static\\chunks\\pages\\components\\search-kocs-8500dc39e88a4b40.js",
+      "PackagePath": "staticwebassets\\lib\\_next\\static\\chunks\\pages\\components\\search-kocs-8500dc39e88a4b40.js"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\_next\\static\\chunks\\pages\\index-c9cfa0f46561ebe1.js",
+      "PackagePath": "staticwebassets\\lib\\_next\\static\\chunks\\pages\\index-c9cfa0f46561ebe1.js"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\_next\\static\\chunks\\pages\\landing\\answer-and-question-6ad5f33da7d00818.js",
+      "PackagePath": "staticwebassets\\lib\\_next\\static\\chunks\\pages\\landing\\answer-and-question-6ad5f33da7d00818.js"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\_next\\static\\chunks\\pages\\landing\\dispute-resolution-7f24dba736bb42fa.js",
+      "PackagePath": "staticwebassets\\lib\\_next\\static\\chunks\\pages\\landing\\dispute-resolution-7f24dba736bb42fa.js"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\_next\\static\\chunks\\pages\\landing\\information-protection-policy-20785db3a5740097.js",
+      "PackagePath": "staticwebassets\\lib\\_next\\static\\chunks\\pages\\landing\\information-protection-policy-20785db3a5740097.js"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\_next\\static\\chunks\\pages\\landing\\instructions-creating-profile-55fcf6dc395ec498.js",
+      "PackagePath": "staticwebassets\\lib\\_next\\static\\chunks\\pages\\landing\\instructions-creating-profile-55fcf6dc395ec498.js"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\_next\\static\\chunks\\pages\\landing\\introduce-e1423e629efe962b.js",
+      "PackagePath": "staticwebassets\\lib\\_next\\static\\chunks\\pages\\landing\\introduce-e1423e629efe962b.js"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\_next\\static\\chunks\\pages\\landing\\operating-regulations-6c276f6584c39200.js",
+      "PackagePath": "staticwebassets\\lib\\_next\\static\\chunks\\pages\\landing\\operating-regulations-6c276f6584c39200.js"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\_next\\static\\chunks\\pages\\landing\\privacy-policy-0bd08bce560a2902.js",
+      "PackagePath": "staticwebassets\\lib\\_next\\static\\chunks\\pages\\landing\\privacy-policy-0bd08bce560a2902.js"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\_next\\static\\chunks\\pages\\landing\\terms-of-use-da5262f8a735be46.js",
+      "PackagePath": "staticwebassets\\lib\\_next\\static\\chunks\\pages\\landing\\terms-of-use-da5262f8a735be46.js"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\_next\\static\\chunks\\pages\\recruitments-e9d952f003f39921.js",
+      "PackagePath": "staticwebassets\\lib\\_next\\static\\chunks\\pages\\recruitments-e9d952f003f39921.js"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\_next\\static\\chunks\\polyfills-c67a75d1b6f99dc8.js",
+      "PackagePath": "staticwebassets\\lib\\_next\\static\\chunks\\polyfills-c67a75d1b6f99dc8.js"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\_next\\static\\chunks\\webpack-89e58df05f54efcc.js",
+      "PackagePath": "staticwebassets\\lib\\_next\\static\\chunks\\webpack-89e58df05f54efcc.js"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\_next\\static\\css\\4acdfb732ad0b9c3.css",
+      "PackagePath": "staticwebassets\\lib\\_next\\static\\css\\4acdfb732ad0b9c3.css"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\_next\\static\\css\\dd67e2b6a406e07a.css",
+      "PackagePath": "staticwebassets\\lib\\_next\\static\\css\\dd67e2b6a406e07a.css"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\_next\\static\\css\\e118dde0a50257df.css",
+      "PackagePath": "staticwebassets\\lib\\_next\\static\\css\\e118dde0a50257df.css"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\_next\\static\\media\\bg-avatar.8bc00429.png",
+      "PackagePath": "staticwebassets\\lib\\_next\\static\\media\\bg-avatar.8bc00429.png"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\_next\\static\\media\\bg-kol.f085c1b6.jpg",
+      "PackagePath": "staticwebassets\\lib\\_next\\static\\media\\bg-kol.f085c1b6.jpg"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\_next\\static\\media\\bg-search-kol.89f1986d.jpg",
+      "PackagePath": "staticwebassets\\lib\\_next\\static\\media\\bg-search-kol.89f1986d.jpg"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\_next\\static\\media\\bg-shadow-kol.7e2673da.png",
+      "PackagePath": "staticwebassets\\lib\\_next\\static\\media\\bg-shadow-kol.7e2673da.png"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\_next\\static\\media\\fa-brands-400.5f7c5bb7.ttf",
+      "PackagePath": "staticwebassets\\lib\\_next\\static\\media\\fa-brands-400.5f7c5bb7.ttf"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\_next\\static\\media\\fa-brands-400.9210030c.woff2",
+      "PackagePath": "staticwebassets\\lib\\_next\\static\\media\\fa-brands-400.9210030c.woff2"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\_next\\static\\media\\fa-regular-400.02ad4ff9.woff2",
+      "PackagePath": "staticwebassets\\lib\\_next\\static\\media\\fa-regular-400.02ad4ff9.woff2"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\_next\\static\\media\\fa-regular-400.570a165b.ttf",
+      "PackagePath": "staticwebassets\\lib\\_next\\static\\media\\fa-regular-400.570a165b.ttf"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\_next\\static\\media\\fa-solid-900.0b5caff7.ttf",
+      "PackagePath": "staticwebassets\\lib\\_next\\static\\media\\fa-solid-900.0b5caff7.ttf"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\_next\\static\\media\\fa-solid-900.3eae9857.woff2",
+      "PackagePath": "staticwebassets\\lib\\_next\\static\\media\\fa-solid-900.3eae9857.woff2"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\_next\\static\\media\\fa-v4compatibility.6209cf01.woff2",
+      "PackagePath": "staticwebassets\\lib\\_next\\static\\media\\fa-v4compatibility.6209cf01.woff2"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\_next\\static\\media\\fa-v4compatibility.92dce52f.ttf",
+      "PackagePath": "staticwebassets\\lib\\_next\\static\\media\\fa-v4compatibility.92dce52f.ttf"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\_next\\static\\media\\flags_responsive.2aca9e17.png",
+      "PackagePath": "staticwebassets\\lib\\_next\\static\\media\\flags_responsive.2aca9e17.png"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\_next\\static\\media\\icon-comma.22f00704.png",
+      "PackagePath": "staticwebassets\\lib\\_next\\static\\media\\icon-comma.22f00704.png"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\_next\\static\\media\\icon-filter.386ad67d.png",
+      "PackagePath": "staticwebassets\\lib\\_next\\static\\media\\icon-filter.386ad67d.png"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\_next\\static\\media\\icon-search-page.34036ce9.svg",
+      "PackagePath": "staticwebassets\\lib\\_next\\static\\media\\icon-search-page.34036ce9.svg"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\_next\\static\\media\\icon-search.6e5c2739.png",
+      "PackagePath": "staticwebassets\\lib\\_next\\static\\media\\icon-search.6e5c2739.png"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\_next\\static\\media\\number-1.fdd5144f.png",
+      "PackagePath": "staticwebassets\\lib\\_next\\static\\media\\number-1.fdd5144f.png"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\_next\\static\\media\\number-2.ccd66b01.png",
+      "PackagePath": "staticwebassets\\lib\\_next\\static\\media\\number-2.ccd66b01.png"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\_next\\static\\media\\number-3.a07f0647.png",
+      "PackagePath": "staticwebassets\\lib\\_next\\static\\media\\number-3.a07f0647.png"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\_next\\static\\media\\primeicons.0112589c.ttf",
+      "PackagePath": "staticwebassets\\lib\\_next\\static\\media\\primeicons.0112589c.ttf"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\_next\\static\\media\\primeicons.943ab24cd41d.svg",
+      "PackagePath": "staticwebassets\\lib\\_next\\static\\media\\primeicons.943ab24cd41d.svg"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\_next\\static\\media\\primeicons.ba3f916d.woff2",
+      "PackagePath": "staticwebassets\\lib\\_next\\static\\media\\primeicons.ba3f916d.woff2"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\_next\\static\\media\\primeicons.f8b9e8a4.woff",
+      "PackagePath": "staticwebassets\\lib\\_next\\static\\media\\primeicons.f8b9e8a4.woff"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\_next\\static\\media\\primeicons.ffecb254.eot",
+      "PackagePath": "staticwebassets\\lib\\_next\\static\\media\\primeicons.ffecb254.eot"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\_next\\static\\media\\primeicons.ffecb254d41d.eot",
+      "PackagePath": "staticwebassets\\lib\\_next\\static\\media\\primeicons.ffecb254d41d.eot"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\_next\\static\\media\\shadow-action.fc2e4444.png",
+      "PackagePath": "staticwebassets\\lib\\_next\\static\\media\\shadow-action.fc2e4444.png"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\_next\\static\\media\\shadow-career.f5287420.png",
+      "PackagePath": "staticwebassets\\lib\\_next\\static\\media\\shadow-career.f5287420.png"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\_next\\static\\media\\title-search.b2e70298.jpg",
+      "PackagePath": "staticwebassets\\lib\\_next\\static\\media\\title-search.b2e70298.jpg"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\bootstrap\\LICENSE",
+      "PackagePath": "staticwebassets\\lib\\bootstrap"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.css"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.css.map"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.min.css"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.js"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.js.map"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.min.js"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\LICENSE.txt"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\jquery-validation\\LICENSE.md",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\LICENSE.md"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\additional-methods.js"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\additional-methods.min.js"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\jquery.validate.js"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\jquery.validate.min.js"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\jquery\\LICENSE.txt",
+      "PackagePath": "staticwebassets\\lib\\jquery\\LICENSE.txt"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\jquery\\dist\\jquery.js",
+      "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.js"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\jquery\\dist\\jquery.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.js"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\jquery\\dist\\jquery.min.map",
+      "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.map"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\themes\\font\\RobotoBlack\\RobotoBlack.eot",
+      "PackagePath": "staticwebassets\\lib\\themes\\font\\RobotoBlack\\RobotoBlack.eot"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\themes\\font\\RobotoBlack\\RobotoBlack.svg",
+      "PackagePath": "staticwebassets\\lib\\themes\\font\\RobotoBlack\\RobotoBlack.svg"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\themes\\font\\RobotoBlack\\RobotoBlack.ttf",
+      "PackagePath": "staticwebassets\\lib\\themes\\font\\RobotoBlack\\RobotoBlack.ttf"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\themes\\font\\RobotoBlack\\RobotoBlack.woff",
+      "PackagePath": "staticwebassets\\lib\\themes\\font\\RobotoBlack\\RobotoBlack.woff"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\themes\\font\\RobotoBlack\\RobotoBlack.woff2",
+      "PackagePath": "staticwebassets\\lib\\themes\\font\\RobotoBlack\\RobotoBlack.woff2"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\themes\\font\\RobotoBold\\RobotoBold.eot",
+      "PackagePath": "staticwebassets\\lib\\themes\\font\\RobotoBold\\RobotoBold.eot"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\themes\\font\\RobotoBold\\RobotoBold.svg",
+      "PackagePath": "staticwebassets\\lib\\themes\\font\\RobotoBold\\RobotoBold.svg"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\themes\\font\\RobotoBold\\RobotoBold.ttf",
+      "PackagePath": "staticwebassets\\lib\\themes\\font\\RobotoBold\\RobotoBold.ttf"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\themes\\font\\RobotoBold\\RobotoBold.woff",
+      "PackagePath": "staticwebassets\\lib\\themes\\font\\RobotoBold\\RobotoBold.woff"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\themes\\font\\RobotoBold\\RobotoBold.woff2",
+      "PackagePath": "staticwebassets\\lib\\themes\\font\\RobotoBold\\RobotoBold.woff2"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\themes\\font\\RobotoMedium\\RobotoMedium.eot",
+      "PackagePath": "staticwebassets\\lib\\themes\\font\\RobotoMedium\\RobotoMedium.eot"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\themes\\font\\RobotoMedium\\RobotoMedium.svg",
+      "PackagePath": "staticwebassets\\lib\\themes\\font\\RobotoMedium\\RobotoMedium.svg"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\themes\\font\\RobotoMedium\\RobotoMedium.ttf",
+      "PackagePath": "staticwebassets\\lib\\themes\\font\\RobotoMedium\\RobotoMedium.ttf"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\themes\\font\\RobotoMedium\\RobotoMedium.woff",
+      "PackagePath": "staticwebassets\\lib\\themes\\font\\RobotoMedium\\RobotoMedium.woff"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\themes\\font\\RobotoMedium\\RobotoMedium.woff2",
+      "PackagePath": "staticwebassets\\lib\\themes\\font\\RobotoMedium\\RobotoMedium.woff2"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\themes\\font\\RobotoRegular\\RobotoRegular.eot",
+      "PackagePath": "staticwebassets\\lib\\themes\\font\\RobotoRegular\\RobotoRegular.eot"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\themes\\font\\RobotoRegular\\RobotoRegular.svg",
+      "PackagePath": "staticwebassets\\lib\\themes\\font\\RobotoRegular\\RobotoRegular.svg"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\themes\\font\\RobotoRegular\\RobotoRegular.ttf",
+      "PackagePath": "staticwebassets\\lib\\themes\\font\\RobotoRegular\\RobotoRegular.ttf"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\themes\\font\\RobotoRegular\\RobotoRegular.woff",
+      "PackagePath": "staticwebassets\\lib\\themes\\font\\RobotoRegular\\RobotoRegular.woff"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\themes\\font\\RobotoRegular\\RobotoRegular.woff2",
+      "PackagePath": "staticwebassets\\lib\\themes\\font\\RobotoRegular\\RobotoRegular.woff2"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\themes\\font\\UTMNeoSansIntelBold\\UTMNeoSansIntelBold.eot",
+      "PackagePath": "staticwebassets\\lib\\themes\\font\\UTMNeoSansIntelBold\\UTMNeoSansIntelBold.eot"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\themes\\font\\UTMNeoSansIntelBold\\UTMNeoSansIntelBold.svg",
+      "PackagePath": "staticwebassets\\lib\\themes\\font\\UTMNeoSansIntelBold\\UTMNeoSansIntelBold.svg"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\themes\\font\\UTMNeoSansIntelBold\\UTMNeoSansIntelBold.ttf",
+      "PackagePath": "staticwebassets\\lib\\themes\\font\\UTMNeoSansIntelBold\\UTMNeoSansIntelBold.ttf"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\themes\\font\\UTMNeoSansIntelBold\\UTMNeoSansIntelBold.woff",
+      "PackagePath": "staticwebassets\\lib\\themes\\font\\UTMNeoSansIntelBold\\UTMNeoSansIntelBold.woff"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\themes\\font\\UTMNeoSansIntelBold\\UTMNeoSansIntelBold.woff2",
+      "PackagePath": "staticwebassets\\lib\\themes\\font\\UTMNeoSansIntelBold\\UTMNeoSansIntelBold.woff2"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\lib\\themes\\theme.css",
+      "PackagePath": "staticwebassets\\lib\\themes\\theme.css"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.WebClient.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.WebClient.props",
+      "PackagePath": "build\\WebClient.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.WebClient.props",
+      "PackagePath": "buildMultiTargeting\\WebClient.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.WebClient.props",
+      "PackagePath": "buildTransitive\\WebClient.props"
+    }
+  ],
+  "ElementsToRemove": []
+}
