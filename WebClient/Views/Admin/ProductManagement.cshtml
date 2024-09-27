@@ -1,0 +1,54 @@
+﻿@section Styles {
+    <link rel="stylesheet" href="~/css/admin_manager.css">
+}
+
+<div class="product-management">
+    <h2>Product Management</h2>
+    <button class="add-product-btn">
+        <i class="fas fa-plus"></i> Add Product
+    </button>
+    <table class="product-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Product Name</th>
+                <th>Category</th>
+                <th>Price</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>Smartphone XYZ</td>
+                <td>Electronics</td>
+                <td>$499</td>
+                <td>In Stock</td>
+                <td class="action-buttons">
+                    <button class="edit-btn">
+                        <i class="fas fa-edit"></i> Edit
+                    </button>
+                    <button class="delete-btn">
+                        <i class="fas fa-trash-alt"></i> Delete
+                    </button>
+                </td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Running Shoes</td>
+                <td>Sports</td>
+                <td>$89</td>
+                <td>Out of Stock</td>
+                <td class="action-buttons">
+                    <button class="edit-btn">
+                        <i class="fas fa-edit"></i> Edit
+                    </button>
+                    <button class="delete-btn">
+                        <i class="fas fa-trash-alt"></i> Delete
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

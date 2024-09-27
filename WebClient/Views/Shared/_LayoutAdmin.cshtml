@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title - Admin Dashboard</title>
+    <link rel="stylesheet" href="~/css/admin.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    @RenderSection("Styles", required: false)
+</head>
+<body>
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <h2><i class="fas fa-bolt"></i> Spur</h2>
+        </div>
+        <ul>
+            <li>
+                <a href="/Admin/Dashboard" class="active"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+            </li>
+            <li>
+                <a href="/Admin/Analytics"><i class="fas fa-chart-bar"></i> Analytics</a>
+            </li>
+            <li>
+                <a href="/Admin/UserManagement"><i class="fas fa-box"></i> User Management</a>
+            </li>
+            <li>
+                <a href="/Admin/ProductManagement"><i class="fas fa-box"></i> Product Management</a>
+            </li>
+        </ul>
+    </div>
+    <div class="main-content">
+        <div class="topbar">
+            <input type="search" placeholder="Type to search..." />
+            <div class="topbar-icons">
+                <a href="#"><i class="fas fa-bell"></i><span class="badge">4</span></a>
+                <a href="Logout"><i class="fas fa-user-circle"></i></a>
+            </div>
+        </div>
+        <div class="content-body">
+            @RenderBody()
+        </div>
+    </div>
+</body>
+</html>
