@@ -10,9 +10,9 @@
             <i class="fas fa-user"></i>
         </div>
         <div class="card-content">
-            <h3>Sign ups</h3>
+            <h3>Đăng ký</h3>
             <p>114</p>
-            <small>+25% from last month</small>
+            <small>+25% so với tháng trước</small>
         </div>
     </div>
     <div class="card green">
@@ -20,9 +20,9 @@
             <i class="fas fa-dollar-sign"></i>
         </div>
         <div class="card-content">
-            <h3>Revenue</h3>
+            <h3>Doanh thu</h3>
             <p>$25,541</p>
-            <small>+17.5% from last month</small>
+            <small>+17.5% so với tháng trước</small>
         </div>
     </div>
     <div class="card red">
@@ -30,7 +30,7 @@
             <i class="fas fa-phone"></i>
         </div>
         <div class="card-content">
-            <h3>Open tickets</h3>
+            <h3>Vé mở</h3>
             <p>5</p>
             <small>&nbsp;</small>
         </div>
@@ -39,17 +39,17 @@
 
 
 <div class="chart-section">
-    <h3>Bar Chart</h3>
+    <h3>Biểu đồ cột</h3>
     <canvas id="myChart"></canvas>
 </div>
 
 <div class="notifications">
-    <h3>Notifications</h3>
+    <h3>Thông báo</h3>
     <ul>
-        <li>New comment - 21 days ago</li>
-        <li>New comment - 21 days ago</li>
-        <li>New comment - 21 days ago</li>
-        <li><a href="#">Show all</a></li>
+        <li>Bình luận mới - 21 ngày trước</li>
+        <li>Bình luận mới - 21 ngày trước</li>
+        <li>Bình luận mới - 21 ngày trước</li>
+        <li><a href="#">Xem tất cả</a></li>
     </ul>
 </div>
 
@@ -59,10 +59,10 @@
     const myChart = new Chart(ctx, {
         type: "bar",
         data: {
-            labels: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+            labels: ["Thứ hai", "Thứ ba", "Thứ tư", "Thứ năm", "Thứ sáu"],
             datasets: [
                 {
-                    label: "# of Signups",
+                    label: "Số lượt đăng ký",
                     data: [12, 19, 3, 5, 2],
                     backgroundColor: [
                         "rgba(52, 152, 219, 0.6)",

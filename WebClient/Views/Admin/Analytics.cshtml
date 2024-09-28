@@ -6,26 +6,26 @@
 }
 <div class="analytics-cards">
     <div class="analytics-card">
-        <h3>Total Visits</h3>
+        <h3>Tổng số lượt truy cập</h3>
         <canvas id="visitsChart"></canvas>
     </div>
     <div class="analytics-card">
-        <h3>Revenue</h3>
+        <h3>Doanh thu</h3>
         <canvas id="revenueChart"></canvas>
     </div>
 </div>
 
 <div class="analytics-summary">
     <div class="summary-box">
-        <h3>Conversion Rate</h3>
+        <h3>Tỷ lệ chuyển đổi</h3>
         <p>4.25%</p>
     </div>
     <div class="summary-box">
-        <h3>Bounce Rate</h3>
+        <h3>Tỷ lệ thoát</h3>
         <p>35.10%</p>
     </div>
     <div class="summary-box">
-        <h3>Average Session Duration</h3>
+        <h3>Thời lượng phiên trung bình</h3>
         <p>2m 45s</p>
     </div>
 </div>
@@ -37,10 +37,10 @@
     const visitsChart = new Chart(visitsCtx, {
         type: "line",
         data: {
-            labels: ["January", "February", "March", "April", "May", "June"],
+            labels: ["Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5", "Tháng 6"],
             datasets: [
                 {
-                    label: "Visits",
+                    label: "Lượt truy cập",
                     data: [300, 400, 350, 500, 600, 700],
                     backgroundColor: "rgba(52, 152, 219, 0.2)",
                     borderColor: "rgba(52, 152, 219, 1)",
@@ -60,10 +60,10 @@
     const revenueChart = new Chart(revenueCtx, {
         type: "bar",
         data: {
-            labels: ["January", "February", "March", "April", "May", "June"],
+            labels: ["Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5", "Tháng 6"],
             datasets: [
                 {
-                    label: "Revenue",
+                    label: "Doanh thu",
                     data: [15000, 20000, 18000, 22000, 24000, 26000],
                     backgroundColor: "rgba(46, 204, 113, 0.6)",
                     borderColor: "rgba(46, 204, 113, 1)",
