@@ -1,0 +1,79 @@
+﻿@section Styles {
+    <link rel="stylesheet" href="~/css/admin_analytics.css" />
+}
+@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div class="analytics-cards">
+    <div class="analytics-card">
+        <h3>Tổng số lượt truy cập</h3>
+        <canvas id="visitsChart"></canvas>
+    </div>
+    <div class="analytics-card">
+        <h3>Doanh thu</h3>
+        <canvas id="revenueChart"></canvas>
+    </div>
+</div>
+
+<div class="analytics-summary">
+    <div class="summary-box">
+        <h3>Tỷ lệ chuyển đổi</h3>
+        <p>4.25%</p>
+    </div>
+    <div class="summary-box">
+        <h3>Tỷ lệ thoát</h3>
+        <p>35.10%</p>
+    </div>
+    <div class="summary-box">
+        <h3>Thời lượng phiên trung bình</h3>
+        <p>2m 45s</p>
+    </div>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    const visitsCtx = document.getElementById("visitsChart").getContext("2d");
+    const visitsChart = new Chart(visitsCtx, {
+        type: "line",
+        data: {
+            labels: ["Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5", "Tháng 6"],
+            datasets: [
+                {
+                    label: "Lượt truy cập",
+                    data: [300, 400, 350, 500, 600, 700],
+                    backgroundColor: "rgba(52, 152, 219, 0.2)",
+                    borderColor: "rgba(52, 152, 219, 1)",
+                    borderWidth: 2,
+                },
+            ],
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+        },
+    });
+
+    const revenueCtx = document
+        .getElementById("revenueChart")
+        .getContext("2d");
+    const revenueChart = new Chart(revenueCtx, {
+        type: "bar",
+        data: {
+            labels: ["Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5", "Tháng 6"],
+            datasets: [
+                {
+                    label: "Doanh thu",
+                    data: [15000, 20000, 18000, 22000, 24000, 26000],
+                    backgroundColor: "rgba(46, 204, 113, 0.6)",
+                    borderColor: "rgba(46, 204, 113, 1)",
+                    borderWidth: 2,
+                },
+            ],
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+        },
+    });
+</script>

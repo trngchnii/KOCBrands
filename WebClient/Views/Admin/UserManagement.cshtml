@@ -1,0 +1,53 @@
+﻿@section Styles {
+    <link rel="stylesheet" href="~/css/admin_manager.css">
+}
+@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div class="user-management">
+    <h2>Quản Lý Người Dùng</h2>
+    <table class="user-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>john_doe</td>
+                <td>john.doe@example.com</td>
+                <td>Admin</td>
+                <td>Active</td>
+                <td class="action-buttons">
+                    <button class="edit-btn">
+                        <i class="fas fa-edit"></i> Edit
+                    </button>
+                    <button class="delete-btn">
+                        <i class="fas fa-trash-alt"></i> Delete
+                    </button>
+                </td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>jane_smith</td>
+                <td>jane.smith@example.com</td>
+                <td>User</td>
+                <td>Active</td>
+                <td class="action-buttons">
+                    <button class="edit-btn">
+                        <i class="fas fa-edit"></i> Edit
+                    </button>
+                    <button class="delete-btn">
+                        <i class="fas fa-trash-alt"></i> Delete
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
