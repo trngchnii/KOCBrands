@@ -1,18 +1,36 @@
 ﻿@section Styles {
     <link rel="stylesheet" href="~/css/admin_manager.css">
+    <style>
+        .add-product-btn:hover {
+            background-color: #f59857;
+        }
+
+        .add-product-btn {
+            padding: 10px 20px;
+            background-color: #ff6b01;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-bottom: 20px;
+        }
+    </style>
 }
-@{
-    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
-}
-<div class="user-management">
-    <h2>Quản Lý Người Dùng</h2>
-    <table class="user-table">
+
+<div class="product-management">
+    <h2>Quản Lý Sản Phẩm</h2>
+    <button class="add-product-btn">
+        <i class="fas fa-plus"></i> Thêm Sản Phẩm
+    </button>
+    <table class="product-table">
         <thead>
             <tr>
                 <th>ID</th>
-                <th>Username</th>
-                <th>Email</th>
-                <th>Role</th>
+                <th>Product Name</th>
+                <th>Category</th>
+                <th>Price</th>
                 <th>Status</th>
                 <th>Actions</th>
             </tr>
@@ -20,10 +38,10 @@
         <tbody>
             <tr>
                 <td>1</td>
-                <td>john_doe</td>
-                <td>john.doe@example.com</td>
-                <td>Admin</td>
-                <td>Active</td>
+                <td>Smartphone XYZ</td>
+                <td>Electronics</td>
+                <td>$499</td>
+                <td>In Stock</td>
                 <td class="action-buttons">
                     <button class="edit-btn">
                         <i class="fas fa-edit"></i> Edit
@@ -35,10 +53,10 @@
             </tr>
             <tr>
                 <td>2</td>
-                <td>jane_smith</td>
-                <td>jane.smith@example.com</td>
-                <td>User</td>
-                <td>Active</td>
+                <td>Running Shoes</td>
+                <td>Sports</td>
+                <td>$89</td>
+                <td>Out of Stock</td>
                 <td class="action-buttons">
                     <button class="edit-btn">
                         <i class="fas fa-edit"></i> Edit

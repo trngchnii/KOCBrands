@@ -5,6 +5,22 @@
       "PackagePath": "staticwebassets\\WebClient.bundle.scp.css"
     },
     {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\css\\admin.css",
+      "PackagePath": "staticwebassets\\css\\admin.css"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\css\\admin_analytics.css",
+      "PackagePath": "staticwebassets\\css\\admin_analytics.css"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\css\\admin_dashboard.css",
+      "PackagePath": "staticwebassets\\css\\admin_dashboard.css"
+    },
+    {
+      "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\css\\admin_manager.css",
+      "PackagePath": "staticwebassets\\css\\admin_manager.css"
+    },
+    {
       "Id": "E:\\Semester 8\\New folder\\KOCBrands\\WebClient\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
     },

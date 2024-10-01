@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace WebClient.Controllers
+namespace WebClient.Areas.Admin.Controllers
 {
+    [Area("Admin")]
+    [Route("Admin/{action=Dashboard}")]
     public class AdminController : Controller
     {
         public IActionResult Dashboard()
