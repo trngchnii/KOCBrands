@@ -9,7 +9,6 @@ namespace api.Models
     {
         public int CampaignId { get; set; }
         public int? BrandId { get; set; }
-        public int? CategoryId { get; set; }
         public int? FaviconId { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
