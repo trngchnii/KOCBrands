@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using api.Data;
@@ -8,32 +7,32 @@ using api.DTOs;
 using api.Models;
 using api.Repository;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 
 namespace api.Controllers
 {
-    [Route("api/controller")]
+    [Route("api/[controller]")]
     [ApiController]
     public class BrandController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
         private readonly IBrandRepository _brandRepo;
+
         public BrandController(ApplicationDbContext context, IBrandRepository brandRepo)
         {
             _context = context;
             _brandRepo = brandRepo;
         }
+
+        // PUT: api/brand/{id}
         [HttpPut]
         [Route("{id:int}")]
         public async Task<IActionResult> Update([FromRoute] int id, [FromBody] BrandDto updateDto)
         {
-            // Validate the model state
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            // Prepare the Brand and User entities for the update
             var brandEntity = new Brand
             {
                 BrandName = updateDto.BrandName,
@@ -50,17 +49,41 @@ namespace api.Controllers
                 Address = updateDto.User.Address
             };
 
-            // Call the repository to update
             var (updatedBrand, updatedUser) = await _brandRepo.UpdateAsync(id, brandEntity, userEntity);
 
-            // Handle the case where the brand or user was not found
             if (updatedBrand == null)
             {
                 return NotFound(new { message = "Brand not found." });
             }
 
-            // Return the updated brand and user
             return Ok(new { updatedBrand, updatedUser });
+        }
+
+        // GET: api/brand
+        [HttpGet]
+        public async Task<IActionResult> GetAll()
+        {
+            var brands = await _brandRepo.GetAllAsync();
+            if (brands == null )
+            {
+                return NotFound(new { message = "No brands found." });
+            }
+
+            return Ok(brands);  // Return the list of brands
+        }
+
+        // GET: api/brand/{id}
+        [HttpGet]
+        [Route("{id:int}")]
+        public async Task<IActionResult> GetById([FromRoute] int id)
+        {
+            var brand = await _brandRepo.GetByIdAsync(id);
+            if (brand == null)
+            {
+                return NotFound(new { message = "Brand not found." });
+            }
+
+            return Ok(brand);  // Return the brand details
         }
     }
 }
