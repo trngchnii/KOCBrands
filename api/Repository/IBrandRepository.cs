@@ -10,6 +10,5 @@ namespace api.Repository
     {
         Task<(Brand?, User?)> UpdateAsync(int id, Brand brandModel, User userModel);
         Task<Brand?> GetByIdAsync(int id);
-        Task<IEnumerable<Brand>> GetAllAsync();
     }
 }
