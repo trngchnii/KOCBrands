@@ -10,7 +10,6 @@ namespace api.Models
         public int InfluencerId { get; set; }
         public int? UserId { get; set; }
         public string Name { get; set; } = string.Empty;
-        public int FollowersCount { get; set; }
         public string Gender { get; set; } = string.Empty;
         public DateTime DateOfBirth { get; set; }
         public string BookingPrice { get; set; }
