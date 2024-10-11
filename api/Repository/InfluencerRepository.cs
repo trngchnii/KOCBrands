@@ -57,10 +57,8 @@ namespace api.Repository
                 existingInfluencer.Name = influencerModel.Name;
                 existingInfluencer.Gender = influencerModel.Gender;
                 existingInfluencer.DateOfBirth = influencerModel.DateOfBirth;
-                existingInfluencer.SocialMediaLinks = influencerModel.SocialMediaLinks;
                 existingInfluencer.BookingPrice = influencerModel.BookingPrice;
                 existingInfluencer.PersonalIdentificationNumber = influencerModel.PersonalIdentificationNumber;
-                existingInfluencer.CategoryId = influencerModel.CategoryId;
 
                 // Update User properties
                 existingInfluencer.User.Email = userModel.Email;

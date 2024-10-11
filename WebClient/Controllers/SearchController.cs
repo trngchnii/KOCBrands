@@ -13,22 +13,29 @@ namespace WebClient.Controllers
             _httpClient = httpClient;
         }
 
-        public async Task<IActionResult> Index(string name, string? gender, int? followersCount = null, decimal? bookingPrice = null)
+        public ActionResult Index()
         {
             return View();
-
-            //string apiUrl = $"https://localhost:7290/searchKOL/search";
-
-            //HttpResponseMessage response = await _httpClient.GetAsync(apiUrl);
-
-            //if (response.IsSuccessStatusCode)
-            //{
-            //    var jsonResponse = await response.Content.ReadAsStringAsync();
-            //    var influencers = JsonConvert.DeserializeObject<IEnumerable<InfluencerDto>>(jsonResponse);
-            //    return View(influencers);
-            //}
-
-            //return View("Error");
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Search(string name, string? gender, DateTime? dateOfBirth, int? followersCount = null, decimal? bookingPrice = null)
+        {
+            string apiUrl = $"https://localhost:7290/searchKOL/search?name={name}&gender={gender}&dateOfBirth={dateOfBirth}&followersCount={followersCount}&bookingPrice={bookingPrice}";
+            
+            HttpResponseMessage response = await _httpClient.GetAsync(apiUrl);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var jsonResponse = await response.Content.ReadAsStringAsync();
+                var influencers = JsonConvert.DeserializeObject<IEnumerable<InfluencerDto>>(jsonResponse);
+
+                return View("SearchResults", influencers);
+            } 
+            
+            return View("SearchFail");
+        }
+
+
     }
 }

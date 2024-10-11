@@ -14,7 +14,7 @@ namespace api.Repository
             _context = context;
         }
 
-        public IEnumerable<InfluencerDto> SearchKOL(string name, string? gender, int? followersCount, decimal? bookingPrice)
+        public IEnumerable<InfluencerDto> SearchKOL(string name, string? gender, DateTime? dateOfBirth, int? followersCount, decimal? bookingPrice)
         {
             var query = _context.Influencers.AsQueryable();
 
@@ -26,6 +26,10 @@ namespace api.Repository
             if (!string.IsNullOrWhiteSpace(gender))
             {
                 query = query.Where(i => i.Gender == gender);
+            }
+
+            if(dateOfBirth.HasValue){
+                query = query.Where(i => i.DateOfBirth == dateOfBirth.Value.Date);
             }
 
             if (followersCount.HasValue)
@@ -42,9 +46,9 @@ namespace api.Repository
             {
                 Name = i.Name,
                 Gender = i.Gender,
+                DateOfBirth = i.DateOfBirth,
                 FollowersCount = i.FollowersCount,
                 BookingPrice = i.BookingPrice,
-                SocialMediaLinks = i.SocialMediaLinks,
                 PersonalIdentificationNumber = i.PersonalIdentificationNumber,
             }).ToList();
 

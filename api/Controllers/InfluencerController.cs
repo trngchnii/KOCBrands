@@ -37,10 +37,8 @@ namespace api.Controllers
                 Name = updateDto.Name,
                 Gender = updateDto.Gender,
                 DateOfBirth = updateDto.DateOfBirth,
-                SocialMediaLinks = updateDto.SocialMediaLinks,
                 BookingPrice = updateDto.BookingPrice,
                 PersonalIdentificationNumber = updateDto.PersonalIdentificationNumber,
-                CategoryId = updateDto.CategoryId
             };
 
             var userEntity = new User
