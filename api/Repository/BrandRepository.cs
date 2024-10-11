@@ -44,7 +44,6 @@ namespace api.Repository
                 // Update Brand properties
                 existingBrand.BrandName = brandModel.BrandName;
                 existingBrand.ImageCover = brandModel.ImageCover;
-                existingBrand.CategoryId = brandModel.CategoryId;
 
                 // Update User properties
                 existingBrand.User.Email = userModel.Email;

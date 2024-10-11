@@ -38,7 +38,6 @@ namespace api.Controllers
             {
                 BrandName = updateDto.BrandName,
                 ImageCover = updateDto.ImageCover,
-                CategoryId = updateDto.CategoryId
             };
 
             var userEntity = new User
