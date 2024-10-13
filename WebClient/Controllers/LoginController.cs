@@ -1,18 +1,20 @@
 ﻿using api.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using WebClient.DataAccess;
+using api.Data;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication;
 
 namespace WebClient.Controllers
 {
     public class LoginController : Controller
     {
 
-        private readonly InfluencerDbContext _context;
+        private readonly ApplicationDbContext _context;
         private readonly IEmailSender _emailSender;
 
 
-        public LoginController(InfluencerDbContext context, IEmailSender emailSender)
+        public LoginController(ApplicationDbContext context, IEmailSender emailSender)
         {
             _context = context;
             _emailSender = emailSender;
@@ -35,7 +37,7 @@ namespace WebClient.Controllers
             }
 
             var user = await _context.Users
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(m => m.UserId == id);
             if (user == null)
             {
                 return NotFound();
@@ -55,7 +57,7 @@ namespace WebClient.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Email,Password")] DataAccess.User user)
+        public async Task<IActionResult> Create([Bind("Id,Name,Email,Password")] api.Models.User user)
         {
             if (ModelState.IsValid)
             {
@@ -87,9 +89,9 @@ namespace WebClient.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Email,Password")] DataAccess.User user)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Email,Password")] api.Models.User user)
         {
-            if (id != user.Id)
+            if (id != user.UserId)
             {
                 return NotFound();
             }
@@ -103,7 +105,7 @@ namespace WebClient.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!UserExists(user.Id))
+                    if (!UserExists(user.UserId))
                     {
                         return NotFound();
                     }
@@ -126,7 +128,7 @@ namespace WebClient.Controllers
             }
 
             var user = await _context.Users
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(m => m.UserId == id);
             if (user == null)
             {
                 return NotFound();
@@ -156,7 +158,7 @@ namespace WebClient.Controllers
 
         private bool UserExists(int id)
         {
-            return (_context.Users?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.Users?.Any(e => e.UserId == id)).GetValueOrDefault();
         }
 
         public IActionResult Login()
@@ -164,6 +166,7 @@ namespace WebClient.Controllers
 
             return View();
         }
+
         [HttpPost]
         public ActionResult Login(string EmailLogin, string PasswordLogin)
         {
@@ -176,13 +179,13 @@ namespace WebClient.Controllers
                     Expires = DateTimeOffset.Now.AddDays(30),
                     IsEssential = true
                 };
-                HttpContext.Response.Cookies.Append("UserId", user.Id.ToString(), cookieOptions);
+                HttpContext.Response.Cookies.Append("UserId", user.UserId.ToString(), cookieOptions);
 
-                if (user.UserTypeId == 1)
+                if (user.Role == "user")
                 {
                     return RedirectToAction("Index", "Home");
                 }
-                else if (user.UserTypeId == 2)
+                else if (user.Role == "admin")
                 {
                     return RedirectToAction("Index", "Login");
                 }
@@ -231,17 +234,28 @@ namespace WebClient.Controllers
             var passwordRegister = model.PasswordRegister;
             var otp = model.OTP;
             var savedOTP = HttpContext.Session.GetString("SavedOTP");
-            var user = _context.Users.FirstOrDefault(u => u.Name == nameRegister);
+            var user = _context.Users.FirstOrDefault(u => u.UserName == nameRegister);
             if (user == null)
             {
                 if (otp == savedOTP)
                 {
-                    var newUser = new DataAccess.User
+                    var newUser = new api.Models.User
                     {
-                        Name = nameRegister,
+                        FavoriteId = null,
+                        UserName = nameRegister,
                         Email = emailRegister,
                         Password = passwordRegister,
-                        UserTypeId = 1
+                        Address = string.Empty,
+                        Avatar = string.Empty,
+                        Bio = string.Empty,
+                        Phonenumber = string.Empty,
+                        Role = "user",
+                        CreatedAt = DateTime.UtcNow,
+                        UpdatedAt = DateTime.UtcNow,
+                        Status = "active",
+                        Influencer = null,
+                        Brand = null,
+                        Favourite = null
                     };
 
                     _context.Users.Add(newUser);
