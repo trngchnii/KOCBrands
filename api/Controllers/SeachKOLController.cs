@@ -17,9 +17,9 @@ namespace api.Controllers
         }
 
         [HttpGet("search")]
-        public IActionResult Index(string name, string gender, int? followersCount, decimal? bookingPrice)
+        public IActionResult Index(string name, string? gender, DateTime? dateOfBirth,  int? followersCount, decimal? bookingPrice)
         {
-            IEnumerable<InfluencerDto> results = _searchKOLRepository.SearchKOL(name, gender, followersCount, bookingPrice);
+            IEnumerable<InfluencerDto> results = _searchKOLRepository.SearchKOL(name, gender, dateOfBirth, followersCount, bookingPrice);
 
             return Ok(results);
         }

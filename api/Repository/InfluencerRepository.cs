@@ -15,24 +15,6 @@ namespace api.Repository
         {
             _context = context;
         }
-
-        // Get all influencers asynchronously
-        public async Task<IEnumerable<Influencer>> GetAllAsync()
-        {
-            return await _context.Influencers
-                .Include(i => i.User)  // Eager load associated User
-                .ToListAsync();
-        }
-
-        // Get an influencer by ID asynchronously
-        public async Task<Influencer?> GetByIdAsync(int id)
-        {
-            return await _context.Influencers
-                .Include(i => i.User)  // Eager load associated User
-                .FirstOrDefaultAsync(i => i.InfluencerId == id);
-        }
-    
-
         public async Task<(Influencer?, User?)> UpdateAsync(int id, Influencer influencerModel, User userModel)
         {
             using var transaction = await _context.Database.BeginTransactionAsync();
@@ -57,10 +39,8 @@ namespace api.Repository
                 existingInfluencer.Name = influencerModel.Name;
                 existingInfluencer.Gender = influencerModel.Gender;
                 existingInfluencer.DateOfBirth = influencerModel.DateOfBirth;
-                //existingInfluencer.SocialMediaLinks = influencerModel.SocialMediaLinks;
                 existingInfluencer.BookingPrice = influencerModel.BookingPrice;
                 existingInfluencer.PersonalIdentificationNumber = influencerModel.PersonalIdentificationNumber;
-                //existingInfluencer.CategoryId = influencerModel.CategoryId;
 
                 // Update User properties
                 existingInfluencer.User.Email = userModel.Email;

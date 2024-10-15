@@ -79,9 +79,6 @@ namespace api.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("CategoryId")
-                        .HasColumnType("int");
-
                     b.Property<string>("ImageCover")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -110,9 +107,6 @@ namespace api.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("Budget")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("CategoryId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedDate")
@@ -165,12 +159,6 @@ namespace api.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CategoryId"));
 
-                    b.Property<int?>("BrandId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("CampaignId")
-                        .HasColumnType("int");
-
                     b.Property<string>("CategoryName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -178,9 +166,6 @@ namespace api.Migrations
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("InfluencerId")
-                        .HasColumnType("int");
 
                     b.HasKey("CategoryId");
 
@@ -215,9 +200,6 @@ namespace api.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("CategoryId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("DateOfBirth")
                         .HasColumnType("datetime2");
 
@@ -237,10 +219,6 @@ namespace api.Migrations
 
                     b.Property<int>("PersonalIdentificationNumber")
                         .HasColumnType("int");
-
-                    b.Property<string>("SocialMediaLinks")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("UserId")
                         .HasColumnType("int");
@@ -295,6 +273,39 @@ namespace api.Migrations
                     b.ToTable("Proposals");
                 });
 
+            modelBuilder.Entity("api.Models.SocialMedia", b =>
+                {
+                    b.Property<int>("SocialMediaId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SocialMediaId"));
+
+                    b.Property<int>("FollowersCount")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("InfluencerId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("SocialMediaImg")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SocialMediaLink")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SocialMediaName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("SocialMediaId");
+
+                    b.HasIndex("InfluencerId");
+
+                    b.ToTable("SocialMedia");
+                });
+
             modelBuilder.Entity("api.Models.User", b =>
                 {
                     b.Property<int>("UserId")
@@ -336,11 +347,13 @@ namespace api.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("Role")
-                        .HasColumnType("bit");
+                    b.Property<string>("Role")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("Status")
-                        .HasColumnType("bit");
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime2");
@@ -455,6 +468,13 @@ namespace api.Migrations
                     b.Navigation("Influencer");
                 });
 
+            modelBuilder.Entity("api.Models.SocialMedia", b =>
+                {
+                    b.HasOne("api.Models.Influencer", null)
+                        .WithMany("SocialMedias")
+                        .HasForeignKey("InfluencerId");
+                });
+
             modelBuilder.Entity("api.Models.User", b =>
                 {
                     b.HasOne("api.Models.Favourite", "Favourite")
@@ -486,6 +506,8 @@ namespace api.Migrations
             modelBuilder.Entity("api.Models.Influencer", b =>
                 {
                     b.Navigation("Proposals");
+
+                    b.Navigation("SocialMedias");
                 });
 
             modelBuilder.Entity("api.Models.User", b =>

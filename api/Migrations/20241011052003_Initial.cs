@@ -18,10 +18,7 @@ namespace api.Migrations
                     CategoryId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CategoryName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    InfluencerId = table.Column<int>(type: "int", nullable: true),
-                    BrandId = table.Column<int>(type: "int", nullable: true),
-                    CampaignId = table.Column<int>(type: "int", nullable: true)
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -55,10 +52,10 @@ namespace api.Migrations
                     Avatar = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Bio = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Phonenumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Role = table.Column<bool>(type: "nvarchar(max)", nullable: false),
+                    Role = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Status = table.Column<bool>(type: "nvarchar(max)", nullable: false),
+                    Status = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     FavouriteId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
@@ -79,8 +76,7 @@ namespace api.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     UserId = table.Column<int>(type: "int", nullable: true),
                     BrandName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ImageCover = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CategoryId = table.Column<int>(type: "int", nullable: true)
+                    ImageCover = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -103,10 +99,8 @@ namespace api.Migrations
                     FollowersCount = table.Column<int>(type: "int", nullable: false),
                     Gender = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     DateOfBirth = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    SocialMediaLinks = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     BookingPrice = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PersonalIdentificationNumber = table.Column<int>(type: "int", nullable: false),
-                    CategoryId = table.Column<int>(type: "int", nullable: true),
                     FavouriteId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
@@ -155,7 +149,6 @@ namespace api.Migrations
                     CampaignId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     BrandId = table.Column<int>(type: "int", nullable: true),
-                    CategoryId = table.Column<int>(type: "int", nullable: true),
                     FaviconId = table.Column<int>(type: "int", nullable: true),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -205,6 +198,28 @@ namespace api.Migrations
                         principalTable: "Influencers",
                         principalColumn: "InfluencerId",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "SocialMedia",
+                columns: table => new
+                {
+                    SocialMediaId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    SocialMediaName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    SocialMediaLink = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    SocialMediaImg = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    FollowersCount = table.Column<int>(type: "int", nullable: false),
+                    InfluencerId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SocialMedia", x => x.SocialMediaId);
+                    table.ForeignKey(
+                        name: "FK_SocialMedia_Influencers_InfluencerId",
+                        column: x => x.InfluencerId,
+                        principalTable: "Influencers",
+                        principalColumn: "InfluencerId");
                 });
 
             migrationBuilder.CreateTable(
@@ -315,6 +330,11 @@ namespace api.Migrations
                 column: "InfluencerId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_SocialMedia_InfluencerId",
+                table: "SocialMedia",
+                column: "InfluencerId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Users_FavouriteId",
                 table: "Users",
                 column: "FavouriteId");
@@ -334,6 +354,9 @@ namespace api.Migrations
 
             migrationBuilder.DropTable(
                 name: "Proposals");
+
+            migrationBuilder.DropTable(
+                name: "SocialMedia");
 
             migrationBuilder.DropTable(
                 name: "Categories");

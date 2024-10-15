@@ -37,10 +37,8 @@ namespace api.Controllers
                 Name = updateDto.Name,
                 Gender = updateDto.Gender,
                 DateOfBirth = updateDto.DateOfBirth,
-                //SocialMediaLinks = updateDto.SocialMediaLinks,
                 BookingPrice = updateDto.BookingPrice,
                 PersonalIdentificationNumber = updateDto.PersonalIdentificationNumber,
-                //CategoryId = updateDto.CategoryId
             };
 
             var userEntity = new User
@@ -63,33 +61,6 @@ namespace api.Controllers
 
             // Return the updated brand and user
             return Ok(new { updatedInfluencer, updatedUser });
-
-        }
-
-        [HttpGet]
-        public async Task<IActionResult> GetAll()
-        {
-            var influencers = await _influencerRepo.GetAllAsync();
-            if (influencers == null || !influencers.Any())
-            {
-                return NotFound(new { message = "No influencers found." });
-            }
-
-            return Ok(influencers);  // Return the list of influencers
-        }
-
-        // GET: api/influencer/{id}
-        [HttpGet]
-        [Route("{id:int}")]
-        public async Task<IActionResult> GetById([FromRoute] int id)
-        {
-            var influencer = await _influencerRepo.GetByIdAsync(id);
-            if (influencer == null)
-            {
-                return NotFound(new { message = "Influencer not found." });
-            }
-
-            return Ok(influencer);  // Return the influencer details
         }
     }
 }

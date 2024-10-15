@@ -5,13 +5,13 @@ namespace api.DTOs
         public BrandDto? Brand { get; set; }
         public UserDto? User { get; set; }
     }
+
     public class BrandDto
     {
         public string? BrandName { get; set; }
         public string? ImageCover { get; set; }
         public int? CategoryId { get; set; }
         public UserDto? User { get; set; }
-
     }
 
     public class UserDto
