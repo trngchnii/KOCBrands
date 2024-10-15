@@ -12,8 +12,8 @@ using api.Data;
 namespace api.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241011052003_Initial")]
-    partial class Initial
+    [Migration("20241015031836_init")]
+    partial class init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -83,6 +83,10 @@ namespace api.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ImageCover")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TaxCode")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -162,6 +166,12 @@ namespace api.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CategoryId"));
 
+                    b.Property<int?>("BrandId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("CampaignId")
+                        .HasColumnType("int");
+
                     b.Property<string>("CategoryName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -169,6 +179,9 @@ namespace api.Migrations
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("InfluencerId")
+                        .HasColumnType("int");
 
                     b.HasKey("CategoryId");
 
@@ -207,9 +220,6 @@ namespace api.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<int?>("FavouriteId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("FollowersCount")
                         .HasColumnType("int");
 
                     b.Property<string>("Gender")
@@ -261,8 +271,9 @@ namespace api.Migrations
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<bool>("Status")
-                        .HasColumnType("bit");
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("UpdatedDate")
                         .HasColumnType("datetime2");
