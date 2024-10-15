@@ -55,10 +55,10 @@ namespace api.Migrations
                     Avatar = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Bio = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Phonenumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Role = table.Column<bool>(type: "bit", nullable: false),
+                    Role = table.Column<bool>(type: "nvarchar(max)", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Status = table.Column<bool>(type: "bit", nullable: false),
+                    Status = table.Column<bool>(type: "nvarchar(max)", nullable: false),
                     FavouriteId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
