@@ -36,8 +36,7 @@ namespace api.Controllers
             var brandEntity = new Brand
             {
                 BrandName = updateDto.BrandName,
-                ImageCover = updateDto.ImageCover,
-                CategoryId = updateDto.CategoryId
+                ImageCover = updateDto.ImageCover
             };
 
             var userEntity = new User
@@ -64,7 +63,7 @@ namespace api.Controllers
         public async Task<IActionResult> GetAll()
         {
             var brands = await _brandRepo.GetAllAsync();
-            if (brands == null )
+            if (brands == null)
             {
                 return NotFound(new { message = "No brands found." });
             }

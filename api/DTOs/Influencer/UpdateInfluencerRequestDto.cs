@@ -1,3 +1,5 @@
+using api.Models;
+
 namespace api.DTOs
 {
     public class UpdateInfluencerRequestDto
@@ -11,10 +13,9 @@ namespace api.DTOs
         public int FollowersCount { get; set; }
         public string Gender { get; set; } = string.Empty;
         public DateTime DateOfBirth { get; set; }
-        public string SocialMediaLinks { get; set; } = string.Empty;
-        public string BookingPrice { get; set; } = string.Empty ;
+        public string BookingPrice { get; set; } = string.Empty;
         public int PersonalIdentificationNumber { get; set; }
-        public int? CategoryId { get; set; }
+        public List<SocialMedia> SocialMedias { get; set; } = new List<SocialMedia>();
         public UserDto? User { get; set; }
     }
 
