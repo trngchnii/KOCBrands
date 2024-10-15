@@ -1,0 +1,38 @@
+﻿@model IEnumerable<api.DTOs.InfluencerDto>
+@{
+    ViewData["Title"] = "SearchResults";
+}
+
+<h2>Search Results</h2>
+
+@if (Model != null && Model.Any())
+{
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Gender</th>
+                <th>Followers Count</th>
+                <th>Booking Price</th>
+                <th>Date of Birth</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var influencer in Model)
+            {
+                <tr>
+                    <td>@influencer.Name</td>
+                    <td>@influencer.Gender</td>
+                    <td>@influencer.FollowersCount</td>
+                    <td>@influencer.BookingPrice</td>
+                    <td>@influencer.DateOfBirth.ToString("MM/dd/yyyy")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No influencers found matching your criteria.</p>
+}
+
