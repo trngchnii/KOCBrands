@@ -23,6 +23,8 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddScoped<IBrandRepository, BrandRepository>();
 builder.Services.AddScoped<IInfluencerRepository, InfluencerRepository>();
 builder.Services.AddScoped<ISearchKOLRepository, SearchKOLRepository>();
+builder.Services.AddScoped<ICampainRepository, CampainRepository>();
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 
 
 

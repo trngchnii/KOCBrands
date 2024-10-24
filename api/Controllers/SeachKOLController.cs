@@ -23,5 +23,12 @@ namespace api.Controllers
 
             return Ok(results);
         }
-    }
+
+		[HttpGet("getAllKOCs")]
+		public IActionResult GetAllKOCs()
+		{
+			var kocs = _searchKOLRepository.GetAllKOCs();
+			return Ok(kocs);
+		}
+	}
 }
