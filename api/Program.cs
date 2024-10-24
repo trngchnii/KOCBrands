@@ -25,6 +25,7 @@ builder.Services.AddScoped<IInfluencerRepository, InfluencerRepository>();
 builder.Services.AddScoped<ISearchKOLRepository, SearchKOLRepository>();
 builder.Services.AddScoped<ICampainRepository, CampainRepository>();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+builder.Services.AddScoped<IProposalRepository, ProposalRepository>();
 
 
 
