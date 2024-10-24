@@ -44,8 +44,8 @@ namespace api.Repository
                 // Update Brand properties
                 existingBrand.BrandName = brandModel.BrandName;
                 existingBrand.ImageCover = brandModel.ImageCover;
-                //existingBrand.CategoryId = brandModel.CategoryId;
-
+                /*existingBrand.CategoryId = brandModel.CategoryId;
+*/
                 // Update User properties
                 existingBrand.User.Email = userModel.Email;
                 existingBrand.User.Avatar = userModel.Avatar;
@@ -64,6 +64,27 @@ namespace api.Repository
                 await transaction.RollbackAsync();
                 throw;
             }
+        }
+
+        public async Task AddAsync(Brand brand)
+        {
+            _context.Brands.Add(brand);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task DeleteAsync(int id)
+        {
+            var brand = await GetByIdAsync(id);
+            if (brand != null)
+            {
+                _context.Brands.Remove(brand);
+                await _context.SaveChangesAsync();
+            }
+        }
+
+        public async Task<IEnumerable<Brand>> GetAllAsync()
+        {
+            return await _context.Brands.ToListAsync();
         }
 
     }
