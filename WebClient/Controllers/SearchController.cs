@@ -17,7 +17,7 @@ namespace WebClient.Controllers
 
         public async Task<ActionResult> Index()
         {
-			string apiUrl = "https://localhost:7290/searchKOL/getAllKOCs";
+			string apiUrl = "https://localhost:7290/searchKOL/getKOCs";
 
 			HttpResponseMessage response = await _httpClient.GetAsync(apiUrl);
 
@@ -26,10 +26,10 @@ namespace WebClient.Controllers
 				var jsonResponse = await response.Content.ReadAsStringAsync();
 				var kocs = JsonConvert.DeserializeObject<IEnumerable<InfluencerDto>>(jsonResponse);
 
-				return View("Index", kocs);
+				return View(kocs);
 			}
 
-            return View("Index");
+            return View(new List<InfluencerDto>());
 		}
 
         [HttpPost]

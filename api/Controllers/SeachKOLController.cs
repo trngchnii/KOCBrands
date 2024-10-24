@@ -24,8 +24,8 @@ namespace api.Controllers
             return Ok(results);
         }
 
-		[HttpGet("getAllKOCs")]
-		public IActionResult GetAllKOCs()
+		[HttpGet("getKOCs")]
+		public IActionResult GetKOCs()
 		{
 			var kocs = _searchKOLRepository.GetAllKOCs();
 			return Ok(kocs);
