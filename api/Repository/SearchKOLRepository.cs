@@ -1,6 +1,7 @@
 ﻿using api.Data;
 using api.DTOs;
 using api.Models;
+using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 
 namespace api.Repository
@@ -14,7 +15,12 @@ namespace api.Repository
             _context = context;
         }
 
-        public IEnumerable<InfluencerDto> SearchKOL(string name, string? gender, int? followersCount, decimal? bookingPrice)
+		public List<Influencer> GetAllKOCs()
+		{
+            return _context.Influencers.ToList();
+		}
+
+		public IEnumerable<InfluencerDto> SearchKOL(string name, string? gender, DateTime? dateOfBirth, int? followersCount, decimal? bookingPrice)
         {
             var query = _context.Influencers.AsQueryable();
 
@@ -28,9 +34,13 @@ namespace api.Repository
                 query = query.Where(i => i.Gender == gender);
             }
 
+            if(dateOfBirth.HasValue){
+                query = query.Where(i => i.DateOfBirth == dateOfBirth.Value.Date);
+            }
+
             if (followersCount.HasValue)
             {
-                query = query.Where(i => i.FollowersCount >= followersCount.Value);
+           //     query = query.Where(i => i.FollowersCount >= followersCount.Value);
             }
 
             if (bookingPrice.HasValue)
@@ -38,17 +48,19 @@ namespace api.Repository
                 query = query.Where(i => decimal.Parse(i.BookingPrice) <= bookingPrice.Value);
             }
 
-            var result = query.Select(i => new InfluencerDto
-            {
-                Name = i.Name,
-                Gender = i.Gender,
-                FollowersCount = i.FollowersCount,
-                BookingPrice = i.BookingPrice,
-                SocialMediaLinks = i.SocialMediaLinks,
-                PersonalIdentificationNumber = i.PersonalIdentificationNumber,
-            }).ToList();
+            /*  var result = query.Select(i => new  
+              {
+                  Name = i.Name,
+                  Gender = i.Gender,
+                  DateOfBirth = i.DateOfBirth,
+                  FollowersCount = i.FollowersCount,
+                  BookingPrice = i.BookingPrice,
+                  PersonalIdentificationNumber = i.PersonalIdentificationNumber,
+              }).ToList();*/
 
-            return result;
+            var result = query.Select(i => new InfluencerDto());
+
+			return result;
         }
     }
 }

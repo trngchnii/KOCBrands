@@ -90,11 +90,11 @@
                         <div id="form-search-kol-page" class="md:pt-5 py-3 md:pb-7">
                             <div class="container">
                                 <h3 class="text-center text-white">Tìm kiếm Influencer</h3>
-                                <form class="text-center" id="searchForm">
+                                <form asp-action="Search" method="post">
                                     <div class="input-name md:mb-4 mb-2 border-round-2xl overflow-hidden m-auto relative w-full">
-                                        <input type="text" value="" class="w-full border-none outline-none"
-                                               placeholder="Nhập username Tiktok, ví dụ: lebong85" name="name" /><button type="submit"
-                                                                                                                         class="border-none z-2 cursor-pointer absolute outline-none"></button>
+                                        <input type="text" id="name" class="w-full border-none outline-none"
+                                               placeholder="Nhập username Tiktok, ví dụ: lebong85" name="name" />
+                                        <button type="submit" class="border-none z-2 cursor-pointer absolute outline-none"></button>
                                     </div>
                                     <div class="flex flex-wrap gap-2 justify-content-center">
                                         <select class="items-form border-none cursor-pointer outline-none shadow-1 border-round-2xl"

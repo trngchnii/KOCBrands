@@ -7,6 +7,7 @@ namespace api.DTOs
         public InfluencerDto? Influencer { get; set; }
         public UserDto? User { get; set; }
     }
+
     public class InfluencerDto
     {
         public string Name { get; set; } = string.Empty;

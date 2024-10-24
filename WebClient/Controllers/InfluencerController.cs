@@ -22,9 +22,5 @@ namespace WebClient.Controllers
         {
             return View();
         }
-
-        public IActionResult ProfileDetails() {
-            return View();
-        }
     }
 }

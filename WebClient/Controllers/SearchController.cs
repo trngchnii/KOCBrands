@@ -1,4 +1,6 @@
-﻿using api.DTOs;
+﻿using api.Data;
+using api.DTOs;
+using api.Repository;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
@@ -8,27 +10,44 @@ namespace WebClient.Controllers
     {
         private readonly HttpClient _httpClient;
 
-        public SearchController(HttpClient httpClient)
+		public SearchController(HttpClient httpClient)
         {
             _httpClient = httpClient;
-        }
+		}
 
-        public async Task<IActionResult> Index(string name, string? gender, int? followersCount = null, decimal? bookingPrice = null)
+        public async Task<ActionResult> Index()
         {
-            return View();
+			string apiUrl = "https://localhost:7290/searchKOL/getAllKOCs";
 
-            //string apiUrl = $"https://localhost:7290/searchKOL/search";
+			HttpResponseMessage response = await _httpClient.GetAsync(apiUrl);
 
-            //HttpResponseMessage response = await _httpClient.GetAsync(apiUrl);
+			if (response.IsSuccessStatusCode)
+			{
+				var jsonResponse = await response.Content.ReadAsStringAsync();
+				var kocs = JsonConvert.DeserializeObject<IEnumerable<InfluencerDto>>(jsonResponse);
 
-            //if (response.IsSuccessStatusCode)
-            //{
-            //    var jsonResponse = await response.Content.ReadAsStringAsync();
-            //    var influencers = JsonConvert.DeserializeObject<IEnumerable<InfluencerDto>>(jsonResponse);
-            //    return View(influencers);
-            //}
+				return View("Index", kocs);
+			}
 
-            //return View("Error");
+            return View("Index");
+		}
+
+        [HttpPost]
+        public async Task<IActionResult> Search(string name, string? gender, DateTime? dateOfBirth, int? followersCount = null, decimal? bookingPrice = null)
+        {
+            string apiUrl = $"https://localhost:7290/searchKOL/search?name={name}&gender={gender}&dateOfBirth={dateOfBirth}&followersCount={followersCount}&bookingPrice={bookingPrice}";
+            
+            HttpResponseMessage response = await _httpClient.GetAsync(apiUrl);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var jsonResponse = await response.Content.ReadAsStringAsync();
+                var influencers = JsonConvert.DeserializeObject<IEnumerable<InfluencerDto>>(jsonResponse);
+
+                return View("SearchResults", influencers);
+            } 
+            
+            return View("SearchFail");
         }
     }
 }

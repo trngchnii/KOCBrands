@@ -16,29 +16,41 @@ namespace api.Repository
             _context = context;
         }
 
-        // Get all influencers asynchronously
-        public async Task<IEnumerable<Influencer>> GetAllAsync()
+        public async Task AddAsync(Influencer influencer)
         {
-            return await _context.Influencers
-                .Include(i => i.User)  // Eager load associated User
-                .ToListAsync();
+            _context.Influencers.Add(influencer);
+            await _context.SaveChangesAsync();
         }
 
-        // Get an influencer by ID asynchronously
+        public async Task DeleteAsync(int id)
+        {
+            var influencer = await GetByIdAsync(id);
+            if (influencer != null)
+            {
+                _context.Influencers.Remove(influencer);
+                await _context.SaveChangesAsync();
+            }
+        }
+
+        public async Task<IEnumerable<Influencer>> GetAllAsync()
+        {
+            return await _context.Influencers.ToListAsync();
+        }
+
         public async Task<Influencer?> GetByIdAsync(int id)
         {
-            return await _context.Influencers
-                .Include(i => i.User)  // Eager load associated User
-                .FirstOrDefaultAsync(i => i.InfluencerId == id);
+            var influencer = await _context.Influencers.FirstOrDefaultAsync(i => i.InfluencerId == id);
+            if (influencer == null)
+                return null;
+            return influencer;
         }
-    
 
         public async Task<(Influencer?, User?)> UpdateAsync(int id, Influencer influencerModel, User userModel)
         {
             using var transaction = await _context.Database.BeginTransactionAsync();
             try
             {
-                // Find the existing Brand by its ID
+                // Find the existing influencer by its ID
                 var existingInfluencer = await _context.Influencers
                     .Include(b => b.User)  // Ensure User is included
                     .FirstOrDefaultAsync(b => b.InfluencerId == id);
@@ -50,17 +62,15 @@ namespace api.Repository
                 if (existingInfluencer.User == null)
                 {
                     // Handle case when User is null (either throw an error or create a new user)
-                    throw new Exception("User không tồn tại cho Brand này.");
+                    throw new Exception("User không tồn tại cho Influencer này.");
                 }
 
-                // Update Brand properties
+                // Update influencer properties
                 existingInfluencer.Name = influencerModel.Name;
                 existingInfluencer.Gender = influencerModel.Gender;
                 existingInfluencer.DateOfBirth = influencerModel.DateOfBirth;
-                existingInfluencer.SocialMediaLinks = influencerModel.SocialMediaLinks;
                 existingInfluencer.BookingPrice = influencerModel.BookingPrice;
                 existingInfluencer.PersonalIdentificationNumber = influencerModel.PersonalIdentificationNumber;
-                existingInfluencer.CategoryId = influencerModel.CategoryId;
 
                 // Update User properties
                 existingInfluencer.User.Email = userModel.Email;
@@ -69,7 +79,7 @@ namespace api.Repository
                 existingInfluencer.User.Phonenumber = userModel.Phonenumber;
                 existingInfluencer.User.Address = userModel.Address;
 
-                // Save changes to both Brand and User
+                // Save changes to both influencer and User
                 await _context.SaveChangesAsync();
                 await transaction.CommitAsync();
 
