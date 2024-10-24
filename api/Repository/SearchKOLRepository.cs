@@ -1,6 +1,7 @@
 ﻿using api.Data;
 using api.DTOs;
 using api.Models;
+using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 
 namespace api.Repository
@@ -14,7 +15,12 @@ namespace api.Repository
             _context = context;
         }
 
-        public IEnumerable<InfluencerDto> SearchKOL(string name, string? gender, DateTime? dateOfBirth, int? followersCount, decimal? bookingPrice)
+		public List<Influencer> GetAllKOCs()
+		{
+            return _context.Influencers.ToList();
+		}
+
+		public IEnumerable<InfluencerDto> SearchKOL(string name, string? gender, DateTime? dateOfBirth, int? followersCount, decimal? bookingPrice)
         {
             var query = _context.Influencers.AsQueryable();
 
