@@ -28,7 +28,7 @@ namespace api.Controllers
         }
 
 
-        [HttpGet("{key}")]
+        [HttpGet("detail")]
         public async Task<ActionResult> Get([FromODataUri] int key)
         {
             var cate = await _categoryRepo.GetByIdAsync(key);
@@ -41,7 +41,7 @@ namespace api.Controllers
             return Ok(cate);
         }
 
-        [HttpPut("{key}")]
+        [HttpPut]
         public async Task<IActionResult> Put([FromODataUri] int key, [FromBody] Category category)
         {
             if (!ModelState.IsValid || category == null)
@@ -51,7 +51,7 @@ namespace api.Controllers
 
             await _categoryRepo.UpdateAsync(category);
 
-            return NoContent();
+            return Ok();
         }
 
         [HttpPost]
@@ -63,10 +63,10 @@ namespace api.Controllers
             }
             await _categoryRepo.AddAsync(cate);
 
-            return Created(cate);
+            return Ok();
         }
 
-        [HttpDelete("{key}")]
+        [HttpDelete]
         public async Task<IActionResult> Delete([FromODataUri] int key)
         {
 
@@ -78,7 +78,7 @@ namespace api.Controllers
 
             await _categoryRepo.DeleteAsync(existCate.CategoryId);
 
-            return NoContent();
+            return Ok();
         }
 
     }

@@ -13,8 +13,8 @@ namespace api.Models
         public int? InfluencerId { get; set; }
         public int? BrandId { get; set; }
         public int? CampaignId { get; set; }
-        public List<Campaign> Campaigns { get; set; } = new List<Campaign>();
-        public List<Influencer> Influencers { get; set; } = new List<Influencer>();
-        public List<Brand> Brands { get; set; } = new List<Brand>();
+        public List<Campaign>? Campaigns { get; set; } = new List<Campaign>();
+        public List<Influencer>? Influencers { get; set; } = new List<Influencer>();
+        public List<Brand>? Brands { get; set; } = new List<Brand>();
     }
 }

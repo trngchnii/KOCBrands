@@ -1,6 +1,6 @@
 ﻿using api.Models;
 
-namespace api.DTOs
+namespace api.DTOs.CategoryDTO
 {
     public class CategoryList
     {

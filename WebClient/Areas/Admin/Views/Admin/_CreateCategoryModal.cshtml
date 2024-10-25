@@ -1,0 +1,14 @@
+﻿@model api.DTOs.CategoryDTO.CategoryAdd
+
+<form asp-action="CreateCategory" method="post" id="createCategoryForm">
+    <div class="form-group">
+        <label asp-for="CategoryName"></label>
+        <input asp-for="CategoryName" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Description"></label>
+        <input asp-for="Description" class="form-control" />
+    </div>
+
+    <button style="margin-top: 5px" type="submit" class="btn btn-primary">Create Category</button>
+</form>
