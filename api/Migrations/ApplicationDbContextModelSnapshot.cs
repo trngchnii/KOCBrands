@@ -209,9 +209,8 @@ namespace api.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("InfluencerId"));
 
-                    b.Property<string>("BookingPrice")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<decimal>("BookingPrice")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<DateTime>("DateOfBirth")
                         .HasColumnType("datetime2");
@@ -452,7 +451,7 @@ namespace api.Migrations
             modelBuilder.Entity("api.Models.Influencer", b =>
                 {
                     b.HasOne("api.Models.Favourite", "Favourite")
-                        .WithMany("Influencers")
+                        .WithMany()
                         .HasForeignKey("FavouriteId");
 
                     b.HasOne("api.Models.User", "User")
@@ -508,8 +507,6 @@ namespace api.Migrations
             modelBuilder.Entity("api.Models.Favourite", b =>
                 {
                     b.Navigation("Campaigns");
-
-                    b.Navigation("Influencers");
 
                     b.Navigation("Users");
                 });

@@ -6,5 +6,6 @@ namespace api.Repository
     public interface ISearchKOLRepository
     {
         IEnumerable<InfluencerDto> SearchKOL(string name, string? gender, DateTime? dateOfBirth, int? followersCount, decimal? bookingPrice);
+        List<Influencer> GetAllKOCs();
     }
 }

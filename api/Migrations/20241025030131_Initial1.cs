@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace api.Migrations
 {
     /// <inheritdoc />
-    public partial class init : Migration
+    public partial class Initial1 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -102,7 +102,7 @@ namespace api.Migrations
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Gender = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     DateOfBirth = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    BookingPrice = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    BookingPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     PersonalIdentificationNumber = table.Column<int>(type: "int", nullable: false),
                     FavouriteId = table.Column<int>(type: "int", nullable: true)
                 },
