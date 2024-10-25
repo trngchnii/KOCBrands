@@ -21,5 +21,18 @@ namespace api.Data
         public DbSet<Brand> Brands { get; set; }
         public DbSet<Influencer> Influencers { get; set; }
         public DbSet<User> Users { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Influencer>()
+                .Property(i => i.BookingPrice)
+                .HasColumnType("decimal(18,2)"); 
+
+            modelBuilder.Entity<Proposal>()
+                .Property(p => p.Price)
+                .HasColumnType("decimal(18,2)"); 
+
+        }
+
     }
 }

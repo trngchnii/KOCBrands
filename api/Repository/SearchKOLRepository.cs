@@ -43,10 +43,10 @@ namespace api.Repository
            //     query = query.Where(i => i.FollowersCount >= followersCount.Value);
             }
 
-            if (bookingPrice.HasValue)
+            /*if (bookingPrice.HasValue)
             {
                 query = query.Where(i => decimal.Parse(i.BookingPrice) <= bookingPrice.Value);
-            }
+            }*/
 
             /*  var result = query.Select(i => new  
               {

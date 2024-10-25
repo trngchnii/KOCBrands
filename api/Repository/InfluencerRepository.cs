@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using api.Data;
+using api.DTOs;
 using api.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -45,7 +46,7 @@ namespace api.Repository
             return influencer;
         }
 
-        public async Task<(Influencer?, User?)> UpdateAsync(int id, Influencer influencerModel, User userModel)
+        public async Task<(Influencer?, User?)> UpdateAsync(int id,UpdateInfluencerRequestDto influencerModel)
         {
             using var transaction = await _context.Database.BeginTransactionAsync();
             try
@@ -58,26 +59,28 @@ namespace api.Repository
                 if (existingInfluencer == null)
                 {
                     return (null, null);
-                }
+                }/*
                 if (existingInfluencer.User == null)
                 {
                     // Handle case when User is null (either throw an error or create a new user)
                     throw new Exception("User không tồn tại cho Influencer này.");
-                }
+                }*/
 
                 // Update influencer properties
-                existingInfluencer.Name = influencerModel.Name;
-                existingInfluencer.Gender = influencerModel.Gender;
-                existingInfluencer.DateOfBirth = influencerModel.DateOfBirth;
-                existingInfluencer.BookingPrice = influencerModel.BookingPrice;
-                existingInfluencer.PersonalIdentificationNumber = influencerModel.PersonalIdentificationNumber;
+                existingInfluencer.Name = influencerModel.Influencer.Name;
+                existingInfluencer.Gender = influencerModel.Influencer.Gender;
+                existingInfluencer.DateOfBirth = influencerModel.Influencer.DateOfBirth;
+                existingInfluencer.BookingPrice = influencerModel.Influencer.BookingPrice;
+                existingInfluencer.PersonalIdentificationNumber = influencerModel.Influencer.PersonalIdentificationNumber;
 
-                // Update User properties
-                existingInfluencer.User.Email = userModel.Email;
-                existingInfluencer.User.Avatar = userModel.Avatar;
-                existingInfluencer.User.Bio = userModel.Bio;
-                existingInfluencer.User.Phonenumber = userModel.Phonenumber;
-                existingInfluencer.User.Address = userModel.Address;
+                if (existingInfluencer.User != null)
+                {
+                    existingInfluencer.User.Email = influencerModel.User.Email;
+                    existingInfluencer.User.Avatar = influencerModel.User.Avatar;
+                    existingInfluencer.User.Bio = influencerModel.User.Bio;
+                    existingInfluencer.User.Phonenumber = influencerModel.User.Phonenumber;
+                    existingInfluencer.User.Address = influencerModel.User.Address;
+                }
 
                 // Save changes to both influencer and User
                 await _context.SaveChangesAsync();

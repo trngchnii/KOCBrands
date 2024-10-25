@@ -1,4 +1,5 @@
-﻿using api.Models;
+﻿using api.DTOs;
+using api.Models;
 using api.Repository;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.OData.Formatter;
@@ -39,7 +40,7 @@ namespace api.Controllers
         }
 
         [HttpPut("{key}")]
-        public async Task<IActionResult> Put([FromODataUri] int key,[FromBody] Brand brand)
+        public async Task<IActionResult> Put([FromODataUri] int key,[FromBody] UpdateBrandUserRequestDto brand)
         {
             if (!ModelState.IsValid || brand == null)
             {
@@ -47,17 +48,17 @@ namespace api.Controllers
             }
 
             // Map User information
-            var userModel = new User
+            /*var userModel = new User
             {
                 Email = brand.User.Email,
                 Avatar = brand.User.Avatar,
                 Bio = brand.User.Bio,
                 Phonenumber = brand.User.Phonenumber,
                 Address = brand.User.Address
-            };
+            };*/
 
             // Call repository to update the brand and user
-            var result = await _brandRepo.UpdateAsync(key,brand,userModel);
+            var result = await _brandRepo.UpdateAsync(key,brand);
 
             if (result.Item1 == null)
             {

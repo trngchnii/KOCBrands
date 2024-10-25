@@ -209,9 +209,8 @@ namespace api.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("InfluencerId"));
 
-                    b.Property<string>("BookingPrice")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<decimal>("BookingPrice")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<DateTime>("DateOfBirth")
                         .HasColumnType("datetime2");

@@ -7,7 +7,7 @@ namespace api.Models
 		public string Name { get; set; } = string.Empty;
 		public string Gender { get; set; } = string.Empty;
 		public DateTime DateOfBirth { get; set; }
-		public string BookingPrice { get; set; }
+		public decimal BookingPrice { get; set; }
 		public int PersonalIdentificationNumber { get; set; }
 		public int? FavouriteId { get; set; }
 		public User? User { get; set; }

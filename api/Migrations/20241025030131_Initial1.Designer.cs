@@ -12,8 +12,8 @@ using api.Data;
 namespace api.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241024184606_Initial")]
-    partial class Initial
+    [Migration("20241025030131_Initial1")]
+    partial class Initial1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -212,9 +212,8 @@ namespace api.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("InfluencerId"));
 
-                    b.Property<string>("BookingPrice")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<decimal>("BookingPrice")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<DateTime>("DateOfBirth")
                         .HasColumnType("datetime2");

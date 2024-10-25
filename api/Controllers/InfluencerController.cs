@@ -1,3 +1,4 @@
+using api.DTOs;
 using api.Models;
 using api.Repository;
 using Microsoft.AspNetCore.Mvc;
@@ -39,7 +40,7 @@ namespace api.Controllers
         }
 
         [HttpPut("{key}")]
-        public async Task<IActionResult> Put([FromODataUri] int key,[FromBody] Influencer influ)
+        public async Task<IActionResult> Put([FromODataUri] int key,[FromBody] UpdateInfluencerRequestDto influ)
         {
             if (!ModelState.IsValid || influ == null)
             {
@@ -47,21 +48,21 @@ namespace api.Controllers
             }
 
             // Map User information
-            var userModel = new User
+            /*var userModel = new User
             {
                 Email = influ.User.Email,
                 Avatar = influ.User.Avatar,
                 Bio = influ.User.Bio,
                 Phonenumber = influ.User.Phonenumber,
                 Address = influ.User.Address
-            };
+            };*/
 
             // Call repository to update the brand and user
-            var result = await _influencerRepo.UpdateAsync(key,influ,userModel);
+            var result = await _influencerRepo.UpdateAsync(key,influ);
 
             if (result.Item1 == null)
             {
-                return NotFound("Brand not found.");
+                return NotFound("Influencer not found.");
             }
 
             return NoContent();
