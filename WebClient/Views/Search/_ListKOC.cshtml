@@ -1,4 +1,4 @@
-﻿@model List<api.DTOs.InfluencerDto>
+﻿@model IEnumerable<api.DTOs.InfluencerDto>
 	<div class="p-toast p-component p-toast-top-right">
 		<div></div>
 	</div>
@@ -34,13 +34,13 @@
 							<div class="image text-center relative border-round-xl overflow-hidden">
 								<div class="followers align-items-center text-white absolute border-round-3xl flex">
 									<img class="mr-1 border-circle" width="22" height="22"
-										 src="/demo/images/social/icon-tiktok.svg">@influencer.FollowersCount
+										 src="/demo/images/social/icon-tiktok.svg">@influencer.PersonalIdentificationNumber
 								</div><img width="270" height="330"
 										   class="max-w-full w-full vertical-align-middle"
 										   src="https://api.mykol.vn/profile/557/eb051934-a7a2-47f4-93fb-e529534c075d_1696049874702-resize.jpg"
 										   loading="lazy" alt="@influencer.Name">
 								<div class="title text-left px-4 pb-4 w-full absolute">
-									<h3 class="name text-white capitalize mb-0 line-clamp-1">@influencer.Name</h3><span class="city text-white">@influencer.DateOfBirth</span>
+									<h3 class="name text-white capitalize mb-0 line-clamp-1">@influencer.Name</h3><span class="city text-white">@influencer.DateOfBirth.ToString("d")</span>
 								</div>
 							</div>
 						</a>
@@ -60,7 +60,7 @@
 										 class="max-w-full md:w-auto vertical-align-middle">
 								</div>
 							</div> 
-							<div class="price">@influencer.BookingPrice.ToString() VNĐ</div>
+							<div class="price">@influencer.BookingPrice.ToString("N0") VNĐ</div>
 						</div>
 						<div class="careers line-clamp-2">@influencer.Gender</div>
 					</div>

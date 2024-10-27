@@ -5,7 +5,8 @@ namespace api.Repository
 {
     public interface ISearchKOLRepository
     {
-        IEnumerable<InfluencerDto> SearchKOL(string name, string? gender, DateTime? dateOfBirth, int? followersCount, decimal? bookingPrice);
-        List<Influencer> GetAllKOCs();
+        IEnumerable<InfluencerDto> SearchKOL(string name, string? gender, DateTime? dateOfBirth, decimal? bookingPrice, int? personalIdentificationNumber);
+        Task<IEnumerable<Influencer>> GetAllKOCs();
+        Task<Influencer?> GetByIdAsync(int id);
     }
 }

@@ -15,12 +15,12 @@ namespace api.Repository
             _context = context;
         }
 
-		public List<Influencer> GetAllKOCs()
-		{
-            return _context.Influencers.ToList();
+        public async Task<IEnumerable<Influencer>> GetAllKOCs()
+        {
+            return await _context.Influencers.ToListAsync();
 		}
 
-		public IEnumerable<InfluencerDto> SearchKOL(string name, string? gender, DateTime? dateOfBirth, int? followersCount, decimal? bookingPrice)
+		public IEnumerable<InfluencerDto> SearchKOL(string name, string? gender, DateTime? dateOfBirth, decimal? bookingPrice, int? personalIdentificationNumber)
         {
             var query = _context.Influencers.AsQueryable();
 
@@ -38,14 +38,19 @@ namespace api.Repository
                 query = query.Where(i => i.DateOfBirth == dateOfBirth.Value.Date);
             }
 
-            if (followersCount.HasValue)
-            {
-                query = query.Where(i => i.FollowersCount >= followersCount.Value);
-            }
+            //if (followersCount.HasValue)
+            //{
+            //    query = query.Where(i => i.FollowersCount >= followersCount.Value);
+            //}
 
             if (bookingPrice.HasValue)
             {
-                query = query.Where(i => decimal.Parse(i.BookingPrice) <= bookingPrice.Value);
+                query = query.Where(i => i.BookingPrice <= bookingPrice.Value);
+            }
+
+            if (personalIdentificationNumber.HasValue)
+            {
+                query = query.Where(i => i.PersonalIdentificationNumber == personalIdentificationNumber.Value);
             }
 
             var result = query.Select(i => new InfluencerDto
@@ -53,12 +58,22 @@ namespace api.Repository
                 Name = i.Name,
                 Gender = i.Gender,
                 DateOfBirth = i.DateOfBirth,
-                FollowersCount = i.FollowersCount,
                 BookingPrice = i.BookingPrice,
                 PersonalIdentificationNumber = i.PersonalIdentificationNumber,
             }).ToList();
 
-            return result;
+			return result;
+        }
+
+        public async Task<Influencer?> GetByIdAsync(int id)
+        {
+            var influencer = await _context.Influencers.FirstOrDefaultAsync(i => i.InfluencerId == id);
+            if (influencer == null)
+            {
+                return null;
+            }
+
+            return influencer;
         }
     }
 }

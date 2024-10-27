@@ -1,9 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using api.Data;
+using api.DTOs;
 using api.Models;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace api.Repository
@@ -18,10 +16,13 @@ namespace api.Repository
 
         public async Task<Brand?> GetByIdAsync(int id)
         {
-            return await _context.Brands.FindAsync(id);
+            var brand = await _context.Brands.FirstOrDefaultAsync(i => i.BrandId == id);
+            if (brand == null)
+                return null;
+            return brand;
         }
 
-        public async Task<(Brand?, User?)> UpdateAsync(int brandId, Brand brandModel, User userModel)
+        public async Task<(Brand?, User?)> UpdateAsync(int brandId, UpdateBrandUserRequestDto brandModel)
         {
             using var transaction = await _context.Database.BeginTransactionAsync();
             try
@@ -34,23 +35,27 @@ namespace api.Repository
                 if (existingBrand == null)
                 {
                     return (null, null);
-                }
+                }/*
                 if (existingBrand.User == null)
                 {
                     // Handle case when User is null (either throw an error or create a new user)
                     throw new Exception("User không tồn tại cho Brand này.");
-                }
+                }*/
 
                 // Update Brand properties
-                existingBrand.BrandName = brandModel.BrandName;
-                existingBrand.ImageCover = brandModel.ImageCover;
-
-                // Update User properties
-                existingBrand.User.Email = userModel.Email;
-                existingBrand.User.Avatar = userModel.Avatar;
-                existingBrand.User.Bio = userModel.Bio;
-                existingBrand.User.Phonenumber = userModel.Phonenumber;
-                existingBrand.User.Address = userModel.Address;
+                existingBrand.BrandName = brandModel.Brand.BrandName;
+                existingBrand.ImageCover = brandModel.Brand.ImageCover;
+                existingBrand.TaxCode = brandModel.Brand.TaxCode;
+                /*existingBrand.CategoryId = brandModel.CategoryId;
+*/
+                if (existingBrand.User != null)
+                {
+                    existingBrand.User.Email = brandModel.User.Email;
+                    existingBrand.User.Avatar = brandModel.User.Avatar;
+                    existingBrand.User.Bio = brandModel.User.Bio;
+                    existingBrand.User.Phonenumber = brandModel.User.Phonenumber;
+                    existingBrand.User.Address = brandModel.User.Address;
+                }
 
                 // Save changes to both Brand and User
                 await _context.SaveChangesAsync();
@@ -63,6 +68,27 @@ namespace api.Repository
                 await transaction.RollbackAsync();
                 throw;
             }
+        }
+
+        public async Task AddAsync(Brand brand)
+        {
+            _context.Brands.Add(brand);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task DeleteAsync(int id)
+        {
+            var brand = await GetByIdAsync(id);
+            if (brand != null)
+            {
+                _context.Brands.Remove(brand);
+                await _context.SaveChangesAsync();
+            }
+        }
+
+        public async Task<IEnumerable<Brand>> GetAllAsync()
+        {
+            return await _context.Brands.ToListAsync();
         }
 
     }

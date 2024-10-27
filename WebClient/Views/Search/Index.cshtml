@@ -48,6 +48,7 @@
 </head>
 
 <body>
+@model IEnumerable<api.DTOs.InfluencerDto>
     <div id="__next" data-reactroot="">
         <div class="layout-wrapper layout-theme-light layout-static layout-static-inactive p-ripple-disabled">
             <div class="layout-topbar">
@@ -188,7 +189,7 @@
                         </div>
                         <div class="container">
                             <div id="search-kocs" class="card md:pb-6 pb-3 pl-3 pr-3 shadow-1 md:mt-6 mt-3 md:mb-3 my-3 border-round-2xl w-full">
-                                @await Html.PartialAsync("_ListKOC")
+                                @await Html.PartialAsync("_ListKOC", Model)
                             </div>
                         </div>
                     </div>

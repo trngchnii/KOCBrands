@@ -11,7 +11,7 @@ namespace api.Models
 
         public DateTime DateAdded { get; set; } = DateTime.Now;
 
-        public List<Influencer> Influencers { get; set; } = new List<Influencer>();
+        //public List<Influencer> Influencers { get; set; } = new List<Influencer>();
         public List<User> Users { get; set; } = new List<User>();
         public List<Campaign> Campaigns { get; set; } = new List<Campaign>();
     }
