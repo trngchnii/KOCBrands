@@ -1,6 +1,7 @@
 ﻿using api.DTOs;
 using api.Models;
 using api.Repository;
+using api.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.OData.Formatter;
 using Microsoft.AspNetCore.OData.Query;
@@ -13,7 +14,7 @@ namespace api.Controllers
     public class BrandController : ODataController
     {
         private readonly IBrandRepository _brandRepo;
-        public BrandController( IBrandRepository brandRepo)
+        public BrandController(IBrandRepository brandRepo)
         {
             _brandRepo = brandRepo;
         }
@@ -40,7 +41,7 @@ namespace api.Controllers
         }
 
         [HttpPut("{key}")]
-        public async Task<IActionResult> Put([FromODataUri] int key,[FromBody] UpdateBrandUserRequestDto brand)
+        public async Task<IActionResult> Put([FromODataUri] int key,[FromForm] UpdateBrandUserRequestDto brand)
         {
             if (!ModelState.IsValid || brand == null)
             {
