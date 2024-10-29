@@ -1,4 +1,6 @@
 ﻿using api.Data;
+using api.DTOs;
+using api.DTOs.Campaign;
 using api.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -39,18 +41,43 @@ namespace api.Repository
             return await _context.Campaigns.FirstOrDefaultAsync(c => c.CampaignId == id);
         }
 
-        public async Task UpdateAsync(Campaign campaign)
+        public async Task<Campaign> UpdateAsync(int id, UpdateCampaignDto model)
         {
-            var existingItem = await GetByIdAsync(campaign.CampaignId);
-            if (existingItem != null)
+            using var transaction = await _context.Database.BeginTransactionAsync();
+            try
             {
-                _context.Entry(existingItem).CurrentValues.SetValues(campaign);
+
+                var existingCampaign = await _context.Campaigns
+                    .Include(b => b.Proposals)
+                    .Include(b => b.Categories)
+                    .Include(b => b.Brand)
+                    .Include(b => b.Favourite)
+                    .FirstOrDefaultAsync(b => b.CampaignId == id);
+
+                if (existingCampaign == null)
+                {
+                    return (null);
+                }
+
+                existingCampaign.Title = model.Title;
+                existingCampaign.Description = model.Description;
+                existingCampaign.Requirements = model.Requirements;
+                existingCampaign.Budget = model.Budget;
+                existingCampaign.StartDate = model.StartDate;
+                existingCampaign.EndDate = model.EndDate;
+                existingCampaign.Status = model.Status;
+                existingCampaign.UpdatedDate = DateTime.Now;
+
+                await _context.SaveChangesAsync();
+                await transaction.CommitAsync();
+
+                return (existingCampaign);
             }
-            else
+            catch (Exception)
             {
-                _context.Campaigns.Add(campaign);
+                await transaction.RollbackAsync();
+                throw;
             }
-            await _context.SaveChangesAsync();
         }
     }
 }

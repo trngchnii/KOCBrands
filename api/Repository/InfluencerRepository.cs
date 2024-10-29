@@ -1,10 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using api.Data;
 using api.DTOs;
 using api.Models;
+using api.Services;
 using Microsoft.EntityFrameworkCore;
 
 namespace api.Repository
@@ -12,9 +9,11 @@ namespace api.Repository
     public class InfluencerRepository : IInfluencerRepository
     {
         private readonly ApplicationDbContext _context;
-        public InfluencerRepository(ApplicationDbContext context)
+        private readonly IFileService _fileService;
+        public InfluencerRepository(ApplicationDbContext context,IFileService fileService)
         {
             _context = context;
+            _fileService = fileService;
         }
 
         public async Task AddAsync(Influencer influencer)
@@ -66,6 +65,10 @@ namespace api.Repository
                     throw new Exception("User không tồn tại cho Influencer này.");
                 }*/
 
+                string oldAvatar = existingInfluencer.User.Avatar;
+
+                
+
                 // Update influencer properties
                 existingInfluencer.Name = influencerModel.Influencer.Name;
                 existingInfluencer.Gender = influencerModel.Influencer.Gender;
@@ -76,10 +79,21 @@ namespace api.Repository
                 if (existingInfluencer.User != null)
                 {
                     existingInfluencer.User.Email = influencerModel.User.Email;
-                    existingInfluencer.User.Avatar = influencerModel.User.Avatar;
                     existingInfluencer.User.Bio = influencerModel.User.Bio;
                     existingInfluencer.User.Phonenumber = influencerModel.User.Phonenumber;
                     existingInfluencer.User.Address = influencerModel.User.Address;
+
+                    // Kiểm tra và lưu file ảnh đại diện của User
+                    if (influencerModel.User.AvatarFile != null)
+                    {
+                        if (influencerModel.User.AvatarFile.Length > 1 * 1024 * 1024)
+                        {
+                            throw new Exception("Kích thước file ảnh đại diện không được vượt quá 1 MB.");
+                        }
+                        string[] allowedFileExtensions = { ".jpg",".jpeg",".png" };
+                        string avatarCreatedName = await _fileService.SaveFileAsync(influencerModel.User.AvatarFile,allowedFileExtensions);
+                        existingInfluencer.User.Avatar = avatarCreatedName; // Cập nhật ảnh đại diện
+                    }
                 }
 
                 // Save changes to both influencer and User
