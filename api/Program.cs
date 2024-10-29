@@ -1,8 +1,10 @@
 using api.Data;
 using api.Models;
 using api.Repository;
+using api.Services;
 using Microsoft.AspNetCore.OData;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.OData.ModelBuilder;
 
 internal class Program
@@ -39,7 +41,17 @@ internal class Program
         builder.Services.AddScoped<ICampainRepository,CampainRepository>();
         builder.Services.AddScoped<ICategoryRepository,CategoryRepository>();
         builder.Services.AddScoped<IProposalRepository,ProposalRepository>();
-        builder.Services.AddScoped<IProposalRepository,ProposalRepository>();
+        builder.Services.AddTransient<IFileService,FileService>();
+        builder.Services.AddCors(options =>
+        {
+            options.AddDefaultPolicy(
+                policy =>
+                {
+                    policy.WithOrigins("*").AllowAnyMethod().AllowAnyHeader();
+                    ;
+                });
+        });
+
 
         builder.Services.AddControllers();
         builder.Services.AddControllers().AddOData(
@@ -60,13 +72,17 @@ internal class Program
 
         app.UseODataBatching();
         app.UseRouting();
-
-        //app.UseCors();
-
         app.UseHttpsRedirection();
 
-        app.MapControllers();
+        app.UseStaticFiles(new StaticFileOptions
+        {
+            FileProvider = new PhysicalFileProvider(
+           Path.Combine(builder.Environment.ContentRootPath,"Uploads")),
+            RequestPath = "/Resources"
+        });
+        app.UseCors();
 
+        app.MapControllers();
         app.Run();
     }
 }
