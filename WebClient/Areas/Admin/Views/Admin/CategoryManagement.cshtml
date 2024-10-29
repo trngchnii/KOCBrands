@@ -1,0 +1,117 @@
+﻿@model IEnumerable<api.Models.Category>
+@section Styles {
+    <link rel="stylesheet" href="~/css/admin_manager.css">
+    <style>
+        .add-product-btn:hover {
+            background-color: #f59857;
+        }
+
+        .add-product-btn {
+            width: 20%;
+            padding: 10px 20px;
+            background-color: #ff6b01;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-bottom: 20px;
+        }
+    </style>
+}
+
+<div class="modal fade" id="createCategoryModal" tabindex="-1" aria-labelledby="createCategoryModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="createCategoryModalLabel">Create New Category</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                @Html.Partial("_CreateCategoryModal", new api.DTOs.CategoryDTO.CategoryAdd())
+            </div>
+        </div>
+    </div>
+</div>
+<div class=" card" style=" padding: 15px">
+    <h2 class="mb-4">Quản Lý Danh Mục</h2>
+    <button class="add-product-btn" data-bs-toggle="modal" data-bs-target="#createCategoryModal">
+        <i class="fas fa-plus"></i> Thêm Danh Mục
+    </button>
+    <table id="categoryTable" class="table table-striped table-bordered no-wrap">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.First().CategoryId)</th>
+            <th>@Html.DisplayNameFor(model => model.First().CategoryName)</th>
+            <th>@Html.DisplayNameFor(model => model.First().Description)</th>
+            <th></th> <!-- Column for actions -->
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.CategoryId)</td>
+                <td>@Html.DisplayFor(modelItem => item.CategoryName)</td>
+                <td>@Html.DisplayFor(modelItem => item.Description)</td>
+                <td>
+                        <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editCategoryModal"
+                                onclick="loadEditCategoryModal(@item.CategoryId)">
+                            <i class="fas fa-edit"></i>Edit
+                        </button>                       
+                        <button class="delete-btn" onclick="confirmDelete('@Url.Action("DeleteCategory", new { id = item.CategoryId })')">
+                            <i class="fas fa-trash-alt"></i> Delete
+                        </button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+</div>
+
+<div class="modal fade" id="editCategoryModal" tabindex="-1" aria-labelledby="editCategoryModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editCategoryModalLabel">Edit Category</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div id="editCategoryContent"></div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#categoryTable').DataTable();
+        });
+        function confirmDelete(deleteUrl) {
+            Swal.fire({
+                title: 'Bạn có chắc chắn muốn xoá?',
+                text: "Hành động này không thể hoàn tác!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Có, xoá ngay!',
+                cancelButtonText: 'Hủy bỏ'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = deleteUrl;
+                }
+            })
+        }
+        function loadEditCategoryModal(cateId) {
+            $.get('/Admin/EditCategory?id=' + cateId, function (data) {
+                $('#editCategoryContent').html(data); // Load the partial view into the modal body
+                $('#editCategoryModal').modal('show'); // Show the modal
+            });
+        }
+
+    </script>
+}

@@ -1,0 +1,25 @@
+﻿@model api.DTOs.User.UserAdd
+
+<form asp-action="CreateUser" method="post" id="createUserForm">
+    <div class="form-group">
+        <label asp-for="UserName"></label>
+        <input asp-for="UserName" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Email"></label>
+        <input asp-for="Email" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Password"></label>
+        <input asp-for="Password" class="form-control" type="password" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Phonenumber"></label>
+        <input asp-for="Phonenumber" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Role"></label>
+        <input asp-for="Role" class="form-control" />
+    </div>
+    <button style="margin-top: 5px" type="submit" class="btn btn-primary">Create User</button>
+</form>

@@ -1,0 +1,43 @@
+﻿@model api.DTOs.User.UserEdit
+
+<form asp-action="EditUser" method="post" id="editUserForm">
+    <input type="hidden" asp-for="UserId" />
+
+    <div class="form-group">
+        <label asp-for="UserName"></label>
+        <input asp-for="UserName" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Email"></label>
+        <input asp-for="Email" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Password"></label>
+        <input asp-for="Password" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Phonenumber"></label>
+        <input asp-for="Phonenumber" class="form-control" />
+    </div>
+    <div class="form-group">    
+        <label asp-for="Role"></label>
+        <input asp-for="Role" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Address"></label>
+        <input asp-for="Address" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Avatar"></label>
+        <input asp-for="Avatar" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Bio"></label>
+        <textarea asp-for="Bio" class="form-control"></textarea>
+    </div>
+    <div class="form-group">
+        <label asp-for="Status"></label>
+        <textarea asp-for="Status" class="form-control"></textarea>
+    </div>
+    <button style="margin-top: 5px" type="submit" class="btn btn-primary">Save Changes</button>
+</form>
