@@ -13,7 +13,6 @@
     <style>
         body {
             font-size: 0.85em;
-            /* Thay đổi giá trị này để điều chỉnh kích thước font chữ cho toàn bộ trang */
         }
 
         .custom-button {
@@ -24,13 +23,11 @@
             border-radius: 4px;
             cursor: pointer;
             transition: background-color 0.3s ease;
-            /* Hiệu ứng chuyển màu */
         }
 
-        .custom-button:hover {
-            background-color: #e65c00;
-            /* Màu tối hơn khi hover */
-        }
+            .custom-button:hover {
+                background-color: #e65c00;
+            }
 
         .avatar-upload {
             position: relative;
@@ -43,36 +40,36 @@
             cursor: pointer;
         }
 
-        .avatar-upload img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 50%;
-            transition: opacity 0.3s ease;
-        }
+            .avatar-upload img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                border-radius: 50%;
+                transition: opacity 0.3s ease;
+            }
 
-        .avatar-upload:hover img {
-            opacity: 0.7;
-        }
+            .avatar-upload:hover img {
+                opacity: 0.7;
+            }
 
-        .avatar-upload .upload-icon {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 24px;
-            color: white;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
+            .avatar-upload .upload-icon {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                font-size: 24px;
+                color: white;
+                opacity: 0;
+                transition: opacity 0.3s ease;
+            }
 
-        .avatar-upload:hover .upload-icon {
-            opacity: 1;
-        }
+            .avatar-upload:hover .upload-icon {
+                opacity: 1;
+            }
 
-        .avatar-upload input[type="file"] {
-            display: none;
-        }
+            .avatar-upload input[type="file"] {
+                display: none;
+            }
     </style>
 </head>
 
@@ -80,225 +77,107 @@
     <div class="container mt-4">
         <h4 class="mb-4">Thông tin cá nhân</h4>
 
-        <form>
+        <form asp-action="EditProfile" method="post" enctype="multipart/form-data">
+            <input type="hidden" name="Id" value="@Model.Id" /> <!-- Hidden field for Id -->
+
             <div class="row">
-                <!-- Left Section: Name and Year of Birth -->
                 <div class="col-md-8 form-row">
-                    <!-- Full Name -->
                     <div class="form-group col-md-6">
-                        <label for="FullName">Họ và tên
-                            <sup class="text-danger">*</sup>
-                        </label>
-                        <input type="text" class="form-control" id="FullName" placeholder="Nhập họ và tên" required />
+                        <label for="FullName">Họ và tên <sup class="text-danger">*</sup></label>
+                        <input type="text" class="form-control" id="FullName" name="Name" placeholder="Nhập họ và tên" required value="@Model.Name" />
                     </div>
-                    <!-- Birth Year -->
                     <div class="form-group col-md-4">
-                        <label for="BirthYear">Năm sinh
-                            <sup class="text-danger">*</sup>
-                        </label>
-                        <input type="number" class="form-control" id="BirthYear" placeholder="Nhập năm sinh" required>
+                        <label for="BirthYear">Năm sinh <sup class="text-danger">*</sup></label>
+                        <input type="date" class="form-control" id="BirthYear" name="DateOfBirth" required value="@Model.DateOfBirth.ToString("yyyy-MM-dd")">
                     </div>
-                    <!-- Gender -->
                     <div class="form-group col-md-2">
-                        <label for="Gender">Giới tính
-                            <sup class="text-danger">*</sup>
-                        </label>
+                        <label for="Gender">Giới tính <sup class="text-danger">*</sup></label>
                         <div class="d-flex align-items-center mt-1">
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="Gender" id="Male" value="Male">
+                                <input class="form-check-input" type="radio" name="Gender" id="Male" value="Male" @(Model.Gender == "Male" ? "checked" : "")>
                                 <label class="form-check-label" for="Male">Nam</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="Gender" id="Female" value="Female">
+                                <input class="form-check-input" type="radio" name="Gender" id="Female" value="Female" @(Model.Gender == "Female" ? "checked" : "")>
                                 <label class="form-check-label" for="Female">Nữ</label>
                             </div>
                         </div>
                     </div>
-                    <!-- City and Address -->
                     <div class="form-group col-md-6">
-                        <label for="City">Tỉnh/Thành phố
-                            <sup class="text-danger">*</sup>
-                        </label>
-                        <select id="City" class="form-control">
-                            <option selected>Vui lòng chọn </option>
-                            <option value="1">Hà Nội</option>
-                            <option value="2">TP. Hồ Chí Minh</option>
-                            <!-- More options -->
+                        <label for="province">Tỉnh/Thành phố <sup class="text-danger">*</sup></label>
+                        <select id="province" class="form-control" name="province" required>
+                            <option selected>Vui lòng chọn</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="district">Quận/Huyện <sup class="text-danger">*</sup></label>
+                        <select id="district" class="form-control" name="district" required disabled>
+                            <option selected>Vui lòng chọn</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="ward">Xã/Phường <sup class="text-danger">*</sup></label>
+                        <select id="ward" class="form-control" name="ward" required disabled>
+                            <option selected>Vui lòng chọn</option>
                         </select>
                     </div>
                     <div class="form-group col-md-6">
                         <label for="SampleAddress">Địa chỉ nhận sản phẩm mẫu</label>
-                        <input type="text" class="form-control" id="SampleAddress" placeholder="Nhập địa chỉ">
-
+                        <input type="text" class="form-control" id="SampleAddress" name="SampleAddress" placeholder="Nhập địa chỉ" value="@Model.SampleAddress">
                     </div>
                 </div>
 
-                <!-- Right Section: Profile Picture -->
                 <div class="col-md-4 text-center">
-                    <label for="ProfilePicture" class="form-label">Ảnh đại diện
-                        <sup class="text-danger">*</sup>
-                    </label>
+                    <label for="ProfilePicture" class="form-label">Ảnh đại diện <sup class="text-danger">*</sup></label>
                     <div class="avatar-upload">
-                        <img id="avatarImage" src="https://via.placeholder.com/150" class="img-thumbnail rounded-circle"
-                            alt="Profile Picture">
+                        <img id="avatarImage" src="@Model.ProfilePictureUrl ?? " https: //via.placeholder.com/150"" class="img-thumbnail rounded-circle" alt="Profile Picture">
                         <i class="fas fa-camera upload-icon"></i>
-                        <input type="file" id="ProfilePicture" accept="image/*" onchange="loadImage(event)">
-                    </div>
-                </div>
-            </div>
-
-            <!-- Self Introduction -->
-            <div class="row">
-                <div class="form-row">
-                    <div class="form-group col-md-12">
-                        <label for="Bio">Giới thiệu bản thân
-                            <sup class="text-danger">*</sup>
-                        </label>
-                        <textarea class="form-control" id="Bio" maxlength="240" rows="3"
-                            placeholder="Giới thiệu bản thân bạn (tối đa 240 ký tự)"></textarea>
-                    </div>
-                </div>
-
-                <!-- Field of Work -->
-                <div class="form-row">
-                    <div class="form-group col-md-12">
-                        <label for="Field">Lĩnh vực
-                            <sup class="text-danger">*</sup>
-
-                        </label>
-                        <select id="Field" class="form-control">
-                            <option selected>Lĩnh vực </option>
-                            <option value="1">Công nghệ</option>
-                            <option value="2">Thời trang</option>
-                            <option value="3">Ẩm thực</option>
-                            <!-- More options -->
-                        </select>
-                    </div>
-                </div>
-
-                <!-- Social Media Link -->
-                <div class="form-row">
-                    <h6 class="col-md-12 mt-2">Nền tảng hoạt động
-                        <sup class="text-danger">*</sup>
-                    </h6>
-                    <div class="form-group col-md-2">
-                        <select class="form-control ">
-                            <option value="Tiktok">Tiktok</option>
-                            <option value="Instagram">Instagram</option>
-                            <!-- More platforms -->
-                        </select>
-                    </div>
-                    <div class="form-group col-md-8">
-                        <input type="url" class="form-control" id="Tiktok" placeholder="https://www.example.com">
-                    </div>
-                    <div class="form-group col-md-1 d-flex align-items-center">
-                        <button type="button" class="custom-button">Xóa</button>
-                    </div>
-                    <div class="form-group col-md-2">
-                        <button type="button" class="custom-button">+ Thêm dịch vụ</button>
-                    </div>
-                </div>
-
-                <!-- Contact Information -->
-                <div class="form-row mt-2">
-                    <h6 class="form-group col-md-12">Thông tin liên hệ
-                        <sup class="text-danger">*</sup>
-                    </h6>
-                    <div class="form-group col-md-6">
-                        <label for="Zalo">Zalo
-                            <sup class="text-danger">*</sup>
-                        </label>
-                        <input type="text" class="form-control" id="Zalo" placeholder="Nhập số Zalo">
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label for="Email">Email
-                            <sup class="text-danger">*</sup>
-                        </label>
-                        <input type="email" class="form-control" id="Email" placeholder="Nhập email">
-                    </div>
-                </div>
-
-                <!-- Service Pricing -->
-                <div class="form-row mt-1">
-                    <div class="form-group col-md-12">
-                        <h6>Giá cast
-                            <sup class="text-danger">*</sup>
-                        </h6>
-                        <div class="grid d-flex">
-                            <div class="col-1">
-                                <label>
-                                    STT
-                                </label>
-                            </div>
-                            <div class="col-2">
-                                <label>
-                                    Nền tảng
-                                    <sup class="text-danger">*</sup>
-                                </label>
-                            </div>
-                            <div class="col-2">
-                                <label>
-                                    Giá
-                                    <sup class="text-danger">*</sup>
-                                </label>
-                            </div>
-                            <div class="col">
-                                <label>
-                                    Mô tả
-                                </label>
-                            </div>
-                            <div class="col-1">
-                                <label>
-
-                                </label>
-                            </div>
-                        </div>
-                        <div class="grid d-flex">
-                            <div class="col-1">
-                                <label>
-                                    <span>1</span>
-                                </label>
-                            </div>
-                            <div class="col-2">
-                                <select class="form-control">
-                                    <option value="Tiktok">Tiktok</option>
-                                    <option value="Instagram">Instagram</option>
-                                    <!-- More platforms -->
-                                </select>
-                            </div>
-                            <div class="col-2">
-                                <input type="text" class="form-control" placeholder="Nhập giá">
-                            </div>
-                            <div class="col">
-                                <textarea class="form-control" maxlength="240" rows="1"
-                                    placeholder="Nhập mô tả (tối đa 240 ký tự)"></textarea>
-                            </div>
-
-                            <div class="col-1">
-                                <label class="mb-0">
-                                    <button type="button" class="custom-button">Xóa</button>
-                                </label>
-                            </div>
-                        </div>
-                        <button type="button" class="custom-button mt-3">+ Thêm dịch vụ</button>
-
+                        <input type="file" id="ProfilePicture" name="ProfilePicture" accept="image/*" onchange="loadImage(event)">
                     </div>
                 </div>
             </div>
 
             <div class="form-row">
-                <h6 class="col-md-12">Số Căn cước công dân hoặc Mã số thuế cá nhân
-                    <sup class="text-danger">*</sup>
-                </h6>
-                <span class="col-md-12 mb-1" style="font-style: italic; font-size: 0.85em;">
-                    Hướng dẫn tra cứu MST tại: <a
-                        href="https://tncnonline.com.vn/tra-cuu-ma-so-thue-tncnonline.html">Link</a>
-                </span>
-                <div class="form-group col-md-4">
-                    <input type="url" class="form-control" id="Tiktok" placeholder="0">
+                <div class="form-group col-md-12">
+                    <label for="Bio">Giới thiệu bản thân <sup class="text-danger">*</sup></label>
+                    <textarea class="form-control" id="Bio" name="Bio" maxlength="240" rows="3" placeholder="Giới thiệu bản thân bạn (tối đa 240 ký tự)">@Model.Bio</textarea>
                 </div>
             </div>
-            <!-- Submit Button -->
+
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label for="Field">
+                        Lĩnh vực
+                        <sup class="text-danger">*</sup>
+                    </label>
+                    <select id="Field" class="form-control" name="Field">
+                        <option selected>Lĩnh vực </option>
+                        <option value="1">Công nghệ</option>
+                        <option value="2">Thời trang</option>
+                        <option value="3">Ẩm thực</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-row mt-2">
+                <h6 class="col-md-12">Thông tin liên hệ <sup class="text-danger">*</sup></h6>
+                <div class="form-group col-md-6">
+                    <label for="Zalo">Zalo <sup class="text-danger">*</sup></label>
+                    <input type="text" class="form-control" id="Zalo" name="Zalo" placeholder="Nhập số Zalo" value="@Model.Zalo" required>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="Email">Email <sup class="text-danger">*</sup></label>
+                    <input type="email" class="form-control" id="Email" name="Email" placeholder="Nhập email" value="@Model.Email" required>
+                </div>
+            </div>
+
+            <div class="form-row mt-2">
+                <h6 class="col-md-12">Giá cast <sup class="text-danger">*</sup></h6>
+                <div class="form-group col-md-12">
+                    <input type="text" class="form-control" placeholder="Nhập giá" name="BookingPrice" value="@Model.BookingPrice" required />
+                </div>
+            </div>
+
             <div class="form-group row">
                 <div class="col-sm-12 text-center">
                     <button type="submit" class="custom-button">Cập nhật</button>
@@ -306,4 +185,56 @@
             </div>
         </form>
     </div>
+
+    <script>
+        function loadImage(event) {
+            const avatarImage = document.getElementById('avatarImage');
+            avatarImage.src = URL.createObjectURL(event.target.files[0]);
+        }
+
+        $(document).ready(function () {
+            // Fetch provinces
+            $.get('https://provinces.open-api.vn/api/?depth=3', function (data) {
+                // Populate province dropdown
+                data.forEach(function (province) {
+                    $('#province').append(`<option value="${province.name}" data-id="${province.code}">${province.name}</option>`);
+                });
+            });
+
+            // When the province changes, fetch districts
+            $('#province').change(function () {
+                const provinceId = $(this).find('option:selected').data('id');
+                $('#district').empty().append('<option selected>Vui lòng chọn</option>').prop('disabled', true);
+                $('#ward').empty().append('<option selected>Vui lòng chọn</option>').prop('disabled', true);
+
+                if (provinceId) {
+                    $.get(`https://provinces.open-api.vn/api/d/${provinceId}?depth=2`, function (data) {
+                        // Populate district dropdown
+                        data.districts.forEach(function (district) {
+                            $('#district').append(`<option value="${district.name}" data-id="${district.code}">${district.name}</option>`);
+                        });
+                        $('#district').prop('disabled', false);
+                    });
+                }
+            });
+
+            // When the district changes, fetch wards
+            $('#district').change(function () {
+                const districtId = $(this).find('option:selected').data('id');
+                $('#ward').empty().append('<option selected>Vui lòng chọn</option>').prop('disabled', true);
+
+                if (districtId) {
+                    $.get(`https://provinces.open-api.vn/api/district/${districtId}/wards`, function (data) {
+                        // Populate ward dropdown
+                        data.forEach(function (ward) {
+                            $('#ward').append(`<option value="${ward.name}">${ward.name}</option>`);
+                        });
+                        $('#ward').prop('disabled', false);
+                    });
+                }
+            });
+        });
+    </script>
 </body>
+
+</html>
