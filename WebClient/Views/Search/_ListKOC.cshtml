@@ -1,4 +1,4 @@
-﻿
+﻿@model List<api.DTOs.InfluencerDto>
 	<div class="p-toast p-component p-toast-top-right">
 		<div></div>
 	</div>
@@ -17,48 +17,44 @@
 			</select>
 		</div>
 	</div>
+
 	<div class="p-dataview p-component p-dataview-list">
 		<div class="p-dataview-content">
 			<div class="p-grid grid p-nogutter grid-nogutter">
-				<div class="p-toast p-component p-toast-top-right">
-					<div></div>
-				</div>
-				<div class="md:col-3 item-kol cursor-pointer sm:col-6 col-12 p-3 relative">
-					<i class="pi-heart pi like-kol"></i><a target="_blank" class="block"
-											href="/components/detail-candidate/?mask=Le-Thanh&amp;id=557" title="Lê Thanh">
-						<div class="image text-center relative border-round-xl overflow-hidden">
-							<div class="followers align-items-center text-white absolute border-round-3xl flex">
-								<img class="mr-1 border-circle" width="22" height="22"
-									 src="/demo/images/social/icon-tiktok.svg">87k
-							</div><img width="270" height="330"
-									   class="max-w-full w-full vertical-align-middle"
-									   src="https://api.mykol.vn/profile/557/eb051934-a7a2-47f4-93fb-e529534c075d_1696049874702-resize.jpg"
-									   loading="lazy" alt="Lê Thanh">
-							<div class="title text-left px-4 pb-4 w-full absolute">
-								<h3 class="name text-white capitalize mb-0 line-clamp-1">Lê Thanh</h3><span class="city text-white">Thành phố Hồ Chí Minh</span>
+			@if (Model != null && Model.Any())
+			{
+				@foreach (var influencer in Model)
+				{
+					<div class="md:col-3 item-kol cursor-pointer sm:col-6 col-12 p-3 relative">
+						<i class="pi-heart pi like-kol"></i><a target="_blank" class="block" href="@Url.Action("Details", "Influencer", new { id = influencer.Name })" title="@influencer.Name">
+							<div class="image text-center relative border-round-xl overflow-hidden">
+								<div class="followers align-items-center text-white absolute border-round-3xl flex">
+									<img class="mr-1 border-circle" width="22" height="22" src="/demo/images/social/icon-tiktok.svg">
+									@influencer.FollowersCount
+								</div>
+								<img width="270" height="330" class="max-w-full w-full vertical-align-middle" src="@influencer.Name" loading="lazy" alt="@influencer.Name">
+								<div class="title text-left px-4 pb-4 w-full absolute">
+									<h3 class="name text-white capitalize mb-0 line-clamp-1">@influencer.Name</h3>
+									<span class="city text-white">@influencer.DateOfBirth.ToShortDateString()</span>
+								</div>
 							</div>
-						</div>
-					</a>
-					<div class="info mt-2 flex justify-content-between flex-wrap align-items-center">
-						<div class="social flex align-items-center">
-							<a href="https://www.tiktok.com/zent94"
-							   target="_blank" title="tiktok">
-								<img width="22" height="22"
-									 src="/demo/images/social/icon-tiktok.svg">
-							</a><span class="ml-1">
-								<img width="29"
-									 height="27" src="/demo/images/home/icon-analytics.png">
-							</span>
-							<div class="social" style="margin-top: -3px;">
-								<img width="22" height="22"
-									 src="/demo/images/kolInfo/zalo.svg" alt="Kols"
-									 class="max-w-full md:w-auto vertical-align-middle">
+						</a>
+						<div class="info mt-2 flex justify-content-between flex-wrap align-items-center">
+							<div class="social flex align-items-center">
+								<a href="@influencer.FollowersCount" target="_blank" title="tiktok">
+									<img width="22" height="22" src="/demo/images/social/icon-tiktok.svg">
+								</a>
 							</div>
+							<div class="price">@influencer.BookingPrice VNĐ</div>
 						</div>
-						<div class="price">0&nbsp;₫</div>
+						<div class="careers line-clamp-2">@influencer.Gender</div>
 					</div>
-					<div class="careers line-clamp-2">Ẩm thực</div>
-				</div>
+				}
+			}
+			else
+			{
+				<p>No KOCs available to display.</p>
+			}
 				<div class="p-toast p-component p-toast-top-right">
 					<div></div>
 				</div>

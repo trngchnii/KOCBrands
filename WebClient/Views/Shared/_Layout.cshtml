@@ -13,33 +13,128 @@
 <body>
 
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">WebClient</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse"
-                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home"
-                                asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
+        <div class="p-menubar p-component layout-topbar" data-pc-name="menubar" data-pc-section="root">
+            <div class="p-menubar-start" data-pc-section="start">
+                <a class="layout-topbar-logo" href="/">
+                    <img src="https://mykol.com.vn/layout/images/logo.jpg" width="70" height="60" alt="logo">
+                </a>
+            </div><a href="#" role="button" tabindex="0"
+                     class="p-menubar-button" data-pc-section="button">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none"
+                     xmlns="http://www.w3.org/2000/svg" class="p-icon" aria-hidden="true" data-pc-section="popupicon">
+                    <path fill-rule="evenodd" clip-rule="evenodd"
+                          d="M13.3226 3.6129H0.677419C0.497757 3.6129 0.325452 3.54152 0.198411 3.41448C0.0713707 3.28744 0 3.11514 0 2.93548C0 2.75581 0.0713707 2.58351 0.198411 2.45647C0.325452 2.32943 0.497757 2.25806 0.677419 2.25806H13.3226C13.5022 2.25806 13.6745 2.32943 13.8016 2.45647C13.9286 2.58351 14 2.75581 14 2.93548C14 3.11514 13.9286 3.28744 13.8016 3.41448C13.6745 3.54152 13.5022 3.6129 13.3226 3.6129ZM13.3226 7.67741H0.677419C0.497757 7.67741 0.325452 7.60604 0.198411 7.479C0.0713707 7.35196 0 7.17965 0 6.99999C0 6.82033 0.0713707 6.64802 0.198411 6.52098C0.325452 6.39394 0.497757 6.32257 0.677419 6.32257H13.3226C13.5022 6.32257 13.6745 6.39394 13.8016 6.52098C13.9286 6.64802 14 6.82033 14 6.99999C14 7.17965 13.9286 7.35196 13.8016 7.479C13.6745 7.60604 13.5022 7.67741 13.3226 7.67741ZM0.677419 11.7419H13.3226C13.5022 11.7419 13.6745 11.6706 13.8016 11.5435C13.9286 11.4165 14 11.2442 14 11.0645C14 10.8848 13.9286 10.7125 13.8016 10.5855C13.6745 10.4585 13.5022 10.3871 13.3226 10.3871H0.677419C0.497757 10.3871 0.325452 10.4585 0.198411 10.5855C0.0713707 10.7125 0 10.8848 0 11.0645C0 11.2442 0.0713707 11.4165 0.198411 11.5435C0.325452 11.6706 0.497757 11.7419 0.677419 11.7419Z"
+                          fill="currentColor"></path>
+                </svg>
+            </a>
+            <ul class="p-menubar-root-list" role="menubar" data-pc-section="menu">
+                <li role="none" class="p-menuitem" data-pc-section="menuitem">
+                    <a class="p-menuitem-link"
+                       href="/danh-sach-kol-koc"><i class="pi pi-users mr-1"></i><span>Danh sách KOL - KOC</span></a>
+                </li>
+                <li role="none" class="p-menuitem" data-pc-section="menuitem">
+                    <a class="p-menuitem-link" href="/tim-thue-kol-koc">
+                        <i class="pi pi-briefcase mr-1"></i><span>Tin tuyển dụng</span>
+                    </a>
+                </li>
+            </ul>
+            <div class="p-menubar-end" data-pc-section="end">
+                <div class="d-flex align-items-center">
+                    <button aria-label="Đăng nhập" class="p-button p-component p-button-text"
+                            data-pc-name="button" data-pc-section="root">
+                        <span class="p-button-icon p-c p-button-icon-left pi pi-sign-in"
+                              data-pc-section="icon"></span><span class="p-button-label p-c" data-pc-section="label">Đăng nhập</span><span role="presentation" class="p-ink" style="height: 148.25px; width: 148.25px;"></span>
+                    </button>
+                    <div class="p-toast p-component p-toast-top-right" data-pc-name="toast" data-pc-section="root">
+                        <div></div>
+                    </div><button aria-label="Đăng ký" class="p-button p-component p-button-text" data-pc-name="button"
+                                  data-pc-section="root">
+                        <span class="p-button-icon p-c p-button-icon-left pi pi-user-plus"
+                              data-pc-section="icon"></span><span class="p-button-label p-c" data-pc-section="label">Đăng ký</span><span role="presentation" class="p-ink" style="height: 127.969px; width: 127.969px;"></span>
+                    </button>
                 </div>
             </div>
-        </nav>
+        </div>
     </header>
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
-
+    <footer class="bg-white shadow-1 pt-3 pb-5">
+        <div class="layout-footer grid">
+            <div class="col-12 md:col-4">
+                <img src="https://mykol.vn/layout/images/logo.jpg" alt="InfluX" width="300">
+                <p class="mb-2"></p>
+                <p class="mb-2"></p>
+                <p class="mb-2"></p>
+                <p class="mb-2">Hotline: <a href="tel:0383050533">0908.141.233</a></p>
+                <p class="mb-2">Email: boonygroup1@gmail.com</p>
+                <p class="mb-2"></p>
+                <div class="flex mt-3 gap-3">
+                    <a href="https://www.youtube.com/channel/UCGTfOtd_pxJXIk8wYZyKyBg"
+                       target="_blank"><img src="https://mykol.vn/demo/images/social/icon-youtube.svg" alt="youtube" width="50"></a><a href="https://www.tiktok.com/mykol.marketing" target="_blank">
+                        <img src="https://mykol.vn/demo/images/social/icon-tiktok.svg"
+                             alt="tiktok" width="50">
+                    </a><a href="https://zalo.me/0908141233" target="_blank">
+                        <img src="https://mykol.vn/demo/images/social/zalo-icon.png" alt="zalo" width="50">
+                    </a>
+                </div>
+            </div>
+            <div class="col-12 md:col-8 md:pl-8 info-footer">
+                <h3 class="w-full uppercase md:mb-5 text-center text-4xl title-info-footer">Về mykol</h3>
+                <div class="grid">
+                    <div class="col-12 md:col-6">
+                        <ul class="list-none my-0 pl-0">
+                            <li class="mb-4"><a class="text-color" href="https://mykol.vn/landing/introduce" title="Giới thiệu">Giới thiệu</a></li>
+                            <li class="mb-4"><a class="text-color" href="https://mykol.vn/components/contact" title="Liên hệ">Liên hệ</a></li>
+                            <li class="mb-4"><a class="text-color" href="https://mykol.vn/landing/answer-and-question" title="Hỏi đáp">Hỏi đáp</a></li>
+                            <li class="mb-4">
+                                <a class="text-color" href="https://mykol.vn/landing/operating-regulations" title="Quy chế hoạt động">
+                                    Quy
+                                    chế hoạt động
+                                </a>
+                            </li>
+                            <li>
+                                <a class="text-color" href="https://mykol.vn/landing/instructions-creating-profile" title="Hướng dẫn tạo profile">
+                                    Hướng
+                                    dẫn tạo profile
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-12 md:col-6">
+                        <ul class="list-none my-0 pl-0">
+                            <li class="mb-4">
+                                <a class="text-color" title="Chính sách bảo mật" href="https://mykol.vn/landing/privacy-policy">
+                                    Chính sách
+                                    bảo mật
+                                </a>
+                            </li>
+                            <li class="mb-4">
+                                <a class="text-color" title="Điều khoản sử dụng" href="https://mykol.vn/landing/terms-of-use">
+                                    Điều khoản sử
+                                    dụng
+                                </a>
+                            </li>
+                            <li class="mb-4">
+                                <a class="text-color" title="Giải quyết tranh chấp" href="https://mykol.vn/landing/dispute-resolution">
+                                    Giải
+                                    quyết tranh chấp
+                                </a>
+                            </li>
+                            <li class="mb-4"><a class="text-color" title="Chương trình Referrals">Chương trình Referrals</a></li>
+                            <li class="mb-4">
+                                <a class="text-color" title="Chính sách bảo vệ thông tin"
+                                   href="https://mykol.vn/landing/information-protection-policy">Chính sách bảo vệ thông tin</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="px-3 text-center pt-2"></div>
+    </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

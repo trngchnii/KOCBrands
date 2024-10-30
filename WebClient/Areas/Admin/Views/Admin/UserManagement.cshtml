@@ -1,9 +1,43 @@
-﻿@section Styles {
+﻿
+@model  api.DTOs.Pagination.PagedResult<api.Models.User>
+
+@section Styles {
     <link rel="stylesheet" href="~/css/admin_manager.css">
 }
 
 <div class="user-management">
     <h2>Quản Lý Người Dùng</h2>
+
+
+    <form method="get" action="@Url.Action("UserManagement")" class="d-flex justify-content-center my-3">
+        <div class="input-group">
+            <input type="text" name="searchString" class="form-control" placeholder="Tìm kiếm người dùng" value="@ViewBag.SearchString" aria-label="Search">
+            <button class="btn btn-primary" type="submit">
+                <i class="fas fa-search"></i>
+                Tìm kiếm
+            </button>
+        </div>
+    </form>
+
+
+    <button type="button" class="btn btn-primary mb-2" data-bs-toggle="modal" data-bs-target="#createUserModal">
+        Create User
+    </button>
+
+    <div class="modal fade" id="createUserModal" tabindex="-1" aria-labelledby="createUserModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="createUserModalLabel">Create New User</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    @Html.Partial("_CreateUserModal", new api.DTOs.User.UserAdd())
+                </div>
+            </div>
+        </div>
+    </div>
+
     <table class="user-table">
         <thead>
             <tr>
@@ -16,36 +50,96 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>1</td>
-                <td>john_doe</td>
-                <td>john.doe@example.com</td>
-                <td>Admin</td>
-                <td>Active</td>
-                <td class="action-buttons">
-                    <button class="edit-btn">
-                        <i class="fas fa-edit"></i> Edit
-                    </button>
-                    <button class="delete-btn">
-                        <i class="fas fa-trash-alt"></i> Delete
-                    </button>
-                </td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>jane_smith</td>
-                <td>jane.smith@example.com</td>
-                <td>User</td>
-                <td>Active</td>
-                <td class="action-buttons">
-                    <button class="edit-btn">
-                        <i class="fas fa-edit"></i> Edit
-                    </button>
-                    <button class="delete-btn">
-                        <i class="fas fa-trash-alt"></i> Delete
-                    </button>
-                </td>
-            </tr>
+            @if (Model.Items.Any())
+            {
+                @foreach (var user in Model.Items)
+                {
+                    <tr>
+                        <td>@user.UserId</td>
+                        <td>@user.UserName</td>
+                        <td>@user.Email</td>
+                        <td>@user.Role</td>
+                        <td>@user.Status</td>
+                        <td class="action-buttons">
+                            <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editUserModal" 
+                            onclick="loadEditUserModal(@user.UserId)"><i class="fas fa-edit"></i>Edit</button>
+                          
+                            <button class="delete-btn" onclick="confirmDelete('@Url.Action("DeleteUser", new { id = user.UserId })')">
+                                <i class="fas fa-trash-alt"></i> Delete
+                            </button>
+
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="6">Không có người dùng nào được tìm thấy.</td>
+                </tr>
+            }
         </tbody>
     </table>
+    <div class="modal fade" id="editUserModal" tabindex="-1" aria-labelledby="editUserModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editUserModalLabel">Edit User</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="editUserContent"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="pagination">
+        @if (ViewBag.PageNumber > 1)
+        {
+            <a href="@Url.Action("UserManagement", new { pageNumber = ViewBag.PageNumber - 1, pageSize = ViewBag.PageSize, searchString = ViewBag.SearchString })">Previous</a>
+        }
+
+        <span>Trang @ViewBag.PageNumber trên @Model.TotalPages</span>
+
+        @if (ViewBag.PageNumber < Model.TotalPages)
+        {
+            <a href="@Url.Action("UserManagement", new { pageNumber = ViewBag.PageNumber + 1, pageSize = ViewBag.PageSize, searchString = ViewBag.SearchString })">Next</a>
+        }
+    </div>
+
+
+
+
 </div>
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        function confirmDelete(deleteUrl) {
+            // Sử dụng SweetAlert để hiện hộp thoại xác nhận
+            Swal.fire({
+                title: 'Bạn có chắc chắn muốn xoá?',
+                text: "Hành động này không thể hoàn tác!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Có, xoá ngay!',
+                cancelButtonText: 'Hủy bỏ'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Nếu người dùng nhấn "Có", chuyển hướng tới hành động xóa
+                    window.location.href = deleteUrl;
+                }
+            })
+        }
+        function loadEditUserModal(userId) {
+            $.get('/Admin/EditUser?id=' + userId, function (data) {
+                $('#editUserContent').html(data); // Load the partial view into the modal body
+                $('#editUserModal').modal('show'); // Show the modal
+            });
+        }
+
+    </script>
+ 
+}

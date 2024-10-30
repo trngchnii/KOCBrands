@@ -174,12 +174,19 @@ namespace WebClient.Controllers
 
             if (user != null)
             {
+                var influencer = _context.Influencers.FirstOrDefault(i => i.UserId == user.UserId);
+
                 var cookieOptions = new CookieOptions
                 {
                     Expires = DateTimeOffset.Now.AddDays(30),
                     IsEssential = true
                 };
                 HttpContext.Response.Cookies.Append("UserId", user.UserId.ToString(), cookieOptions);
+
+                if (influencer != null)
+                {
+                    HttpContext.Response.Cookies.Append("InfluencerId",influencer.InfluencerId.ToString(),cookieOptions);
+                }
 
                 if (user.Role == "user")
                 {
@@ -192,7 +199,7 @@ namespace WebClient.Controllers
             }
             else
             {
-                ModelState.AddModelError("", "Invalid email or password. Please try again!.");
+                ModelState.AddModelError("","Email hoặc mật khẩu không đúng. Vui lòng thử lại!");
                 return View();
             }
             return View();

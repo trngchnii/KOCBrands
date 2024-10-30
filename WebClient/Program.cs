@@ -9,6 +9,7 @@ builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection("Emai
 builder.Services.AddTransient<IEmailSender, EmailSender>();
 builder.Services.AddSession();
 builder.Services.AddControllersWithViews();
+builder.Services.AddHttpClient();
 
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
@@ -27,6 +28,8 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+
+app.UseCors();
 
 app.UseRouting();
 
