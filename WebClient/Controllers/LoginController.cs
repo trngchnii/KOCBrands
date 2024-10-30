@@ -275,10 +275,10 @@ namespace WebClient.Controllers
                         {
                             UserId = newUser.UserId,
                             Name = nameRegister,
-                            FollowersCount = 0,
+                            //FollowersCount = 0,
                             Gender = "",
                             DateOfBirth = DateTime.Now,
-                            BookingPrice = "0",
+                            //BookingPrice = "0",
                             PersonalIdentificationNumber = 0,
                             FavouriteId = null,
                             User = newUser,
