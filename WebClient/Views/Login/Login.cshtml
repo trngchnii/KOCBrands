@@ -22,7 +22,11 @@
                 <div class="social-icons">
                     <a asp-controller="Login" asp-action="Register" class="icon"><i class="fa-brands fa-google-plus-g"></i></a>
                 </div>
-                <span>hoặc sử dụng email để tạo tài khoản</span>
+                <select id="UserTypeRegister" name="UserTypeRegister" class="form-control" required>
+                    <option value="" disabled selected>Chọn loại tài khoản</option>
+                    <option value="KOC">KOC</option>
+                    <option value="Brand">Brand</option>
+                </select>
                 <input type="text" placeholder="Họ và tên" id="NameRegister" name="NameRegister">
                 <div id="blankInputMessage" style="display: none" class="text-danger">Please input your name!</div>
                 <input type="password" placeholder="Mật khẩu" id="PasswordRegister" name="PasswordRegister">
@@ -35,7 +39,7 @@
                 <div id="ValidatePassword" class="text-danger" style="display: none">Xác nhận mật khẩu không khớp</div>
                 <div class="email-otp">
                     <input type="email" placeholder="Email" id="EmailRegister" name="EmailRegister">
-                    <button type="button" class="send-otp" onclick="sendOTP()" style="background-color: #FB6A01 !important;">Gửi OTP</button>
+                    <button type="button" class="send-otp" onclick="sendOTP()" style="background-color: #EF4F5E !important;">Gửi OTP</button>
                 </div>
                 <div id="blankEmailMessage" style="display: none" class="text-danger">Hãy nhập Email!</div>
                 <div id="blankOTPMessage" style="display: none" class="text-danger">Hãy gửi OTP trước tiên</div>
@@ -44,7 +48,7 @@
                 <div id="EmailRegister-error" class="text-danger"></div>
                 <div id="SubmitFormSentMessage" style="display: none; color:#009966">Hoàn thành đăng kí</div>
                 <div id="CheckPassMessage" style="display: none" class="text-danger">Hãy check xác nhận mật khẩu</div>
-                <button type="button" class="submit-form" onclick="submitForm()" style="background-color: #FB6A01 !important;">Đăng kí</button>
+                <button type="button" class="submit-form" onclick="submitForm()" style="background-color: #EF4F5E !important;">Đăng kí</button>
             </form>
         </div>
         <div class="form-container sign-in">
@@ -63,11 +67,11 @@
                 <div id="OTPLogin" style="display: none; color:#009966">OTP gửi thành công</div>
                 <div id="ChangesPass" style="display: none; color:#009966">Đổi mật khẩu thành công</div>
                 <a href="#" id="ForgotPassword" name="ForgotPassword">Quên mật khẩu?</a>
-                <button type="Submit" style="background-color: #FB6A01 !important;">Đăng nhập</button>
+                <button type="Submit" style="background-color: #EF4F5E !important;">Đăng nhập</button>
             </form>
         </div>
         <div class="toggle-container">
-            <div class="toggle" style="background-image: linear-gradient(to right, #fd8e63, #ff6800) !important;">
+            <div class="toggle" style="background-image: linear-gradient(to right, #F5A3AC, #EF4F5E) !important;">
                 <div class="toggle-panel toggle-left">
                     <h1>Chào mừng trở lại!</h1>
                     <p>Hãy trở lại đăng nhập để trải nghiệm</p>
@@ -116,7 +120,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-                    <button type="button" class="btn" onclick="SubmitOTP()" style="background-color: #FB6A01;color: #ffffff">Xác nhận OTP</button>
+                    <button type="button" class="btn" onclick="SubmitOTP()" style="background-color: #EF4F5E;color: #ffffff">Xác nhận OTP</button>
                 </div>
             </div>
         </div>
@@ -306,7 +310,8 @@
                     NameRegister: form.querySelector("#NameRegister").value,
                     PasswordRegister: form.querySelector("#PasswordRegister").value,
                     EmailRegister: form.querySelector("#EmailRegister").value,
-                    OTP: form.querySelector("#OTP").value
+                    OTP: form.querySelector("#OTP").value,
+                    Type: form.querySelector('#UserTypeRegister').value
                 };
 
                 var data = JSON.stringify(formData);

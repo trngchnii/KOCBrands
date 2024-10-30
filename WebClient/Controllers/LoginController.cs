@@ -234,6 +234,7 @@ namespace WebClient.Controllers
             var passwordRegister = model.PasswordRegister;
             var otp = model.OTP;
             var savedOTP = HttpContext.Session.GetString("SavedOTP");
+            var Type = model.Type;
             var user = _context.Users.FirstOrDefault(u => u.UserName == nameRegister);
             if (user == null)
             {
@@ -256,11 +257,45 @@ namespace WebClient.Controllers
                         Influencer = null,
                         Brand = null,
                         Favourite = null
-                    };
+                    }; 
 
                     _context.Users.Add(newUser);
                     _context.SaveChanges();
 
+                    if (Type == "KOC")
+                    {
+                        var newKOC = new api.Models.Influencer
+                        {
+                            UserId = newUser.UserId,
+                            Name = nameRegister,
+                            FollowersCount = 0,
+                            Gender = "",
+                            DateOfBirth = DateTime.Now,
+                            BookingPrice = "0",
+                            PersonalIdentificationNumber = 0,
+                            FavouriteId = null,
+                            User = newUser,
+                            SocialMedias = new List<SocialMedia>(),
+                            Categories = new List<Category>(),
+                            Proposals = new List<Proposal>()
+                        };
+                        _context.Influencers.Add(newKOC);
+                        _context.SaveChanges();
+                    }
+                    else
+                    {
+                        var newBrand = new api.Models.Brand
+                        {
+                            UserId = newUser.UserId,
+                            BrandName = nameRegister,
+                            ImageCover = "",
+                            User = newUser,
+                            Campaigns = new List<Campaign>(),
+                            Categories = new List<Category>()
+                        };
+                        _context.Brands.Add(newBrand);
+                        _context.SaveChanges();
+                    }    
                     return Json(new { success = true });
                 }
                 else
@@ -282,6 +317,7 @@ namespace WebClient.Controllers
             public string PasswordRegister { get; set; }
             public string EmailRegister { get; set; }
             public string OTP { get; set; }
+            public string Type { get; set; }
         }
 
         [HttpPost]
