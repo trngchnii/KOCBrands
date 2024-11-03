@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.OData;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.OData.ModelBuilder;
+using Microsoft.OpenApi.Models;
 
 internal class Program
 {
@@ -59,7 +60,12 @@ internal class Program
                         );
 
         builder.Services.AddEndpointsApiExplorer();
-        builder.Services.AddSwaggerGen();
+        builder.Services.AddSwaggerGen(options =>
+        {
+            options.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
+
+            options.ResolveConflictingActions(apiDescriptions => apiDescriptions.First());
+        });
 
         var app = builder.Build();
 

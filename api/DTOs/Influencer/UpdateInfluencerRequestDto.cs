@@ -11,7 +11,6 @@ namespace api.DTOs
     public class InfluencerDto
     {
         public string Name { get; set; } = string.Empty;
-        public int FollowersCount { get; set; }
         public string Gender { get; set; } = string.Empty;
         public DateTime DateOfBirth { get; set; }
         public decimal BookingPrice { get; set; } 
