@@ -2,59 +2,64 @@
 {
     public interface IFileService
     {
-        Task<string> SaveFileAsync(IFormFile imageFile,string[] allowedFileExtensions);
-        void DeleteFile(string fileNameWithExtension);
+        Task<string> UploadFileAsync(IFormFile file,string uploadFolder);
+        Task<bool> DeleteFileAsync(string filePath);
     }
-    public class FileService(IWebHostEnvironment environment) : IFileService
+
+    public class FileService : IFileService
     {
+        private readonly IWebHostEnvironment _webHostEnvironment;
 
-        public async Task<string> SaveFileAsync(IFormFile imageFile,string[] allowedFileExtensions)
+        public FileService(IWebHostEnvironment webHostEnvironment)
         {
-            if (imageFile == null)
-            {
-                throw new ArgumentNullException(nameof(imageFile));
-            }
-
-            var contentPath = environment.ContentRootPath;
-            var path = Path.Combine(contentPath,"Uploads");
-            // path = "c://projects/ImageManipulation.Ap/uploads" ,not exactly, but something like that
-
-            if (!Directory.Exists(path))
-            {
-                Directory.CreateDirectory(path);
-            }
-
-            // Check the allowed extenstions
-            var ext = Path.GetExtension(imageFile.FileName);
-            if (!allowedFileExtensions.Contains(ext))
-            {
-                throw new ArgumentException($"Only {string.Join(",",allowedFileExtensions)} are allowed.");
-            }
-
-            // generate a unique filename
-            var fileName = $"{Guid.NewGuid().ToString()}{ext}";
-            var fileNameWithPath = Path.Combine(path,fileName);
-            using var stream = new FileStream(fileNameWithPath,FileMode.Create);
-            await imageFile.CopyToAsync(stream);
-            return fileName;
+            _webHostEnvironment = webHostEnvironment;
         }
 
-
-        public void DeleteFile(string fileNameWithExtension)
+        public async Task<string> UploadFileAsync(IFormFile file,string uploadFolder)
         {
-            if (string.IsNullOrEmpty(fileNameWithExtension))
+            if (file == null || file.Length == 0)
             {
-                throw new ArgumentNullException(nameof(fileNameWithExtension));
+                throw new ArgumentException("No file uploaded.");
             }
-            var contentPath = environment.ContentRootPath;
-            var path = Path.Combine(contentPath,$"Uploads",fileNameWithExtension);
 
-            if (!File.Exists(path))
+            // Đảm bảo thư mục Uploads tồn tại trong thư mục gốc của project API
+            var uploadPath = Path.Combine(Directory.GetCurrentDirectory(),"Uploads",uploadFolder);
+
+            // Kiểm tra và tạo thư mục nếu chưa có
+            if (!Directory.Exists(uploadPath))
             {
-                throw new FileNotFoundException($"Invalid file path");
+                Directory.CreateDirectory(uploadPath);
             }
-            File.Delete(path);
+
+            // Đặt tên file và đường dẫn đầy đủ
+            var fileName = Path.GetFileName(file.FileName);
+            var filePath = Path.Combine(uploadPath,fileName);
+
+            // Lưu file vào thư mục
+            using (var fileStream = new FileStream(filePath,FileMode.Create))
+            {
+                await file.CopyToAsync(fileStream);
+            }
+
+            // Trả về đường dẫn tương đối
+            return Path.Combine("Uploads",uploadFolder,fileName);
         }
+
+        public async Task<bool> DeleteFileAsync(string filePath)
+        {
+            // Đảm bảo filePath là đường dẫn tuyệt đối
+            var fullPath = Path.Combine(Directory.GetCurrentDirectory(),"Uploads",filePath.Replace("api\\",""));
+
+            if (File.Exists(fullPath))
+            {
+                // Nếu file tồn tại, xóa nó
+                File.Delete(fullPath);
+                return await Task.FromResult(true);
+            }
+
+            return await Task.FromResult(false);
+        }
+
 
     }
 }

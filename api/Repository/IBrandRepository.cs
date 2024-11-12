@@ -9,7 +9,7 @@ namespace api.Repository
 {
     public interface IBrandRepository
     {
-        Task<(Brand?, User?)> UpdateAsync(int id,UpdateBrandUserRequestDto brandModel);
+        Task UpdateBrandAsync(int brandId,UpdateBrandUserRequestDto requestDto);
         Task<Brand?> GetByIdAsync(int id);
         Task<IEnumerable<Brand>> GetAllAsync();
         Task AddAsync(Brand brand);
