@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@model api.Models.Campaign
+
+<!DOCTYPE html>
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
@@ -126,50 +128,154 @@
                 font-size: 8px;
                 color: #007bff;
             }
+
+        .category-button {
+            display: inline-block;
+            padding: 2px 5px;
+            background-color: #e0e0e0;
+            color: #333;
+            border-radius: 5px;
+            margin: 5px 5px 5px 0;
+            font-size: 10px;
+            text-align: center;
+            cursor: default;
+        }
+        /* css pop-up */
+        /* Overlay nền mờ */
+    .modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        display: none;
+        justify-content: center;
+        align-items: center;
+        z-index: 999;
+    }
+
+    /* Modal hiển thị ở giữa màn hình */
+    .modal-content {
+        background-color: #ffffff;
+        padding: 20px;
+        border-radius: 8px;
+        width: 400px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .modal-content h2 {
+        margin-top: 0;
+        font-size: 22px;
+        color: #333;
+        font-weight: bold;
+        text-align: center;
+    }
+
+    .modal-content label {
+        font-size: 14px;
+        font-weight: 600;
+        margin-bottom: 5px;
+        color: #333;
+    }
+
+    .modal-content input[type="number"], .modal-content textarea {
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        font-size: 14px;
+        box-sizing: border-box;
+        outline: none;
+    }
+
+    .modal-content input[type="number"]:focus, .modal-content textarea:focus {
+        border-color: #007bff;
+    }
+
+    .modal-content textarea {
+        min-height: 100px;
+        resize: vertical;
+    }
+
+    .modal-content button {
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        margin-top: 10px;
+        width: 100%;
+        font-size: 16px;
+        font-weight: bold;
+    }
+
+    .modal-content button:hover {
+        background-color: #0056b3;
+    }
+
+    .modal-content button[type="button"] {
+        background-color: #f44336;
+    }
+
+    .modal-content button[type="button"]:hover {
+        background-color: #d32f2f;
+    }
+
+
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
     <div class="container mt-8">
-        <!-- Title -->
-        <div class="header">
-            <h1>TUYỂN KOC/UGC REVIEW DẦU GỘI - XÃ CNMOFAXIN</h1>
-            <div class="contact-info">
-                <div class="contact-item">
-                    <i class="fas fa-building"></i>
-                    <p><strong>Brand Name:</strong> Chava Beauty</p>
-                </div>
-                <div class="contact-item">
-                    <i class="fas fa-envelope"></i>
-                    <p><strong>Email:</strong> matrix049101@gmail.com</p>
-                </div>
-                <div class="contact-item">
-                    <i class="fas fa-phone"></i>
-                    <p><strong>Phone Number:</strong> 0528403406</p>
+            <!-- Title -->
+            <div class="header">
+                <h1>@Model.Title</h1>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-building"></i>
+                        <p><strong>Brand Name:</strong> @Model.Brand.BrandName</p>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <p><strong>Email:</strong> @Model.Brand.User.Email</p>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <p><strong>Phone Number:</strong> @Model.Brand.User.Phonenumber</p>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <!-- Content Row -->
-        <div class="row">
-            <!-- Left Column -->
+            <!-- Content Row -->
+            <div class="row">
+                <!-- Left Column -->
             <div class="column left-column">
                 <div class="section">
                     <div class="section-title">Tổng quan</div>
                     <div class="section-content">
-                        <p><strong>Cast:</strong> 0 - 10000000</p>
+                            <p><strong>Cast:</strong> @Model.Budget</p>
                         <p><strong>Độ Tuổi:</strong> 18 - 40</p>
-                        <p><strong>Địa điểm:</strong> Hà Nội, Thành phố Hồ Chí Minh, An Giang, Bà Rịa – Vũng Tàu, và các tỉnh khác...</p>
-                        <p><strong>Lĩnh vực:</strong> Life & Style, Mẹ & bé</p>
+                            <p><strong>Địa điểm:</strong> @Model.Brand.User.Address</p>
+                        <p>
+                            <strong>Lĩnh vực:</strong> @foreach (var category in @Model.Categories)
+                            {
+                                <span class="category-button">@category.CategoryName</span>
+                            }
+                        </p>
                         <p><strong>Mạng xã hội:</strong> No social networks available</p>
-                        <p><strong>Thời gian tạo:</strong> 08:28 17/09/2024</p>
-                        <p><strong>Hết hạn lúc:</strong> 17:00 29/11/2024</p>
+                            <p><strong>Thời gian tạo:</strong> @Model.StartDate</p>
+                            <p><strong>Hết hạn lúc:</strong> @Model.EndDate</p>
                     </div>
                 </div>
                 <!-- Button Actions -->
                 <div class="button-group">
-                    <button class="button">Ứng tuyển ngay</button>
-                    <button class="button">Báo xấu</button>
+                    <button class="btn btn-info" id="openProposalModal">Ứng tuyển ngay</button>
+                    <button class="btn btn-danger">Báo xấu</button>
                 </div>
             </div>
 
@@ -179,29 +285,120 @@
                     <div class="section-title">Mô tả</div>
                     <div class="section-content">
                         🌸 <strong>GÓC TÌM KOC REVIEW CÓ CAST</strong> 🌸<br>
-                        - Mình đang cần tìm các bạn KOC/UGC review về sản phẩm Cặp dầu gội - xả Gừng CN-MOFAXIN
+                            @Model.Description
                     </div>
+                   
                 </div>
                 <div class="section">
                     <div class="section-title">Thông tin hợp tác</div>
                     <div class="section-content">
-                        <p><strong>Hình thức hợp tác:</strong> Nhận sản phẩm mẫu miễn phí + Hoa hồng 15%</p>
+                            <p><strong>Hình thức hợp tác:</strong>  Nhận sản phẩm mẫu miễn phí + Hoa hồng 15%</p>
                         <p><strong>Hoàn sản phẩm mẫu + CÓ CAST</strong></p>
                     </div>
                 </div>
                 <div class="section">
-                    <div class="section-title">Yêu cầu</div>
                     <div class="section-content">
                         <p><span class="important">★ YÊU CẦU:</span></p>
                         <ul>
-                            <li>Hình thức: review sản phẩm</li>
+                                <li>@Model.Requirements</li>
                             <li>Lên video đúng hạn (có việc bận vui lòng nhắn tin cho bên mình)</li>
+                           
                         </ul>
                         Tham gia group để nhận nhiều job hơn: <a href="https://zalo.me/g/zarko083">https://zalo.me/g/zarko083</a>
+                        <img src="https://kols-koc.com/wp-content/uploads/2023/07/Thiet-ke-chua-co-ten-82.png"
+                             class="card-img-top" alt="Campaign Image">
                     </div>
                 </div>
             </div>
         </div>
+        
     </div>
+    <!-- Modal pop-up với overlay -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal-content">
+            <h2>@Model.Title</h2>
+            <form id="proposalForm" method="post" action="@Url.Action("AddProposal", "Proposal")">
+                <input type="hidden" id="CampaignId" name="CampaignId" value="@Model.CampaignId" />
+                <input type="hidden" id="InfluencerId" name="InfluencerId" />
+
+                <label for="OfferDetails">Ghi chú:</label>
+                <textarea id="OfferDetails" name="OfferDetails" required></textarea>
+                <br />
+
+                <label for="Price">Chi phí offer:</label>
+                <input type="number" id="Price" name="Price" required min="0" step="0.01" />
+                <br />
+
+                <button type="submit">Submit</button>
+                <button type="button" onclick="closeModal()">Cancel</button>
+            </form>
+        </div>
+    </div>
+
 </body>
 </html>
+<script>
+    // Hàm lấy giá trị từ cookie
+    function getCookie(name) {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+
+        if (parts.length === 2) return parts.pop().split(';').shift();
+    }
+
+    // Mở modal và overlay
+    document.getElementById('openProposalModal').addEventListener('click', function () {
+        const influencerId = getCookie('InfluencerId');
+        if (influencerId) {
+            document.getElementById('InfluencerId').value = influencerId;
+        }
+        document.getElementById('modalOverlay').style.display = 'flex';
+    });
+
+    // Đóng modal và overlay
+    function closeModal() {
+        document.getElementById('modalOverlay').style.display = 'none';
+    }
+
+    // Hàm gửi form và hiển thị alert khi thành công
+    document.getElementById('proposalForm').addEventListener('submit', async function (e) {
+        e.preventDefault(); // Ngừng gửi form theo cách mặc định
+
+        const formData = new FormData(this);
+        const data = new URLSearchParams(formData).toString(); // Chuyển đổi dữ liệu thành chuỗi query
+
+        try {
+            const response = await fetch('@Url.Action("AddProposal","Proposal")', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: data
+            });
+
+            // Kiểm tra xem response có hợp lệ không
+            if (!response.ok) {
+                console.error("Error response:", response);
+                return;
+            }
+
+            // Đọc toàn bộ phản hồi dưới dạng văn bản và sau đó phân tích thành JSON
+            const responseText = await response.text(); // Đọc như text đầu tiên
+            console.log('Response text:', responseText);  // In ra responseText
+
+            // Nếu cần phân tích JSON, sử dụng JSON.parse() trên responseText
+            const result = JSON.parse(responseText); // Phân tích JSON từ responseText
+            console.log('Parsed result:', result);
+
+            if (response.ok) {
+                // Hiển thị alert nếu thành công
+                alert('Proposal added successfully!');
+                closeModal(); // Đóng modal sau khi thêm thành công
+            } else {
+                alert('Error adding proposal: ' + result.message);
+            }
+        } catch (error) {
+            alert('Error adding proposal: ' + error.message);
+        }
+    });
+</script>

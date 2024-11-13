@@ -7,19 +7,31 @@ namespace api.Repository
 	public class ProposalRepository : IProposalRepository
 	{
 		private readonly ApplicationDbContext _context;
+        private readonly ILogger<ProposalRepository> _logger;
 
-		public ProposalRepository(ApplicationDbContext context)
-		{
-			_context = context;
-		}
+        public ProposalRepository(ApplicationDbContext context,ILogger<ProposalRepository> logger)
+        {
+            _context = context;
+            _logger = logger;
+        }
 
-		public Task AddAsync(Proposal proposal)
-		{
-			_context.Proposals.Add(proposal);
-			return _context.SaveChangesAsync();
-		}
+        public async Task AddAsync(Proposal proposal)
+        {
+            try
+            {
+                _context.Proposals.Add(proposal);
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                // Log error if any exception occurs
+                _logger.LogError($"An error occurred while saving the proposal: {ex.Message}");
+                throw;
+            }
+        }
 
-		public async Task DeleteAsync(int id)
+
+        public async Task DeleteAsync(int id)
 		{
 			var proposal = await GetByIdAsync(id);
 			if (proposal != null)

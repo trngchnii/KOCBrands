@@ -43,6 +43,7 @@ internal class Program
         modelBuilder.EntityType<Campaign>().HasRequired(p => p.Brand);
         modelBuilder.EntityType<Campaign>().HasMany(p => p.Categories);
 
+
         // Add services to the container.
         builder.Services.AddControllers()
             .AddJsonOptions(options =>
