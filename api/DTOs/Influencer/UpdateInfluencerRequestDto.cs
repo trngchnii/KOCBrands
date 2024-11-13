@@ -1,4 +1,5 @@
-﻿using api.Models;
+﻿using api.DTOs.SocialMedia;
+using api.Models;
 using System.ComponentModel.DataAnnotations;
 
 namespace api.DTOs
@@ -43,7 +44,7 @@ namespace api.DTOs
         public DateTime DateOfBirth { get; set; }
         public decimal BookingPrice { get; set; }
         public int PersonalIdentificationNumber { get; set; }
-        public List<SocialMedia>? SocialMedias { get; set; } = new List<SocialMedia>();
+        public List<SocialMediaDto>? SocialMedias { get; set; } = new List<SocialMediaDto>();
 
         // User sẽ có thể null nếu không cập nhật trong request này
         public UserDto? User { get; set; }

@@ -1,5 +1,6 @@
 using api.Data;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileProviders;
 using WebClient;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -28,6 +29,7 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
 app.UseStaticFiles();
 
 app.UseCors();

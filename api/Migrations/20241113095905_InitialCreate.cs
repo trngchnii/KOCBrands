@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace api.Migrations
 {
     /// <inheritdoc />
-    public partial class Initial1 : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -287,14 +287,14 @@ namespace api.Migrations
                 columns: new[] { "UserId", "Address", "Avatar", "Bio", "CreatedAt", "Email", "FavoriteId", "FavouriteId", "Password", "Phonenumber", "Role", "Status", "UpdatedAt", "UserName" },
                 values: new object[,]
                 {
-                    { 1, "123 Main St, City, Country", "avatar1.jpg", "Bio of John Doe", new DateTime(2024, 11, 11, 2, 17, 37, 85, DateTimeKind.Local).AddTicks(453), "ni.trnh59@gmail.com", null, null, "Abc123#", "123456789", null, "Active", new DateTime(2024, 11, 11, 2, 17, 37, 85, DateTimeKind.Local).AddTicks(468), "hanni_44" },
-                    { 2, "456 Brand St, City, Country", "avatar2.jpg", "Brand ABC official account", new DateTime(2024, 11, 11, 2, 17, 37, 85, DateTimeKind.Local).AddTicks(471), "contact@brandabc.com", null, null, "password123", "987654321", null, "Active", new DateTime(2024, 11, 11, 2, 17, 37, 85, DateTimeKind.Local).AddTicks(472), "brand_abc" }
+                    { 1, "123 Main St, City, Country", "NULL", "Bio of John Doe", new DateTime(2024, 11, 13, 16, 59, 5, 158, DateTimeKind.Local).AddTicks(2076), "ni.trnh59@gmail.com", null, null, "Abc123#", "123456789", null, "Active", new DateTime(2024, 11, 13, 16, 59, 5, 158, DateTimeKind.Local).AddTicks(2091), "hanni_44" },
+                    { 2, "456 Brand St, City, Country", "NULL", "Brand ABC official account", new DateTime(2024, 11, 13, 16, 59, 5, 158, DateTimeKind.Local).AddTicks(2094), "contact@brandabc.com", null, null, "password123", "987654321", null, "Active", new DateTime(2024, 11, 13, 16, 59, 5, 158, DateTimeKind.Local).AddTicks(2094), "brand_abc" }
                 });
 
             migrationBuilder.InsertData(
                 table: "Brands",
                 columns: new[] { "BrandId", "BrandName", "ImageCover", "TaxCode", "UserId" },
-                values: new object[] { 1, "Brand ABC", "brand_abc_cover.jpg", "1234567890", 2 });
+                values: new object[] { 1, "Brand ABC", "NULL", "1234567890", 2 });
 
             migrationBuilder.InsertData(
                 table: "Influencers",
