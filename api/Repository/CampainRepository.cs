@@ -45,7 +45,7 @@ namespace api.Repository
                                             .Include(c => c.Categories).FirstOrDefaultAsync(c => c.CampaignId == id);
         }
 
-        public async Task<Campaign> UpdateAsync(int id, UpdateCampaignDto model)
+        public async Task<Campaign> UpdateAsync(Campaign model)
         {
             using var transaction = await _context.Database.BeginTransactionAsync();
             try
@@ -56,7 +56,7 @@ namespace api.Repository
                     .Include(b => b.Categories)
                     .Include(b => b.Brand)
                     .Include(b => b.Favourite)
-                    .FirstOrDefaultAsync(b => b.CampaignId == id);
+                    .FirstOrDefaultAsync(b => b.CampaignId == model.CampaignId);
 
                 if (existingCampaign == null)
                 {

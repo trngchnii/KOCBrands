@@ -5,32 +5,30 @@
 <div class="cards">
     <div class="card blue">
         <div class="card-icon">
-            <i class="fas fa-user"></i>
+            <i class="fa-solid fa-house" ></i>
+        
         </div>
         <div class="card-content">
-            <h3>Đăng ký</h3>
-            <p>114</p>
-            <small>+25% so với tháng trước</small>
+            <h3>Brand</h3>
+            <p id="brandcount" value="@Model.TotalBrand">@Model.TotalBrand</p>
         </div>
     </div>
     <div class="card green">
         <div class="card-icon">
-            <i class="fas fa-dollar-sign"></i>
+            <i class="fas fa-user"></i>
         </div>
         <div class="card-content">
-            <h3>Doanh thu</h3>
-            <p>$25,541</p>
-            <small>+17.5% so với tháng trước</small>
+            <h3>Influencer</h3>
+            <p id="influencercount">@Model.TotalInfluencer</p>
         </div>
     </div>
     <div class="card red">
         <div class="card-icon">
-            <i class="fas fa-phone"></i>
+            <i class="fa-solid fa-newspaper"></i>
         </div>
         <div class="card-content">
-            <h3>Vé mở</h3>
-            <p>5</p>
-            <small>&nbsp;</small>
+            <h3>Campaign</h3>
+            <p id="campaigncount">@Model.TotalCampaign</p>
         </div>
     </div>
 </div>
@@ -41,40 +39,32 @@
     <canvas id="myChart"></canvas>
 </div>
 
-<div class="notifications">
-    <h3>Thông báo</h3>
-    <ul>
-        <li>Bình luận mới - 21 ngày trước</li>
-        <li>Bình luận mới - 21 ngày trước</li>
-        <li>Bình luận mới - 21 ngày trước</li>
-        <li><a href="#">Xem tất cả</a></li>
-    </ul>
-</div>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
+    var brandcount = document.getElementById("brandcount").innerText;
+    var influencercount = document.getElementById("influencercount").innerText;
+    var campaigncount = document.getElementById("campaigncount").innerText;
     const ctx = document.getElementById("myChart").getContext("2d");
     const myChart = new Chart(ctx, {
         type: "bar",
         data: {
-            labels: ["Thứ hai", "Thứ ba", "Thứ tư", "Thứ năm", "Thứ sáu"],
+            labels: ["Brand", "Influencer", "Campaign"],
             datasets: [
                 {
-                    label: "Số lượt đăng ký",
-                    data: [12, 19, 3, 5, 2],
+                    label: "Số lượng",
+                    data: [brandcount, influencercount, campaigncount],
                     backgroundColor: [
                         "rgba(52, 152, 219, 0.6)",
                         "rgba(52, 152, 219, 0.6)",
                         "rgba(52, 152, 219, 0.6)",
-                        "rgba(52, 152, 219, 0.6)",
-                        "rgba(52, 152, 219, 0.6)",
+  
                     ],
                     borderColor: [
                         "rgba(52, 152, 219, 1)",
                         "rgba(52, 152, 219, 1)",
                         "rgba(52, 152, 219, 1)",
-                        "rgba(52, 152, 219, 1)",
-                        "rgba(52, 152, 219, 1)",
+         
                     ],
                     borderWidth: 1,
                 },

@@ -9,7 +9,7 @@ namespace api.Repository
         Task<Campaign> GetByIdAsync(int id);
         Task<IEnumerable<Campaign>> GetAllAsync();
         Task AddAsync(Campaign campaign);
-        Task<Campaign> UpdateAsync(int id, UpdateCampaignDto model);
+        Task<Campaign> UpdateAsync(Campaign campaign);
         Task DeleteAsync(int id);
     }
 }

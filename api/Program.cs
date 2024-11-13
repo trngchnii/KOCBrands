@@ -33,13 +33,15 @@ internal class Program
 
         builder.Services.AddCors(options =>
         {
-            options.AddPolicy("AllowAll",policy =>
+            options.AddPolicy("AllowAll", policy =>
             {
                 policy.AllowAnyOrigin()          // Cho phép tất cả các nguồn (origins)
                       .AllowAnyMethod()          // Cho phép tất cả các phương thức HTTP (GET, POST, PUT, DELETE, ...)
                       .AllowAnyHeader();         // Cho phép tất cả các headers
             });
         });
+        modelBuilder.EntityType<Campaign>().HasRequired(p => p.Brand);
+        modelBuilder.EntityType<Campaign>().HasMany(p => p.Categories);
 
         // Add services to the container.
         builder.Services.AddControllers()
@@ -53,13 +55,13 @@ internal class Program
         {
             options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
         });
-        builder.Services.AddScoped<IBrandRepository,BrandRepository>();
-        builder.Services.AddScoped<IInfluencerRepository,InfluencerRepository>();
-        builder.Services.AddScoped<ISearchKOLRepository,SearchKOLRepository>();
-        builder.Services.AddScoped<ICampainRepository,CampainRepository>();
-        builder.Services.AddScoped<ICategoryRepository,CategoryRepository>();
-        builder.Services.AddScoped<IProposalRepository,ProposalRepository>();
-        builder.Services.AddTransient<IFileService,FileService>();
+        builder.Services.AddScoped<IBrandRepository, BrandRepository>();
+        builder.Services.AddScoped<IInfluencerRepository, InfluencerRepository>();
+        builder.Services.AddScoped<ISearchKOLRepository, SearchKOLRepository>();
+        builder.Services.AddScoped<ICampainRepository, CampainRepository>();
+        builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+        builder.Services.AddScoped<IProposalRepository, ProposalRepository>();
+        builder.Services.AddTransient<IFileService, FileService>();
         builder.Services.AddCors(options =>
         {
             options.AddDefaultPolicy(
@@ -79,7 +81,7 @@ internal class Program
         options.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.Never;
     })
     .AddOData(
-    o => o.Select().Filter().OrderBy().Expand().Count().SetMaxTop(null).AddRouteComponents("odata",modelBuilder.GetEdmModel())
+    o => o.Select().Filter().OrderBy().Expand().Count().SetMaxTop(null).AddRouteComponents("odata", modelBuilder.GetEdmModel())
     );
 
         builder.Services.AddEndpointsApiExplorer();
@@ -107,7 +109,7 @@ internal class Program
         // Cấu hình thư mục Uploads bên ngoài wwwroot
         app.UseStaticFiles(new StaticFileOptions
         {
-            FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(),"Uploads")),
+            FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "Uploads")),
             RequestPath = "/Uploads" // Đường dẫn sẽ được truy cập qua /Uploads
         });
         /*app.UseStaticFiles(new StaticFileOptions

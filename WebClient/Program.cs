@@ -1,9 +1,13 @@
 using api.Data;
 using Microsoft.EntityFrameworkCore;
+using Net.payOS;
 using WebClient;
 
 var builder = WebApplication.CreateBuilder(args);
-
+IConfiguration configuration = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json", optional: false, reloadOnChange: true).Build();
+PayOS payOS = new PayOS(configuration["Environment:PAYOS_CLIENT_ID"] ?? throw new Exception("Cannot find environment"),
+                    configuration["Environment:PAYOS_API_KEY"] ?? throw new Exception("Cannot find environment"),
+                    configuration["Environment:PAYOS_CHECKSUM_KEY"] ?? throw new Exception("Cannot find environment"));
 // Add services to the container.
 builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection("EmailSettings"));
 builder.Services.AddTransient<IEmailSender, EmailSender>();
@@ -13,19 +17,22 @@ builder.Services.AddHttpClient();
 
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowAll",policy =>
+    options.AddPolicy("AllowAll", policy =>
     {
-        policy.AllowAnyOrigin()          // Cho phép t?t c? các ngu?n (origins)
-              .AllowAnyMethod()          // Cho phép t?t c? các ph??ng th?c HTTP (GET, POST, PUT, DELETE, ...)
-              .AllowAnyHeader();         // Cho phép t?t c? các headers
+        policy.AllowAnyOrigin()          // Cho phï¿½p t?t c? cï¿½c ngu?n (origins)
+              .AllowAnyMethod()          // Cho phï¿½p t?t c? cï¿½c ph??ng th?c HTTP (GET, POST, PUT, DELETE, ...)
+              .AllowAnyHeader();         // Cho phï¿½p t?t c? cï¿½c headers
     });
 });
+builder.Services.AddSingleton(payOS);
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"),
     b => b.MigrationsAssembly("WebClient"));
 });
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
