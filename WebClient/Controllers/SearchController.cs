@@ -34,12 +34,11 @@ namespace WebClient.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Search(string name, string? gender, DateTime? dateOfBirth, decimal? bookingPrice = null, int? personalIdentificationNumber = null)
+		public async Task<IActionResult> Search(string name, string? gender, DateTime? dateOfBirth, decimal? bookingPrice = null, int? personalIdentificationNumber = null, string? sorting = null)
         {
-            string apiUrl = $"https://localhost:7290/odata/SeachKOL/search?name={name}&gender={gender}&dateOfBirth={dateOfBirth}&bookingPrice={bookingPrice}&personalIdentificationNumber={personalIdentificationNumber}";
+            string apiUrl = $"https://localhost:7290/odata/SeachKOL/search?name={name}&gender={gender}&dateOfBirth={dateOfBirth}&bookingPrice={bookingPrice}&personalIdentificationNumber={personalIdentificationNumber}&sorting={sorting}";
 
             HttpResponseMessage response = await _httpClient.GetAsync(apiUrl);
-
             IEnumerable<InfluencerDto> influencers = Enumerable.Empty<InfluencerDto>();
 
             if (response.IsSuccessStatusCode)

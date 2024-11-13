@@ -2,22 +2,22 @@
 	<div class="p-toast p-component p-toast-top-right">
 		<div></div>
 	</div>
-	<div class="header-list-koc mb-2 flex justify-content-between flex-wrap align-items-center">
-		<h3 class="mb-0"></h3>
-		<div class="select-soft md:w-auto w-full md:mt-0 mt-1 flex align-items-center">
-			<label for="sorting">
-				Sắp xếp
-				theo:
-			</label><select class="cursor-pointer outline-none" id="sorting" name="sorting">
-				<option selected="" value="minPrice">...</option>
-				<option value="avgVideo">Doanh thu/ Video</option>
-				<option value="avgLive">Doanh thu/ Live</option>
-				<option value="followers">Follower</option>
-				<option value="price">Giá booking</option>
-			</select>
+	<form id="filterForm" method="post" action="/Search/Search">
+		<div class="header-list-koc mb-2 flex justify-content-between flex-wrap align-items-center">
+			<h3 class="mb-0"></h3>
+			<div class="select-soft md:w-auto w-full md:mt-0 mt-1 flex align-items-center">
+				<label for="sorting">Sắp xếp theo: </label>
+				<select class="cursor-pointer outline-none" id="sorting" name="sorting">
+					<option selected="" value="minPrice">...</option>
+					@* <option value="avgVideo">Doanh thu/ Video</option>
+					<option value="avgLive">Doanh thu/ Live</option> *@
+					<option value="followers">Follower</option>
+					<option value="price">Giá booking</option>
+				</select>
+			<button type="submit">Tìm</button>
+			</div>
 		</div>
-	</div>
-
+	</form>
 	<div class="p-dataview p-component p-dataview-list">
 		<div class="p-dataview-content">
 			<div class="p-grid grid p-nogutter grid-nogutter">
@@ -29,40 +29,61 @@
 						<div></div>
 					</div>
 					<div class="md:col-3 item-kol cursor-pointer sm:col-6 col-12 p-3 relative">
-						<i class="pi-heart pi like-kol"></i><a target="_blank" class="block"
-												   href="/components/detail-candidate/?mask=Le-Thanh&amp;id=557" title="@influencer.Name">
+						<i class="pi pi-heart heart-icon like-kol" data-id="@influencer.InfluencerId" onclick="addToFavorites(@influencer.InfluencerId)"></i>
+						<a target="_blank" class="block" href="/components/detail-candidate/?mask=@influencer.Name&amp;id=@influencer.PersonalIdentificationNumber" title="@influencer.Name">
 							<div class="image text-center relative border-round-xl overflow-hidden">
-								<div class="followers align-items-center text-white absolute border-round-3xl flex">
-									<img class="mr-1 border-circle" width="22" height="22"
-										 src="/demo/images/social/icon-tiktok.svg">@influencer.PersonalIdentificationNumber
-								</div><img width="270" height="330"
-										   class="max-w-full w-full vertical-align-middle"
-										   src="https://api.mykol.vn/profile/557/eb051934-a7a2-47f4-93fb-e529534c075d_1696049874702-resize.jpg"
-										   loading="lazy" alt="@influencer.Name">
+									@if (influencer.SocialMedias != null)
+									{
+										@foreach (var socialMedia in influencer.SocialMedias)
+										{
+											<div class="followers align-items-center text-white absolute border-round-3xl flex">
+												<i class="fa-brands fa-facebook" style="color: #74C0FC;"></i>   @socialMedia.FollowersCount
+												
+											</div>
+
+											<img width="270" height="330" class="max-w-full w-full vertical-align-middle"
+												src="https://localhost:7290/uploads/avatars/@(socialMedia.SocialMediaImg ?? "default-avatar.jpg")"
+												 loading="lazy" alt="@influencer.Name">
+										}
+									}
 								<div class="title text-left px-4 pb-4 w-full absolute">
-									<h3 class="name text-white capitalize mb-0 line-clamp-1">@influencer.Name</h3><span class="city text-white">@influencer.DateOfBirth.ToString("d")</span>
+									<h3 class="name text-white capitalize mb-0 line-clamp-1">@influencer.Name</h3>
+									<span class="city text-white">@influencer.DateOfBirth.ToString("d")</span>
 								</div>
 							</div>
 						</a>
 						<div class="info mt-2 flex justify-content-between flex-wrap align-items-center">
 							<div class="social flex align-items-center">
-								<a href="https://www.tiktok.com/zent94"
-								   target="_blank" title="tiktok">
-									<img width="22" height="22"
-										 src="/demo/images/social/icon-tiktok.svg">
-								</a><span class="ml-1">
-									<img width="29"
-										 height="27" src="/demo/images/home/icon-analytics.png">
+								@if (influencer.SocialMedias != null)
+								{
+									@foreach (var socialMedia in influencer.SocialMedias)
+									{
+										<a href="@socialMedia.SocialMediaLink" target="_blank" title="@socialMedia.SocialMediaName">
+											<i class="fa-brands fa-facebook" style="color: #74C0FC;"></i>
+										</a>
+									}
+								}
+								<span class="ml-1">
+									<i class="fa-brands fa-tiktok" style="color: #000000;"></i>
 								</span>
-								<div class="social" style="margin-top: -3px;">
-									<img width="22" height="22"
-										 src="/demo/images/kolInfo/zalo.svg" alt="Kols"
-										 class="max-w-full md:w-auto vertical-align-middle">
-								</div>
+								
 							</div> 
 							<div class="price">@influencer.BookingPrice.ToString("N0") VNĐ</div>
 						</div>
 						<div class="careers line-clamp-2">@influencer.Gender</div>
+						<div class="contact-info">
+							@if (influencer.User != null)
+							{
+								<h5>Thông tin liên lạc</h5>
+								<p>Email: @influencer.User.Email</p>
+								<p>Số điện thoại: @influencer.User.Phonenumber</p>
+								<p>Thành Phố: @influencer.User.Address</p>
+							}
+							else
+							{
+								<p>Chưa có thông tin cụ thể</p>
+							}
+						</div>
 					</div>
 				}
 			}

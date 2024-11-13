@@ -1,5 +1,6 @@
-﻿using api.Models;
+using api.Models;
 using Microsoft.AspNetCore.Mvc;
+using api.DTOs.SocialMedia;
 using System.ComponentModel.DataAnnotations;
 
 namespace api.DTOs
@@ -14,7 +15,7 @@ namespace api.DTOs
         [Required(ErrorMessage = "Date of Birth is required.")]
         public DateTime DateOfBirth { get; set; }
 
-        [Range(0,double.MaxValue,ErrorMessage = "Booking Price must be a positive number.")]
+        [Range(0, double.MaxValue, ErrorMessage = "Booking Price must be a positive number.")]
         public decimal BookingPrice { get; set; }
 
         [Required(ErrorMessage = "Personal Identification Number is required.")]
@@ -45,7 +46,7 @@ namespace api.DTOs
         public DateTime DateOfBirth { get; set; }
         public decimal BookingPrice { get; set; }
         public int PersonalIdentificationNumber { get; set; }
-        public List<SocialMedia>? SocialMedias { get; set; } = new List<SocialMedia>();
+        public List<SocialMediaDto>? SocialMedias { get; set; } = new List<SocialMediaDto>();
 
         // User sẽ có thể null nếu không cập nhật trong request này
         public UserDto? User { get; set; }

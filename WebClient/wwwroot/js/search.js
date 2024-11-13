@@ -1,31 +1,38 @@
-﻿    document.getElementById("btn-search").addEventListener("click", function () {
-        const form = document.getElementById("searchForm");
-    const formData = new FormData(form);
+﻿function addToFavorites(influencerId) {
+    // Tạo URL cho yêu cầu API
+    var url = 'https://localhost:7290/api/Favourites/add/' + influencerId;
 
-    // Chuyển dữ liệu form thành JSON object
-    const searchCriteria = { };
-        formData.forEach((value, key) => {
-        searchCriteria[key] = value;
-        });
-
-    // Gửi yêu cầu đến API backend để tìm kiếm
-    fetch("/api/SearchKOL", {
-        method: "POST",
-    headers: {
-        "Content-Type": "application/json"
-            },
-    body: JSON.stringify(searchCriteria)
+    // Sử dụng fetch API để gửi yêu cầu POST
+    fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            // Thêm token JWT nếu cần thiết cho xác thực
+            'Authorization': 'Bearer ' + localStorage.getItem('jwtToken')
+        }
+    })
+        .then(response => {
+            if (!response.ok) {
+                // Kiểm tra nếu response không phải là 200 OK
+                throw new Error('Failed to add to favorites. Status: ' + response.status);
+            }
+            return response.json();  // Chuyển đổi phản hồi thành JSON
         })
-        .then(response => response.json())
         .then(data => {
-            // Cập nhật danh sách KOL với kết quả trả về từ API
-            const searchResultDiv = document.getElementById("search-kocs");
-            searchResultDiv.innerHTML = data.map(kol => `
-    <div class="kol-item">
-        <h3>${kol.name}</h3>
-        <p>Followers: ${kol.followers}</p>
-        <p>Giá Booking: ${kol.bookingPrice}</p>
-    </div>
-    `).join('');
+            console.log('Success:', data); // Log phản hồi từ API
+
+            // Kiểm tra nếu phản hồi trả về thông báo lỗi hoặc thành công
+            if (data && data.message === "This influencer is already in your favorites.") {
+                alert("This influencer is already in your favorites.");
+            } else {
+                // Cập nhật giao diện hoặc trạng thái của nút yêu thích
+                alert("Added to favorites successfully!");
+                var heartIcon = document.querySelector(`.like-kol[data-id='${influencerId}']`);
+                heartIcon.classList.add('liked');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('An error occurred. Please try again.');
         });
-    });
+}
