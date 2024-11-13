@@ -1,5 +1,6 @@
 ﻿using api.Data;
 using api.DTOs;
+using api.DTOs.Campaign;
 using api.DTOs.CategoryDTO;
 using api.DTOs.Pagination;
 using api.DTOs.User;
@@ -8,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using Net.payOS;
 using Net.payOS.Types;
 using Newtonsoft.Json;
+using System.Drawing.Printing;
 using System.Net.Http;
 
 namespace WebClient.Areas.Admin.Controllers
@@ -19,6 +21,7 @@ namespace WebClient.Areas.Admin.Controllers
     {
         private readonly HttpClient _httpClient;
         private readonly string CategoryAPIURL = "https://localhost:7290/odata/Category";
+        private readonly string CampaignAPIURL = "https://localhost:7290/odata/Campaigns";
         private readonly PayOS _payOS;
         public AdminController(HttpClient httpClient, PayOS payOS)
         {
@@ -26,9 +29,46 @@ namespace WebClient.Areas.Admin.Controllers
             _payOS = payOS;
         }
 
-        public IActionResult Dashboard()
+        public async Task<IActionResult> Dashboard()
         {
-            return View();
+            string apiUrl = CampaignAPIURL;
+            int totalCampaign = 0;
+            int totalBrand= 0;
+            int totalInfluencer = 0;
+            HttpResponseMessage response = await _httpClient.GetAsync(apiUrl);
+            if (response.IsSuccessStatusCode)
+            {
+                var jsonResponse = await response.Content.ReadAsStringAsync();
+                var campaigns = JsonConvert.DeserializeObject<CampaignResponse>(jsonResponse);
+                totalCampaign = campaigns.Value.Count;
+            }
+            apiUrl = $"https://localhost:7290/api/admin/getalluser";
+
+            response = await _httpClient.GetAsync(apiUrl);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var jsonResponse = await response.Content.ReadAsStringAsync();
+                var pagedResult = JsonConvert.DeserializeObject<List<User>>(jsonResponse);
+                pagedResult.ForEach(user =>
+                {
+                    if (user.Role == "Brand")
+                    {
+                        totalBrand++;
+                    }
+                    else if (user.Role == "Influencer")
+                    {
+                        totalInfluencer++;
+                    }
+                }); 
+            }
+            var dashboard = new
+            {
+                TotalCampaign = totalCampaign,
+                TotalBrand = totalBrand,
+                TotalInfluencer = totalInfluencer
+            };
+            return View(dashboard);
         }
 
         public IActionResult Analytics()
@@ -239,7 +279,147 @@ namespace WebClient.Areas.Admin.Controllers
 
             return RedirectToAction("CategoryManagement");
         }
+        public class CampaignResponse
+        {
+            [JsonProperty("value")]
+            public List<Campaign> Value { get; set; } = new List<Campaign>();
+        }
+        public async Task<IActionResult> CampaignManagement()
+        {
+            string apiUrl = CampaignAPIURL;
 
+            HttpResponseMessage response = await _httpClient.GetAsync(apiUrl);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var jsonResponse = await response.Content.ReadAsStringAsync();
+                var campaigns = JsonConvert.DeserializeObject<CampaignResponse>(jsonResponse);
+                return View(campaigns.Value);
+            }
+            else
+            {
+                return View(new List<Campaign>());
+            }
+        }
+
+        public async Task<IActionResult> DeleteCampaign(int id)
+        {
+            string apiUrl = $"{CampaignAPIURL}({id})";
+            HttpResponseMessage response = await _httpClient.DeleteAsync(apiUrl);
+
+            if (response.IsSuccessStatusCode)
+            {
+                return RedirectToAction("CampaignManagement");
+            }
+            return StatusCode((int)response.StatusCode);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateCampaign(CampaignAdd camp)
+        {
+            if (ModelState.IsValid)
+            {
+                string apiUrl = CampaignAPIURL + "/create-campaign";
+                var jsonString = JsonConvert.SerializeObject(new
+                {
+                    BrandId = camp.BrandId,
+                    Title = camp.Title,
+                    Description = camp.Description,
+                    Requirements = camp.Requirements,
+                    Budget = camp.Budget,
+                    StartDate = camp.StartDate.ToString("yyyy-MM-ddTHH:mm:ssZ"),
+                    EndDate = camp.EndDate.ToString("yyyy-MM-ddTHH:mm:ssZ"),
+                    Status = camp.Status,
+                    CreatedDate = camp.CreatedDate.ToString("yyyy-MM-ddTHH:mm:ssZ")
+                });
+                var jsonContent = new StringContent(jsonString, System.Text.Encoding.UTF8, "application/json");
+
+                try
+                {
+                    HttpResponseMessage response = await _httpClient.PostAsync(apiUrl, jsonContent);
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        return RedirectToAction("CampaignManagement");
+                    }
+                    else
+                    {
+                        // Lấy nội dung chi tiết của lỗi từ phản hồi API để kiểm tra
+                        var errorResponse = await response.Content.ReadAsStringAsync();
+                        return View("Error");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Exception: " + ex.Message);
+                    return View("Error");
+                }
+
+
+            }
+
+            return RedirectToAction("CampaignManagement");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> EditCampaign(int id)
+        {
+            string apiUrl = $"{CampaignAPIURL}({id})";
+            HttpResponseMessage response = await _httpClient.GetAsync(apiUrl);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var jsonResponse = await response.Content.ReadAsStringAsync();
+                var cate = JsonConvert.DeserializeObject<CampaignEdit>(jsonResponse);
+                return PartialView("_EditCampaignModal", cate);
+            }
+
+            return View("Error");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditCampaign(CampaignEdit camp)
+        {
+            if (ModelState.IsValid)
+            {
+                string apiUrl = CampaignAPIURL;
+                var jsonString = JsonConvert.SerializeObject(new
+                {
+                    CampaignId = camp.CampaignId,
+                    BrandId = camp.BrandId,
+                    Title = camp.Title,
+                    Description = camp.Description,
+                    Requirements = camp.Requirements,
+                    Budget = camp.Budget,
+                    StartDate = camp.StartDate.ToString("yyyy-MM-ddTHH:mm:ssZ"),
+                    EndDate = camp.EndDate.ToString("yyyy-MM-ddTHH:mm:ssZ"),
+                    Status = camp.Status,
+                    CreatedDate = camp.CreatedDate.ToString("yyyy-MM-ddTHH:mm:ssZ")
+                });
+                var jsonContent = new StringContent(jsonString, System.Text.Encoding.UTF8, "application/json");
+                try
+                {
+                    HttpResponseMessage response = await _httpClient.PutAsync(apiUrl, jsonContent);
+                    if (response.IsSuccessStatusCode)
+                    {
+                        return RedirectToAction("CampaignManagement");
+                    }
+                    else
+                    {
+                        var errorResponse = await response.Content.ReadAsStringAsync();
+                        return View("Error");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Exception: " + ex.Message);
+                    return View("Error");
+                }
+            }
+
+            return RedirectToAction("CampaignManagement");
+        }
+        //-----------------------------------------PAYMENT-----------------------------------------
         public async Task<IActionResult> TestPayment()
         {
             string Name = "tran van dat";
