@@ -98,7 +98,7 @@
                         <input type="date" class="form-control" id="BirthYear" asp-for="InfluencerEditDto.DateOfBirth" required />
                     </div>
 
-                    <div class="form-group col-md-2">
+                    @* <div class="form-group col-md-2">
                         <label for="Gender">Giới tính <sup class="text-danger">*</sup></label>
                         <div class="d-flex align-items-center mt-1">
                             <div class="form-check form-check-inline">
@@ -112,7 +112,7 @@
                                 <label class="form-check-label" for="Female">Nữ</label>
                             </div>
                         </div>
-                    </div>
+                    </div> *@
 
 
                     <div class="form-group col-md-6">
@@ -136,7 +136,7 @@
                              alt="Profile Picture">
                     </div>
                     <i class="fas fa-camera upload-icon"></i>
-                    <input type="file" class="form-control" id="Avatar" asp-for="InfluencerEditDto.AvatarFile" accept="image/*" />
+                    <input type="file" class="form-control" id="Avatar" asp-for="InfluencerEditDto.AvatarFile" accept="image/*" onchange="loadImage(event)" />
                 </div>
             </div>
 
