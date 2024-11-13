@@ -37,7 +37,7 @@ namespace WebClient.Controllers
 
             // G?i API ð? l?y thông tin c?a Influencer d?a trên InfluencerId t? cookie
             string str = BrandAPIURL;
-            HttpResponseMessage res = await _httpClient.GetAsync($"{str}{brandId}");
+            HttpResponseMessage res = await _httpClient.GetAsync($"{str}/{brandId}");
 
             if (!res.IsSuccessStatusCode)
             {
