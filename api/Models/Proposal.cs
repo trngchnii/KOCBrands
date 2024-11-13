@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -12,7 +12,7 @@ namespace api.Models
         public int? InfluencerId { get; set; }
         public string OfferDetails { get; set; }
         public decimal Price { get; set; }
-        public string Status { get; set; } = "Pending";
+        public string Status { get; set; } = "Chờ xử lý";
         public DateTime CreatedDate { get; set; } = DateTime.Now;
         public DateTime UpdatedDate { get; set; } = DateTime.Now;
         public Campaign? Campaign { get; set; }

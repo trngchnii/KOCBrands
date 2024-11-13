@@ -59,5 +59,41 @@ namespace WebClient.Controllers
 
             return View(response.Value);
         }
+
+        public async Task<IActionResult> GetListByBrand(int page = 1,int pageSize = 10)
+        {
+            var brandId = HttpContext.Request.Cookies["BrandId"];
+
+            if (string.IsNullOrEmpty(brandId))
+            {
+                // Gửi thông báo lỗi nếu không tìm thấy brandId trong cookie
+                return View("Error",new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            }
+            string baseUrl = "https://localhost:7290/odata/Campaigns";
+            string requestUrl = $"{baseUrl}?$filter=BrandId eq {brandId}&$expand=Brand($expand=User),Categories";
+
+            HttpResponseMessage res = await _httpClient.GetAsync(requestUrl);
+
+            if (!res.IsSuccessStatusCode)
+            {
+                return View("Error",new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            }
+
+            string rData = await res.Content.ReadAsStringAsync();
+            var responseWrapper = JsonConvert.DeserializeObject<CampaignResponse>(rData);
+
+            // Get total count of campaigns for pagination
+            string countUrl = $"{baseUrl}?$filter=BrandId eq {brandId}";
+            HttpResponseMessage countRes = await _httpClient.GetAsync(countUrl);
+            string countData = await countRes.Content.ReadAsStringAsync();
+            var countWrapper = JsonConvert.DeserializeObject<CampaignResponse>(countData);
+
+            int totalCount = countWrapper?.Value?.Count ?? 0;
+
+            ViewData["TotalPages"] = (int)Math.Ceiling((double)totalCount / pageSize);
+            ViewData["CurrentPage"] = page;
+
+            return View(responseWrapper?.Value); // Pass campaigns to the view
+        }
     }
 }
