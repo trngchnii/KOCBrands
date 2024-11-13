@@ -33,7 +33,7 @@ namespace api.Repository
 
         public async Task<IEnumerable<Campaign>> GetAllAsync()
         {
-            return await _context.Campaigns.ToListAsync();  
+            return await _context.Campaigns.Include(campaign => campaign.Categories).ToListAsync();  
         }
 
         public async Task<Campaign> GetByIdAsync(int id)

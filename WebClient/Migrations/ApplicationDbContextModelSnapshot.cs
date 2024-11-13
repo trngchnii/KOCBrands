@@ -8,7 +8,7 @@ using api.Data;
 
 #nullable disable
 
-namespace api.Migrations
+namespace WebClient.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     partial class ApplicationDbContextModelSnapshot : ModelSnapshot
@@ -80,6 +80,7 @@ namespace api.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ImageCover")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("TaxCode")
@@ -96,16 +97,6 @@ namespace api.Migrations
                         .HasFilter("[UserId] IS NOT NULL");
 
                     b.ToTable("Brands");
-
-                    b.HasData(
-                        new
-                        {
-                            BrandId = 1,
-                            BrandName = "Brand ABC",
-                            ImageCover = "brand_abc_cover.jpg",
-                            TaxCode = "1234567890",
-                            UserId = 2
-                        });
                 });
 
             modelBuilder.Entity("api.Models.Campaign", b =>
@@ -250,18 +241,6 @@ namespace api.Migrations
                         .HasFilter("[UserId] IS NOT NULL");
 
                     b.ToTable("Influencers");
-
-                    b.HasData(
-                        new
-                        {
-                            InfluencerId = 1,
-                            BookingPrice = 1000.00m,
-                            DateOfBirth = new DateTime(1990, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Gender = "Female",
-                            Name = "Han Ni",
-                            PersonalIdentificationNumber = 123456789,
-                            UserId = 1
-                        });
                 });
 
             modelBuilder.Entity("api.Models.Proposal", b =>
@@ -350,12 +329,14 @@ namespace api.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Avatar")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Bio")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime?>("CreatedAt")
+                    b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Email")
@@ -377,12 +358,14 @@ namespace api.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Role")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Status")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime?>("UpdatedAt")
+                    b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("UserName")
@@ -394,36 +377,6 @@ namespace api.Migrations
                     b.HasIndex("FavouriteId");
 
                     b.ToTable("Users");
-
-                    b.HasData(
-                        new
-                        {
-                            UserId = 1,
-                            Address = "123 Main St, City, Country",
-                            Avatar = "avatar1.jpg",
-                            Bio = "Bio of John Doe",
-                            CreatedAt = new DateTime(2024, 11, 11, 2, 17, 37, 85, DateTimeKind.Local).AddTicks(453),
-                            Email = "ni.trnh59@gmail.com",
-                            Password = "Abc123#",
-                            Phonenumber = "123456789",
-                            Status = "Active",
-                            UpdatedAt = new DateTime(2024, 11, 11, 2, 17, 37, 85, DateTimeKind.Local).AddTicks(468),
-                            UserName = "hanni_44"
-                        },
-                        new
-                        {
-                            UserId = 2,
-                            Address = "456 Brand St, City, Country",
-                            Avatar = "avatar2.jpg",
-                            Bio = "Brand ABC official account",
-                            CreatedAt = new DateTime(2024, 11, 11, 2, 17, 37, 85, DateTimeKind.Local).AddTicks(471),
-                            Email = "contact@brandabc.com",
-                            Password = "password123",
-                            Phonenumber = "987654321",
-                            Status = "Active",
-                            UpdatedAt = new DateTime(2024, 11, 11, 2, 17, 37, 85, DateTimeKind.Local).AddTicks(472),
-                            UserName = "brand_abc"
-                        });
                 });
 
             modelBuilder.Entity("BrandCategory", b =>
@@ -475,8 +428,7 @@ namespace api.Migrations
                 {
                     b.HasOne("api.Models.User", "User")
                         .WithOne("Brand")
-                        .HasForeignKey("api.Models.Brand", "UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("api.Models.Brand", "UserId");
 
                     b.Navigation("User");
                 });
@@ -504,8 +456,7 @@ namespace api.Migrations
 
                     b.HasOne("api.Models.User", "User")
                         .WithOne("Influencer")
-                        .HasForeignKey("api.Models.Influencer", "UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("api.Models.Influencer", "UserId");
 
                     b.Navigation("Favourite");
 

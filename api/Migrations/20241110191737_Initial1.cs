@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace api.Migrations
 {
     /// <inheritdoc />
@@ -52,13 +54,13 @@ namespace api.Migrations
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Avatar = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Bio = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Avatar = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Bio = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Phonenumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Role = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Status = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Role = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Status = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     FavouriteId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
@@ -79,7 +81,7 @@ namespace api.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     UserId = table.Column<int>(type: "int", nullable: true),
                     BrandName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ImageCover = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ImageCover = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     TaxCode = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
@@ -89,7 +91,8 @@ namespace api.Migrations
                         name: "FK_Brands_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
-                        principalColumn: "UserId");
+                        principalColumn: "UserId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -118,7 +121,8 @@ namespace api.Migrations
                         name: "FK_Influencers_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
-                        principalColumn: "UserId");
+                        principalColumn: "UserId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -277,6 +281,25 @@ namespace api.Migrations
                         principalTable: "Influencers",
                         principalColumn: "InfluencerId");
                 });
+
+            migrationBuilder.InsertData(
+                table: "Users",
+                columns: new[] { "UserId", "Address", "Avatar", "Bio", "CreatedAt", "Email", "FavoriteId", "FavouriteId", "Password", "Phonenumber", "Role", "Status", "UpdatedAt", "UserName" },
+                values: new object[,]
+                {
+                    { 1, "123 Main St, City, Country", "avatar1.jpg", "Bio of John Doe", new DateTime(2024, 11, 11, 2, 17, 37, 85, DateTimeKind.Local).AddTicks(453), "ni.trnh59@gmail.com", null, null, "Abc123#", "123456789", null, "Active", new DateTime(2024, 11, 11, 2, 17, 37, 85, DateTimeKind.Local).AddTicks(468), "hanni_44" },
+                    { 2, "456 Brand St, City, Country", "avatar2.jpg", "Brand ABC official account", new DateTime(2024, 11, 11, 2, 17, 37, 85, DateTimeKind.Local).AddTicks(471), "contact@brandabc.com", null, null, "password123", "987654321", null, "Active", new DateTime(2024, 11, 11, 2, 17, 37, 85, DateTimeKind.Local).AddTicks(472), "brand_abc" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Brands",
+                columns: new[] { "BrandId", "BrandName", "ImageCover", "TaxCode", "UserId" },
+                values: new object[] { 1, "Brand ABC", "brand_abc_cover.jpg", "1234567890", 2 });
+
+            migrationBuilder.InsertData(
+                table: "Influencers",
+                columns: new[] { "InfluencerId", "BookingPrice", "DateOfBirth", "FavouriteId", "Gender", "Name", "PersonalIdentificationNumber", "UserId" },
+                values: new object[] { 1, 1000.00m, new DateTime(1990, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Female", "Han Ni", 123456789, 1 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_BrandCategory_CategoriesCategoryId",

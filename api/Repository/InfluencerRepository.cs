@@ -10,6 +10,7 @@ namespace api.Repository
     {
         private readonly ApplicationDbContext _context;
         private readonly IFileService _fileService;
+
         public InfluencerRepository(ApplicationDbContext context,IFileService fileService)
         {
             _context = context;
@@ -34,79 +35,88 @@ namespace api.Repository
 
         public async Task<IEnumerable<Influencer>> GetAllAsync()
         {
-            return await _context.Influencers.ToListAsync();
+            return await _context.Influencers.Include(i => i.User).ToListAsync();
         }
 
         public async Task<Influencer?> GetByIdAsync(int id)
         {
-            var influencer = await _context.Influencers.FirstOrDefaultAsync(i => i.InfluencerId == id);
-            if (influencer == null)
-                return null;
-            return influencer;
+            return await _context.Influencers.Include(i => i.User).FirstOrDefaultAsync(i => i.InfluencerId == id);
         }
 
-        public async Task<(Influencer?, User?)> UpdateAsync(int id,UpdateInfluencerRequestDto influencerModel)
+        public async Task UpdateInfluencerAsync(int influencerId,UpdateInfluencerRequestDto requestDto)
         {
-            using var transaction = await _context.Database.BeginTransactionAsync();
-            try
+            // Tìm influencer theo InfluencerId
+            var influencer = await _context.Influencers
+                .Include(i => i.User) // Include User để cập nhật Avatar
+                .FirstOrDefaultAsync(i => i.InfluencerId == influencerId);
+
+            if (influencer == null)
             {
-                // Find the existing influencer by its ID
-                var existingInfluencer = await _context.Influencers
-                    .Include(b => b.User)  // Ensure User is included
-                    .FirstOrDefaultAsync(b => b.InfluencerId == id);
-
-                if (existingInfluencer == null)
-                {
-                    return (null, null);
-                }/*
-                if (existingInfluencer.User == null)
-                {
-                    // Handle case when User is null (either throw an error or create a new user)
-                    throw new Exception("User không tồn tại cho Influencer này.");
-                }*/
-
-                string oldAvatar = existingInfluencer.User.Avatar;
-
-                
-
-                // Update influencer properties
-                existingInfluencer.Name = influencerModel.Influencer.Name;
-                existingInfluencer.Gender = influencerModel.Influencer.Gender;
-                existingInfluencer.DateOfBirth = influencerModel.Influencer.DateOfBirth;
-                existingInfluencer.BookingPrice = influencerModel.Influencer.BookingPrice;
-                existingInfluencer.PersonalIdentificationNumber = influencerModel.Influencer.PersonalIdentificationNumber;
-
-                if (existingInfluencer.User != null)
-                {
-                    existingInfluencer.User.Email = influencerModel.User.Email;
-                    existingInfluencer.User.Bio = influencerModel.User.Bio;
-                    existingInfluencer.User.Phonenumber = influencerModel.User.Phonenumber;
-                    existingInfluencer.User.Address = influencerModel.User.Address;
-
-                    // Kiểm tra và lưu file ảnh đại diện của User
-                    if (influencerModel.User.AvatarFile != null)
-                    {
-                        if (influencerModel.User.AvatarFile.Length > 1 * 1024 * 1024)
-                        {
-                            throw new Exception("Kích thước file ảnh đại diện không được vượt quá 1 MB.");
-                        }
-                        string[] allowedFileExtensions = { ".jpg",".jpeg",".png" };
-                        string avatarCreatedName = await _fileService.SaveFileAsync(influencerModel.User.AvatarFile,allowedFileExtensions);
-                        existingInfluencer.User.Avatar = avatarCreatedName; // Cập nhật ảnh đại diện
-                    }
-                }
-
-                // Save changes to both influencer and User
-                await _context.SaveChangesAsync();
-                await transaction.CommitAsync();
-
-                return (existingInfluencer, existingInfluencer.User);
+                throw new Exception("Influencer not found");
             }
-            catch (Exception)
+
+            // Cập nhật các thuộc tính của Influencer và User từ DTO
+            influencer.Name = requestDto.Name;
+            influencer.Gender = requestDto.Gender;
+            influencer.DateOfBirth = requestDto.DateOfBirth;
+            influencer.BookingPrice = requestDto.BookingPrice;
+            influencer.PersonalIdentificationNumber = requestDto.PersonalIdentificationNumber;
+            influencer.User.Email = requestDto.Email;
+            influencer.User.Bio = requestDto.Bio;
+            influencer.User.Phonenumber = requestDto.PhoneNumber;
+            influencer.User.Address = requestDto.Address;
+
+            // Xử lý avatar
+            if (requestDto.AvatarFile != null && requestDto.AvatarFile.Length > 0)
             {
-                await transaction.RollbackAsync();
-                throw;
+                // Upload ảnh mới và lấy đường dẫn
+                var avatarPath = await UploadAvatarAsync(influencer.User.Avatar,requestDto.AvatarFile);
+                influencer.User.Avatar = avatarPath; // Cập nhật đường dẫn avatar vào User
+            }
+
+            // Cập nhật thời gian sửa đổi
+            influencer.User.UpdatedAt = DateTime.Now;
+
+            // Lưu thay đổi vào database
+            await _context.SaveChangesAsync();
+        }
+
+        // Phương thức riêng xử lý việc upload avatar
+        private async Task<string> UploadAvatarAsync(string currentAvatarPath,IFormFile avatarFile)
+        {
+            // Nếu không có file avatar mới, giữ nguyên avatar cũ
+            if (avatarFile == null || avatarFile.Length == 0)
+            {
+                return currentAvatarPath;
+            }
+
+            // Nếu có avatar cũ, xóa nó
+            if (!string.IsNullOrEmpty(currentAvatarPath))
+            {
+                await DeleteOldAvatarAsync(currentAvatarPath);
+            }
+
+            // Upload ảnh mới và lấy đường dẫn
+            var avatarPath = await _fileService.UploadFileAsync(avatarFile,"avatars");
+            return avatarPath;
+        }
+
+        private async Task DeleteOldAvatarAsync(string oldAvatarPath)
+        {
+            if (oldAvatarPath.Contains("avatars"))
+            {
+                var fullPath = Path.Combine(Directory.GetCurrentDirectory(),"Uploads",oldAvatarPath.Replace("api\\",""));
+
+                // Kiểm tra xem file cũ có tồn tại không, nếu có thì xóa
+                if (File.Exists(fullPath))
+                {
+                    await _fileService.DeleteFileAsync(oldAvatarPath);
+                }
+                else
+                {
+                    Console.WriteLine($"File không tồn tại: {fullPath}");
+                }
             }
         }
     }
-}
+    }

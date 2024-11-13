@@ -1,5 +1,6 @@
+@model WebClient.Controllers.InfluencerController.InfluencerEditViewModel
 @{
-    ViewBag.Title = "Edit Profile";
+    ViewBag.Title = "Chỉnh sửa hồ sơ";
 }
 <!DOCTYPE html>
 <html lang="vi">
@@ -7,42 +8,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chỉnh sửa hồ sơ công ty</title>
+    <title>Chỉnh sửa hồ sơ Influencer</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
     <style>
         body {
             font-size: 0.85em;
-            /* Thay đổi giá trị này để điều chỉnh kích thước font chữ cho toàn bộ trang */
         }
 
         .custom-button {
-            background-color: #FF6B00;
-            color: white;
+            background-color: #ff6f00;
             border: none;
-            padding: 5px 10px;
+            padding: 8px 12px;
+            color: white;
             border-radius: 4px;
             cursor: pointer;
             transition: background-color 0.3s ease;
-            /* Hiệu ứng chuyển màu */
         }
 
         .custom-button:hover {
             background-color: #e65c00;
-            /* Màu tối hơn khi hover */
         }
-
-        .avatar-upload {
-            position: relative;
-            width: 150px;
-            height: 150px;
-            margin: auto;
-            background-color: #f8f9fa;
-            border-radius: 50%;
-            overflow: hidden;
-            cursor: pointer;
-        }
-
         .avatar-upload img {
             width: 100%;
             height: 100%;
@@ -53,6 +39,24 @@
 
         .avatar-upload:hover img {
             opacity: 0.7;
+        }
+
+        .avatar-upload {
+            width: 150px; /* Cố định chiều rộng của div */
+            height: 150px; /* Cố định chiều cao của div */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden; /* Ẩn phần ảnh vượt ra ngoài */
+            border-radius: 50%; /* Đảm bảo div có hình tròn nếu cần */
+            position: relative;
+            margin: 0 auto;
+        }
+
+        #avatarImage {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Đảm bảo ảnh không bị méo */
         }
 
         .avatar-upload .upload-icon {
@@ -77,233 +81,146 @@
 </head>
 
 <body>
-    <div class="container mt-4">
-        <h4 class="mb-4">Thông tin cá nhân</h4>
+    <div class="container mt-6">
+        <h4 class="mb-6">Chỉnh sửa hồ sơ Influencer</h4>
 
-        <form>
+        <form method="post" enctype="multipart/form-data">
             <div class="row">
-                <!-- Left Section: Name and Year of Birth -->
+                <!-- Left Section: Name, Birth Year, Gender, and City -->
                 <div class="col-md-8 form-row">
-                    <!-- Full Name -->
                     <div class="form-group col-md-6">
-                        <label for="FullName">Họ và tên
-                            <sup class="text-danger">*</sup>
-                        </label>
-                        <input type="text" class="form-control" id="FullName" placeholder="Nhập họ và tên" required />
+                        <label for="FullName">Họ và tên <sup class="text-danger">*</sup></label>
+                        <input type="text" class="form-control" id="FullName" placeholder="Nhập họ và tên" asp-for="InfluencerEditDto.Name" required />
                     </div>
-                    <!-- Birth Year -->
                     <div class="form-group col-md-4">
-                        <label for="BirthYear">Năm sinh
-                            <sup class="text-danger">*</sup>
-                        </label>
-                        <input type="number" class="form-control" id="BirthYear" placeholder="Nhập năm sinh" required>
+                        <label for="BirthYear">Năm sinh <sup class="text-danger">*</sup></label>
+                        <input type="date" class="form-control" id="BirthYear" asp-for="InfluencerEditDto.DateOfBirth" required />
                     </div>
-                    <!-- Gender -->
+
                     <div class="form-group col-md-2">
-                        <label for="Gender">Giới tính
-                            <sup class="text-danger">*</sup>
-                        </label>
+                        <label for="Gender">Giới tính <sup class="text-danger">*</sup></label>
                         <div class="d-flex align-items-center mt-1">
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="Gender" id="Male" value="Male">
+                                <input class="form-check-input" type="radio" name="Gender" id="Male" value="Male" @(Model.InfluencerEditDto.Gender == "Name" ? "checked" : "") />
+
                                 <label class="form-check-label" for="Male">Nam</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="Gender" id="Female" value="Female">
+                                <input class="form-check-input" type="radio" name="Gender" id="Female" value="Female" @(Model.InfluencerEditDto.Gender == "Nữ" ? "checked" : "") />
+
                                 <label class="form-check-label" for="Female">Nữ</label>
                             </div>
                         </div>
                     </div>
-                    <!-- City and Address -->
                     <div class="form-group col-md-6">
-                        <label for="City">Tỉnh/Thành phố
-                            <sup class="text-danger">*</sup>
-                        </label>
-                        <select id="City" class="form-control">
-                            <option selected>Vui lòng chọn </option>
+                        <label for="City">Tỉnh/Thành phố <sup class="text-danger">*</sup></label>
+                        <input type="text" class="form-control" id="Address" placeholder="Nhập địa chỉ nhận hàng" asp-for="InfluencerEditDto.Address" required />
+                        @* <select id="City" value="@Model.User.Address" class="form-control">
+                            <option selected>City</option>
                             <option value="1">Hà Nội</option>
                             <option value="2">TP. Hồ Chí Minh</option>
-                            <!-- More options -->
-                        </select>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label for="SampleAddress">Địa chỉ nhận sản phẩm mẫu</label>
-                        <input type="text" class="form-control" id="SampleAddress" placeholder="Nhập địa chỉ">
-
+                        </select> *@
                     </div>
                 </div>
 
-                <!-- Right Section: Profile Picture -->
+                <!-- Right Section: Avatar -->
                 <div class="col-md-4 text-center">
-                    <label for="ProfilePicture" class="form-label">Ảnh đại diện
-                        <sup class="text-danger">*</sup>
-                    </label>
+                    <label for="ProfilePicture" class="form-label">Ảnh đại diện <sup class="text-danger">*</sup></label>
                     <div class="avatar-upload">
-                        <img id="avatarImage" src="https://via.placeholder.com/150" class="img-thumbnail rounded-circle"
-                            alt="Profile Picture">
+                        <img id="avatarImage"
+                             src="@Url.Content((Model.InfluencerEditDto.AvatarFile != null ? Model.InfluencerEditDto.AvatarFile.FileName.Replace("\\", "/") : "/images/default-avatar.png"))"
+                             class="img-thumbnail rounded-circle"
+                             alt="Profile Picture">
+
+
                         <i class="fas fa-camera upload-icon"></i>
                         <input type="file" id="ProfilePicture" accept="image/*" onchange="loadImage(event)">
                     </div>
                 </div>
             </div>
 
-            <!-- Self Introduction -->
+            <!-- Bio Section -->
             <div class="row">
-                <div class="form-row">
-                    <div class="form-group col-md-12">
-                        <label for="Bio">Giới thiệu bản thân
-                            <sup class="text-danger">*</sup>
-                        </label>
-                        <textarea class="form-control" id="Bio" maxlength="240" rows="3"
-                            placeholder="Giới thiệu bản thân bạn (tối đa 240 ký tự)"></textarea>
-                    </div>
-                </div>
-
-                <!-- Field of Work -->
-                <div class="form-row">
-                    <div class="form-group col-md-12">
-                        <label for="Field">Lĩnh vực
-                            <sup class="text-danger">*</sup>
-
-                        </label>
-                        <select id="Field" class="form-control">
-                            <option selected>Lĩnh vực </option>
-                            <option value="1">Công nghệ</option>
-                            <option value="2">Thời trang</option>
-                            <option value="3">Ẩm thực</option>
-                            <!-- More options -->
-                        </select>
-                    </div>
-                </div>
-
-                <!-- Social Media Link -->
-                <div class="form-row">
-                    <h6 class="col-md-12 mt-2">Nền tảng hoạt động
-                        <sup class="text-danger">*</sup>
-                    </h6>
-                    <div class="form-group col-md-2">
-                        <select class="form-control ">
-                            <option value="Tiktok">Tiktok</option>
-                            <option value="Instagram">Instagram</option>
-                            <!-- More platforms -->
-                        </select>
-                    </div>
-                    <div class="form-group col-md-8">
-                        <input type="url" class="form-control" id="Tiktok" placeholder="https://www.example.com">
-                    </div>
-                    <div class="form-group col-md-1 d-flex align-items-center">
-                        <button type="button" class="custom-button">Xóa</button>
-                    </div>
-                    <div class="form-group col-md-2">
-                        <button type="button" class="custom-button">+ Thêm dịch vụ</button>
-                    </div>
-                </div>
-
-                <!-- Contact Information -->
-                <div class="form-row mt-2">
-                    <h6 class="form-group col-md-12">Thông tin liên hệ
-                        <sup class="text-danger">*</sup>
-                    </h6>
-                    <div class="form-group col-md-6">
-                        <label for="Zalo">Zalo
-                            <sup class="text-danger">*</sup>
-                        </label>
-                        <input type="text" class="form-control" id="Zalo" placeholder="Nhập số Zalo">
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label for="Email">Email
-                            <sup class="text-danger">*</sup>
-                        </label>
-                        <input type="email" class="form-control" id="Email" placeholder="Nhập email">
-                    </div>
-                </div>
-
-                <!-- Service Pricing -->
-                <div class="form-row mt-1">
-                    <div class="form-group col-md-12">
-                        <h6>Giá cast
-                            <sup class="text-danger">*</sup>
-                        </h6>
-                        <div class="grid d-flex">
-                            <div class="col-1">
-                                <label>
-                                    STT
-                                </label>
-                            </div>
-                            <div class="col-2">
-                                <label>
-                                    Nền tảng
-                                    <sup class="text-danger">*</sup>
-                                </label>
-                            </div>
-                            <div class="col-2">
-                                <label>
-                                    Giá
-                                    <sup class="text-danger">*</sup>
-                                </label>
-                            </div>
-                            <div class="col">
-                                <label>
-                                    Mô tả
-                                </label>
-                            </div>
-                            <div class="col-1">
-                                <label>
-
-                                </label>
-                            </div>
-                        </div>
-                        <div class="grid d-flex">
-                            <div class="col-1">
-                                <label>
-                                    <span>1</span>
-                                </label>
-                            </div>
-                            <div class="col-2">
-                                <select class="form-control">
-                                    <option value="Tiktok">Tiktok</option>
-                                    <option value="Instagram">Instagram</option>
-                                    <!-- More platforms -->
-                                </select>
-                            </div>
-                            <div class="col-2">
-                                <input type="text" class="form-control" placeholder="Nhập giá">
-                            </div>
-                            <div class="col">
-                                <textarea class="form-control" maxlength="240" rows="1"
-                                    placeholder="Nhập mô tả (tối đa 240 ký tự)"></textarea>
-                            </div>
-
-                            <div class="col-1">
-                                <label class="mb-0">
-                                    <button type="button" class="custom-button">Xóa</button>
-                                </label>
-                            </div>
-                        </div>
-                        <button type="button" class="custom-button mt-3">+ Thêm dịch vụ</button>
-
-                    </div>
+                <div class="form-group col-md-12">
+                    <label for="Bio">Giới thiệu bản thân <sup class="text-danger">*</sup></label>
+                    <textarea class="form-control" id="Bio" maxlength="240" rows="3" placeholder="Giới thiệu bản thân bạn (tối đa 240 ký tự)">@Model.InfluencerEditDto.Bio</textarea>
                 </div>
             </div>
 
-            <div class="form-row">
-                <h6 class="col-md-12">Số Căn cước công dân hoặc Mã số thuế cá nhân
-                    <sup class="text-danger">*</sup>
-                </h6>
-                <span class="col-md-12 mb-1" style="font-style: italic; font-size: 0.85em;">
-                    Hướng dẫn tra cứu MST tại: <a
-                        href="https://tncnonline.com.vn/tra-cuu-ma-so-thue-tncnonline.html">Link</a>
-                </span>
-                <div class="form-group col-md-4">
-                    <input type="url" class="form-control" id="Tiktok" placeholder="0">
+            <!-- Field of Work Section -->
+            <div class="row">
+                <div class="form-group col-md-12">
+                    <label for="Field">Lĩnh vực <sup class="text-danger">*</sup></label>
+                    <select id="Field" class="form-control">
+                        <option selected>Field</option>
+                        <option value="1">Công nghệ</option>
+                        <option value="2">Thời trang</option>
+                        <option value="3">Ẩm thực</option>
+                    </select>
                 </div>
             </div>
+
+            <!-- Social Media Links -->
+            <div class="row">
+                <h6 class="col-md-12 mt-2">Nền tảng hoạt động <sup class="text-danger">*</sup></h6>
+                <div class="form-group col-md-2">
+                    <select class="form-control">
+                        <option value="Tiktok">Tiktok</option>
+                        <option value="Instagram">Instagram</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-8">
+                    <input type="url" class="form-control" id="Tiktok" placeholder="https://www.example.com">
+                </div>
+                <div class="form-group col-md-1 d-flex align-items-center">
+                    <button type="button" class="custom-button">Xóa</button>
+                </div>
+                <div class="form-group col-md-2">
+                    <button type="button" class="custom-button">+ Thêm dịch vụ</button>
+                </div>
+            </div>
+
+            <!-- Contact Information -->
+            <div class="row mt-2">
+                <h6 class="form-group col-md-12">Thông tin liên hệ <sup class="text-danger">*</sup></h6>
+                <div class="form-group col-md-6">
+                    <label for="Zalo">Zalo <sup class="text-danger">*</sup></label>
+                    <input type="text" class="form-control" id="Zalo" placeholder="Nhập số Zalo" asp-for="InfluencerEditDto.PhoneNumber"> 
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="Email">Email <sup class="text-danger">*</sup></label>
+                    <input type="email" class="form-control" id="Email" placeholder="Nhập email" asp-for="InfluencerEditDto.Email">
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="form-group col-md-12">
+                    <label for="PersonalIdentificationNumber">Mã thuế <sup class="text-danger">*</sup></label>
+                    <input type="text" class="form-control" id="PersonalIdentificationNumber" placeholder="Nhập mã thuế" asp-for="InfluencerEditDto.PersonalIdentificationNumber" required />
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="form-group col-md-12">
+                    <label for="BookingPrice">Giá booking <sup class="text-danger">*</sup></label>
+                    <input type="text" class="form-control" id="BookingPrice" placeholder="Nhập giá booking" asp-for="InfluencerEditDto.BookingPrice" required />
+                </div>
+            </div>
+
+
             <!-- Submit Button -->
-            <div class="form-group row">
-                <div class="col-sm-12 text-center">
-                    <button type="submit" class="custom-button">Cập nhật</button>
-                </div>
-            </div>
+            <button type="submit" class="btn btn-primary w-100 mb-4">Lưu thay đổi</button>
         </form>
     </div>
+
+    <script>
+        function loadImage(event) {
+            var reader = new FileReader();
+            reader.onload = function() {
+                var output = document.getElementById('avatarImage');
+                output.src = reader.result;
+            }
+            reader.readAsDataURL(event.target.files[0]);
+        }
+    </script>
 </body>
+
+</html>
