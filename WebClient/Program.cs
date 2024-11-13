@@ -1,4 +1,5 @@
 using api.Data;
+using api.Repository;
 using Microsoft.EntityFrameworkCore;
 using Net.payOS;
 using WebClient;
@@ -31,7 +32,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"),
     b => b.MigrationsAssembly("WebClient"));
 });
-
+builder.Services.AddScoped<IProposalRepository,ProposalRepository>();
 
 var app = builder.Build();
 
@@ -42,6 +43,7 @@ if (!app.Environment.IsDevelopment())
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
+builder.Logging.AddConsole(); // Để log ra console
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
