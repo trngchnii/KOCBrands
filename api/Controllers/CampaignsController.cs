@@ -53,14 +53,27 @@ namespace api.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Post([FromBody] Campaign campaign)
+        public async Task<ActionResult> Post([FromBody] CreateCampaingDTO campaign)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            await _campainRepository.AddAsync(campaign);
-            return Created(campaign);
+            var newCampaign = new Campaign()
+            {
+                BrandId = campaign.BrandId,
+                Description = campaign.Description,
+                Title = campaign.Title,
+                Budget = campaign.Budget,
+                StartDate = campaign.StartDate,
+                Requirements = campaign.Requirements,
+                EndDate = campaign.EndDate, 
+                FaviconId = campaign.FaviconId,
+                Status = campaign.Status,
+                
+            };
+            await _campainRepository.AddAsync(newCampaign);
+            return Created(newCampaign);
         }
 
         [HttpDelete("{key}")]

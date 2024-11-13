@@ -1,6 +1,5 @@
-﻿@{
-    ViewData["Title"] = "BandProfile";
-}
+﻿@model api.Models.Brand
+
 
 <!DOCTYPE html>
 <html lang="vi">
@@ -175,7 +174,7 @@
                                 </div>
                             </div>
                             <div class="text-center">
-                                <h5 class="fs-5 mb-0 fw-semibold">Tên nhãn hàng</h5>
+                                <h5 class="fs-5 mb-0 fw-semibold">@Model.BrandName</h5>
                                 <p class="mb-0 fs-4">TiktokShop</p>
                             </div>
                         </div>
@@ -215,23 +214,23 @@
                         <div class="card shadow-none border">
                             <div class="card-body">
                                 <h4 class="fw-semibold mb-3">Thông tin liên hệ</h4>
-                                <p>Hello, I am Mathew Anderson. I love making websites and graphics. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                <p>Xin chào, chúng mình là @Model.BrandName, chúng mình đến đây với sứ mệnh kết nối cộng đồng, nếu bạn có hứng thú xin hãy liên hệ để cùng hợp tác </p>
                                 <ul class="list-unstyled mb-0">
                                     <li class="d-flex align-items-center gap-3 mb-4">
                                         <i class="fa fa-briefcase text-dark fs-6"></i>
-                                        <h6 class="fs-4 fw-semibold mb-0">Sir, P P Institute Of Science</h6>
+                                        <h6 class="fs-4 fw-semibold mb-0">@Model.User.UserName</h6>
                                     </li>
                                     <li class="d-flex align-items-center gap-3 mb-4">
                                         <i class="fa fa-envelope text-dark fs-6"></i>
-                                        <h6 class="fs-4 fw-semibold mb-0">xyzjonathan@gmail.com</h6>
+                                        <h6 class="fs-4 fw-semibold mb-0">@Model.User.Email</h6>
                                     </li>
                                     <li class="d-flex align-items-center gap-3 mb-4">
                                         <i class="fa fa-desktop text-dark fs-6"></i>
-                                        <h6 class="fs-4 fw-semibold mb-0">www.xyz.com</h6>
+                                        <h6 class="fs-4 fw-semibold mb-0">www.talentcompany.com</h6>
                                     </li>
                                     <li class="d-flex align-items-center gap-3 mb-2">
                                         <i class="fa fa-list text-dark fs-6"></i>
-                                        <h6 class="fs-4 fw-semibold mb-0">Newyork, USA - 100001</h6>
+                                        <h6 class="fs-4 fw-semibold mb-0">@Model.User.Bio</h6>
                                     </li>
                                 </ul>
                             </div>

@@ -175,6 +175,7 @@ namespace WebClient.Controllers
             if (user != null)
             {
                 var influencer = _context.Influencers.FirstOrDefault(i => i.UserId == user.UserId);
+                var brand = _context.Brands.FirstOrDefault(i => i.UserId == user.UserId);
 
                 var cookieOptions = new CookieOptions
                 {
@@ -186,6 +187,10 @@ namespace WebClient.Controllers
                 if (influencer != null)
                 {
                     HttpContext.Response.Cookies.Append("InfluencerId",influencer.InfluencerId.ToString(),cookieOptions);
+                }
+                if (brand != null)
+                {
+                    HttpContext.Response.Cookies.Append("BrandId", brand.BrandId.ToString(), cookieOptions);
                 }
 
                 if (user.Role == "user")

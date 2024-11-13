@@ -19,7 +19,7 @@ namespace api.Repository
 
         public async Task<Brand?> GetByIdAsync(int id)
         {
-            var brand = await _context.Brands.FirstOrDefaultAsync(i => i.BrandId == id);
+            var brand = await _context.Brands.Include(i => i.User).FirstOrDefaultAsync(i => i.BrandId == id);
             if (brand == null)
                 return null;
             return brand;
@@ -116,7 +116,7 @@ namespace api.Repository
 
         public async Task<IEnumerable<Brand>> GetAllAsync()
         {
-            return await _context.Brands.ToListAsync();
+            return await _context.Brands.Include(i => i.User).ToListAsync();
         }
 
     }

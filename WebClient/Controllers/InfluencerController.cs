@@ -10,6 +10,35 @@ namespace WebClient.Controllers
 {
     public class InfluencerController : BaseController
     {
+
+        public async Task<IActionResult> ProfileDetails()
+        {
+            {
+
+                var influencerId = HttpContext.Request.Cookies["InfluencerId"];
+
+
+                if (string.IsNullOrEmpty(influencerId))
+                {
+                    return View("Error", new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+                }
+
+
+                string str = InfluencerAPIURL;
+                HttpResponseMessage res = await _httpClient.GetAsync($"{str}{influencerId}");
+
+                if (!res.IsSuccessStatusCode)
+                {
+                    return View("Error", new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+                }
+
+                string rData = await res.Content.ReadAsStringAsync();
+                var response = JsonConvert.DeserializeObject<UpdateInfluencerRequestDto>(rData);
+
+                return View(response);
+            }
+
+        }
         public class InfluencerResponseEdit
         {
             [JsonProperty("value")]
