@@ -33,12 +33,16 @@ namespace api.Repository
 
         public async Task<IEnumerable<Campaign>> GetAllAsync()
         {
-            return await _context.Campaigns.Include(campaign => campaign.Categories).ToListAsync();  
+            return await _context.Campaigns.Include(c => c.Brand)            
+                                            .ThenInclude(b => b.User)
+                                            .Include(c => c.Categories).ToListAsync();  
         }
 
         public async Task<Campaign> GetByIdAsync(int id)
         {
-            return await _context.Campaigns.FirstOrDefaultAsync(c => c.CampaignId == id);
+            return await _context.Campaigns.Include(c => c.Brand)
+                                            .ThenInclude(b => b.User)
+                                            .Include(c => c.Categories).FirstOrDefaultAsync(c => c.CampaignId == id);
         }
 
         public async Task<Campaign> UpdateAsync(int id, UpdateCampaignDto model)

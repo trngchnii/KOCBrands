@@ -11,6 +11,15 @@ builder.Services.AddSession();
 builder.Services.AddControllersWithViews();
 builder.Services.AddHttpClient();
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll",policy =>
+    {
+        policy.AllowAnyOrigin()          // Cho phép t?t c? các ngu?n (origins)
+              .AllowAnyMethod()          // Cho phép t?t c? các ph??ng th?c HTTP (GET, POST, PUT, DELETE, ...)
+              .AllowAnyHeader();         // Cho phép t?t c? các headers
+    });
+});
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
