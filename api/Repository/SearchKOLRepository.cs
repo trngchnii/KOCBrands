@@ -23,6 +23,7 @@ namespace api.Repository
                 .Include(i => i.User)
                 .Select(i => new InfluencerDto
                 {
+                    InfluencerId = i.InfluencerId,
                     Name = i.Name,
                     Gender = i.Gender,
                     DateOfBirth = i.DateOfBirth,

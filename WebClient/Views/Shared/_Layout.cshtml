@@ -73,7 +73,7 @@
             <ul class="p-menubar-root-list" role="menubar" data-pc-section="menu">
                 <li role="none" class="p-menuitem" data-pc-section="menuitem">
                     <a class="p-menuitem-link"
-                       href="/danh-sach-kol-koc"><i class="pi pi-users mr-1"></i><span>Danh sách KOL - KOC</span></a>
+                       href="/Search/Index"><i class="pi pi-users mr-1"></i><span>Danh sách KOL - KOC</span></a>
                 </li>
                 <li role="none" class="p-menuitem" data-pc-section="menuitem">
                     <a class="p-menuitem-link" href="/tim-thue-kol-koc">
@@ -183,6 +183,7 @@
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
     @RenderSection("Styles", required: false)
+    @RenderSection("FavouriteKOC", required: false)
 </body>
 
 </html>
