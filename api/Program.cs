@@ -30,7 +30,8 @@ internal class Program
             .HasMany(p => p.Categories);
         modelBuilder.EntityType<Influencer>()
             .HasMany(p => p.Proposals);
-
+        modelBuilder.EntityType<Campaign>().HasRequired(p => p.Brand);
+        modelBuilder.EntityType<Campaign>().HasMany(p => p.Categories);
 
         // Add services to the container.
         builder.Services.AddControllers()
