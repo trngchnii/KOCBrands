@@ -1,5 +1,6 @@
+@model WebClient.Controllers.InfluencerController.InfluencerEditViewModel
 @{
-    ViewBag.Title = "Edit Profile";
+    ViewBag.Title = "Chỉnh sửa hồ sơ";
 }
 <!DOCTYPE html>
 <html lang="vi">
@@ -7,7 +8,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chỉnh sửa hồ sơ công ty</title>
+    <title>Chỉnh sửa hồ sơ Influencer</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
     <style>
@@ -16,142 +17,142 @@
         }
 
         .custom-button {
-            background-color: #FF6B00;
-            color: white;
+            background-color: #ff6f00;
             border: none;
-            padding: 5px 10px;
+            padding: 8px 12px;
+            color: white;
             border-radius: 4px;
             cursor: pointer;
             transition: background-color 0.3s ease;
         }
 
-            .custom-button:hover {
-                background-color: #e65c00;
-            }
-
-        .avatar-upload {
-            position: relative;
-            width: 150px;
-            height: 150px;
-            margin: auto;
-            background-color: #f8f9fa;
+        .custom-button:hover {
+            background-color: #e65c00;
+        }
+        .avatar-upload img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
             border-radius: 50%;
-            overflow: hidden;
-            cursor: pointer;
+            transition: opacity 0.3s ease;
         }
 
-            .avatar-upload img {
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-                border-radius: 50%;
-                transition: opacity 0.3s ease;
-            }
+        .avatar-upload:hover img {
+            opacity: 0.7;
+        }
 
-            .avatar-upload:hover img {
-                opacity: 0.7;
-            }
+        .avatar-upload {
+            width: 150px; /* Cố định chiều rộng của div */
+            height: 150px; /* Cố định chiều cao của div */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden; /* Ẩn phần ảnh vượt ra ngoài */
+            border-radius: 50%; /* Đảm bảo div có hình tròn nếu cần */
+            position: relative;
+            margin: 0 auto;
+        }
 
-            .avatar-upload .upload-icon {
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                font-size: 24px;
-                color: white;
-                opacity: 0;
-                transition: opacity 0.3s ease;
-            }
+        #avatarImage {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Đảm bảo ảnh không bị méo */
+        }
 
-            .avatar-upload:hover .upload-icon {
-                opacity: 1;
-            }
+        .avatar-upload .upload-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 24px;
+            color: white;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
 
-            .avatar-upload input[type="file"] {
-                display: none;
-            }
+        .avatar-upload:hover .upload-icon {
+            opacity: 1;
+        }
+
+        .avatar-upload input[type="file"] {
+            display: none;
+        }
     </style>
 </head>
 
 <body>
-    <div class="container mt-4">
-        <h4 class="mb-4">Thông tin cá nhân</h4>
+    <div class="container mt-6">
+        <h4 class="mb-6">Chỉnh sửa hồ sơ Influencer</h4>
 
-        <form asp-action="EditProfile" method="post" enctype="multipart/form-data">
-            <input type="hidden" name="Id" value="@Model.Id" /> <!-- Hidden field for Id -->
-
+        <form method="post" enctype="multipart/form-data">
             <div class="row">
+                <!-- Left Section: Name, Birth Year, Gender, and City -->
                 <div class="col-md-8 form-row">
                     <div class="form-group col-md-6">
                         <label for="FullName">Họ và tên <sup class="text-danger">*</sup></label>
-                        <input type="text" class="form-control" id="FullName" name="Name" placeholder="Nhập họ và tên" required value="@Model.Name" />
+                        <input type="text" class="form-control" id="FullName" placeholder="Nhập họ và tên" asp-for="InfluencerEditDto.Name" required />
                     </div>
                     <div class="form-group col-md-4">
                         <label for="BirthYear">Năm sinh <sup class="text-danger">*</sup></label>
-                        <input type="date" class="form-control" id="BirthYear" name="DateOfBirth" required value="@Model.DateOfBirth.ToString("yyyy-MM-dd")">
+                        <input type="date" class="form-control" id="BirthYear" asp-for="InfluencerEditDto.DateOfBirth" required />
                     </div>
+
                     <div class="form-group col-md-2">
                         <label for="Gender">Giới tính <sup class="text-danger">*</sup></label>
                         <div class="d-flex align-items-center mt-1">
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="Gender" id="Male" value="Male" @(Model.Gender == "Male" ? "checked" : "")>
+                                <input class="form-check-input" type="radio" name="Gender" id="Male" value="Male" @(Model.InfluencerEditDto.Gender == "Name" ? "checked" : "") />
+
                                 <label class="form-check-label" for="Male">Nam</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="Gender" id="Female" value="Female" @(Model.Gender == "Female" ? "checked" : "")>
+                                <input class="form-check-input" type="radio" name="Gender" id="Female" value="Female" @(Model.InfluencerEditDto.Gender == "Nữ" ? "checked" : "") />
+
                                 <label class="form-check-label" for="Female">Nữ</label>
                             </div>
                         </div>
                     </div>
                     <div class="form-group col-md-6">
-                        <label for="province">Tỉnh/Thành phố <sup class="text-danger">*</sup></label>
-                        <select id="province" class="form-control" name="province" required>
-                            <option selected>Vui lòng chọn</option>
-                        </select>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label for="district">Quận/Huyện <sup class="text-danger">*</sup></label>
-                        <select id="district" class="form-control" name="district" required disabled>
-                            <option selected>Vui lòng chọn</option>
-                        </select>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label for="ward">Xã/Phường <sup class="text-danger">*</sup></label>
-                        <select id="ward" class="form-control" name="ward" required disabled>
-                            <option selected>Vui lòng chọn</option>
-                        </select>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label for="SampleAddress">Địa chỉ nhận sản phẩm mẫu</label>
-                        <input type="text" class="form-control" id="SampleAddress" name="SampleAddress" placeholder="Nhập địa chỉ" value="@Model.SampleAddress">
+                        <label for="City">Tỉnh/Thành phố <sup class="text-danger">*</sup></label>
+                        <input type="text" class="form-control" id="Address" placeholder="Nhập địa chỉ nhận hàng" asp-for="InfluencerEditDto.Address" required />
+                        @* <select id="City" value="@Model.User.Address" class="form-control">
+                            <option selected>City</option>
+                            <option value="1">Hà Nội</option>
+                            <option value="2">TP. Hồ Chí Minh</option>
+                        </select> *@
                     </div>
                 </div>
 
+                <!-- Right Section: Avatar -->
                 <div class="col-md-4 text-center">
                     <label for="ProfilePicture" class="form-label">Ảnh đại diện <sup class="text-danger">*</sup></label>
                     <div class="avatar-upload">
-                        <img id="avatarImage" src="@Model.ProfilePictureUrl ?? " https: //via.placeholder.com/150"" class="img-thumbnail rounded-circle" alt="Profile Picture">
+                        <img id="avatarImage"
+                             src="@Url.Content((Model.InfluencerEditDto.AvatarFile != null ? Model.InfluencerEditDto.AvatarFile.FileName.Replace("\\", "/") : "/images/default-avatar.png"))"
+                             class="img-thumbnail rounded-circle"
+                             alt="Profile Picture">
+
+
                         <i class="fas fa-camera upload-icon"></i>
-                        <input type="file" id="ProfilePicture" name="ProfilePicture" accept="image/*" onchange="loadImage(event)">
+                        <input type="file" id="ProfilePicture" accept="image/*" onchange="loadImage(event)">
                     </div>
                 </div>
             </div>
 
-            <div class="form-row">
+            <!-- Bio Section -->
+            <div class="row">
                 <div class="form-group col-md-12">
                     <label for="Bio">Giới thiệu bản thân <sup class="text-danger">*</sup></label>
-                    <textarea class="form-control" id="Bio" name="Bio" maxlength="240" rows="3" placeholder="Giới thiệu bản thân bạn (tối đa 240 ký tự)">@Model.Bio</textarea>
+                    <textarea class="form-control" id="Bio" maxlength="240" rows="3" placeholder="Giới thiệu bản thân bạn (tối đa 240 ký tự)">@Model.InfluencerEditDto.Bio</textarea>
                 </div>
             </div>
 
-            <div class="form-row">
+            <!-- Field of Work Section -->
+            <div class="row">
                 <div class="form-group col-md-12">
-                    <label for="Field">
-                        Lĩnh vực
-                        <sup class="text-danger">*</sup>
-                    </label>
-                    <select id="Field" class="form-control" name="Field">
-                        <option selected>Lĩnh vực </option>
+                    <label for="Field">Lĩnh vực <sup class="text-danger">*</sup></label>
+                    <select id="Field" class="form-control">
+                        <option selected>Field</option>
                         <option value="1">Công nghệ</option>
                         <option value="2">Thời trang</option>
                         <option value="3">Ẩm thực</option>
@@ -159,81 +160,66 @@
                 </div>
             </div>
 
-            <div class="form-row mt-2">
-                <h6 class="col-md-12">Thông tin liên hệ <sup class="text-danger">*</sup></h6>
+            <!-- Social Media Links -->
+            <div class="row">
+                <h6 class="col-md-12 mt-2">Nền tảng hoạt động <sup class="text-danger">*</sup></h6>
+                <div class="form-group col-md-2">
+                    <select class="form-control">
+                        <option value="Tiktok">Tiktok</option>
+                        <option value="Instagram">Instagram</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-8">
+                    <input type="url" class="form-control" id="Tiktok" placeholder="https://www.example.com">
+                </div>
+                <div class="form-group col-md-1 d-flex align-items-center">
+                    <button type="button" class="custom-button">Xóa</button>
+                </div>
+                <div class="form-group col-md-2">
+                    <button type="button" class="custom-button">+ Thêm dịch vụ</button>
+                </div>
+            </div>
+
+            <!-- Contact Information -->
+            <div class="row mt-2">
+                <h6 class="form-group col-md-12">Thông tin liên hệ <sup class="text-danger">*</sup></h6>
                 <div class="form-group col-md-6">
                     <label for="Zalo">Zalo <sup class="text-danger">*</sup></label>
-                    <input type="text" class="form-control" id="Zalo" name="Zalo" placeholder="Nhập số Zalo" value="@Model.Zalo" required>
+                    <input type="text" class="form-control" id="Zalo" placeholder="Nhập số Zalo" asp-for="InfluencerEditDto.PhoneNumber"> 
                 </div>
                 <div class="form-group col-md-6">
                     <label for="Email">Email <sup class="text-danger">*</sup></label>
-                    <input type="email" class="form-control" id="Email" name="Email" placeholder="Nhập email" value="@Model.Email" required>
+                    <input type="email" class="form-control" id="Email" placeholder="Nhập email" asp-for="InfluencerEditDto.Email">
                 </div>
             </div>
-
-            <div class="form-row mt-2">
-                <h6 class="col-md-12">Giá cast <sup class="text-danger">*</sup></h6>
+            <div class="row mt-2">
                 <div class="form-group col-md-12">
-                    <input type="text" class="form-control" placeholder="Nhập giá" name="BookingPrice" value="@Model.BookingPrice" required />
+                    <label for="PersonalIdentificationNumber">Mã thuế <sup class="text-danger">*</sup></label>
+                    <input type="text" class="form-control" id="PersonalIdentificationNumber" placeholder="Nhập mã thuế" asp-for="InfluencerEditDto.PersonalIdentificationNumber" required />
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="form-group col-md-12">
+                    <label for="BookingPrice">Giá booking <sup class="text-danger">*</sup></label>
+                    <input type="text" class="form-control" id="BookingPrice" placeholder="Nhập giá booking" asp-for="InfluencerEditDto.BookingPrice" required />
                 </div>
             </div>
 
-            <div class="form-group row">
-                <div class="col-sm-12 text-center">
-                    <button type="submit" class="custom-button">Cập nhật</button>
-                </div>
-            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" class="btn btn-primary w-100 mb-4">Lưu thay đổi</button>
         </form>
     </div>
 
     <script>
         function loadImage(event) {
-            const avatarImage = document.getElementById('avatarImage');
-            avatarImage.src = URL.createObjectURL(event.target.files[0]);
+            var reader = new FileReader();
+            reader.onload = function() {
+                var output = document.getElementById('avatarImage');
+                output.src = reader.result;
+            }
+            reader.readAsDataURL(event.target.files[0]);
         }
-
-        $(document).ready(function () {
-            // Fetch provinces
-            $.get('https://provinces.open-api.vn/api/?depth=3', function (data) {
-                // Populate province dropdown
-                data.forEach(function (province) {
-                    $('#province').append(`<option value="${province.name}" data-id="${province.code}">${province.name}</option>`);
-                });
-            });
-
-            // When the province changes, fetch districts
-            $('#province').change(function () {
-                const provinceId = $(this).find('option:selected').data('id');
-                $('#district').empty().append('<option selected>Vui lòng chọn</option>').prop('disabled', true);
-                $('#ward').empty().append('<option selected>Vui lòng chọn</option>').prop('disabled', true);
-
-                if (provinceId) {
-                    $.get(`https://provinces.open-api.vn/api/d/${provinceId}?depth=2`, function (data) {
-                        // Populate district dropdown
-                        data.districts.forEach(function (district) {
-                            $('#district').append(`<option value="${district.name}" data-id="${district.code}">${district.name}</option>`);
-                        });
-                        $('#district').prop('disabled', false);
-                    });
-                }
-            });
-
-            // When the district changes, fetch wards
-            $('#district').change(function () {
-                const districtId = $(this).find('option:selected').data('id');
-                $('#ward').empty().append('<option selected>Vui lòng chọn</option>').prop('disabled', true);
-
-                if (districtId) {
-                    $.get(`https://provinces.open-api.vn/api/district/${districtId}/wards`, function (data) {
-                        // Populate ward dropdown
-                        data.forEach(function (ward) {
-                            $('#ward').append(`<option value="${ward.name}">${ward.name}</option>`);
-                        });
-                        $('#ward').prop('disabled', false);
-                    });
-                }
-            });
-        });
     </script>
 </body>
 

@@ -1,4 +1,4 @@
-using api.DTOs;
+﻿using api.DTOs;
 using api.Models;
 using api.Repository;
 using Microsoft.AspNetCore.Mvc;
@@ -39,33 +39,20 @@ namespace api.Controllers
             return Ok(influencer);
         }
 
-        [HttpPut("{key}")]
-        public async Task<IActionResult> Put([FromODataUri] int key,[FromBody] UpdateInfluencerRequestDto influ)
+
+        [HttpPut("{influencerId}")]
+        public async Task<IActionResult> UpdateInfluencer(int influencerId,[FromForm] UpdateInfluencerRequestDto requestDto)
         {
-            if (!ModelState.IsValid || influ == null)
+            try
             {
-                return BadRequest(ModelState);
+                await _influencerRepo.UpdateInfluencerAsync(influencerId,requestDto);
+
+                return Ok(new { message = "Influencer updated successfully!" });
             }
-
-            // Map User information
-            /*var userModel = new User
+            catch (Exception ex)
             {
-                Email = influ.User.Email,
-                Avatar = influ.User.Avatar,
-                Bio = influ.User.Bio,
-                Phonenumber = influ.User.Phonenumber,
-                Address = influ.User.Address
-            };*/
-
-            // Call repository to update the brand and user
-            var result = await _influencerRepo.UpdateAsync(key,influ);
-
-            if (result.Item1 == null)
-            {
-                return NotFound("Influencer not found.");
+                return StatusCode(500,new { message = ex.Message });
             }
-
-            return NoContent();
         }
 
         [HttpPost]
@@ -75,14 +62,16 @@ namespace api.Controllers
             {
                 return BadRequest(ModelState);
             }
+
             await _influencerRepo.AddAsync(influ);
-            return Created(influ);
+
+            // Trả về thông tin của influencer vừa được tạo
+            return CreatedAtAction(nameof(Get),new { key = influ.InfluencerId },influ);
         }
 
         [HttpDelete("{key}")]
         public async Task<IActionResult> Delete([FromODataUri] int key)
         {
-
             var existInflu = await _influencerRepo.GetByIdAsync(key);
             if (existInflu == null)
             {
@@ -93,49 +82,5 @@ namespace api.Controllers
 
             return NoContent();
         }
-
-
-        /*[HttpPut]
-        [Route("{id:int}")]
-        public async Task<IActionResult> Update([FromRoute] int id, [FromBody] InfluencerDto updateDto)
-        {
-            // Validate the model state
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            // Prepare the Brand and User entities for the update
-            var influencerEntity = new Influencer
-            {
-                Name = updateDto.Name,
-                Gender = updateDto.Gender,
-                DateOfBirth = updateDto.DateOfBirth,
-                SocialMedias = updateDto.SocialMedias,
-                BookingPrice = updateDto.BookingPrice,
-                PersonalIdentificationNumber = updateDto.PersonalIdentificationNumber,
-            };
-
-            var userEntity = new User
-            {
-                Email = updateDto.User.Email,
-                Avatar = updateDto.User.Avatar,
-                Bio = updateDto.User.Bio,
-                Phonenumber = updateDto.User.Phonenumber,
-                Address = updateDto.User.Address
-            };
-
-            // Call the repository to update
-            var (updatedInfluencer, updatedUser) = await _influencerRepo.UpdateAsync(id, influencerEntity, userEntity);
-
-            // Handle the case where the brand or user was not found
-            if (updatedInfluencer == null)
-            {
-                return NotFound(new { message = "Brand not found." });
-            }
-
-            // Return the updated brand and user
-            return Ok(new { updatedInfluencer, updatedUser });
-        }*/
     }
 }

@@ -41,32 +41,19 @@ namespace api.Controllers
         }
 
         [HttpPut("{key}")]
-        public async Task<IActionResult> Put([FromODataUri] int key,[FromForm] UpdateBrandUserRequestDto brand)
+        public async Task<IActionResult> UpdateInfluencer(int key,[FromForm] UpdateBrandUserRequestDto requestDto)
         {
-            if (!ModelState.IsValid || brand == null)
+            try
             {
-                return BadRequest(ModelState);
+                // Gọi repository để cập nhật influencer
+                await _brandRepo.UpdateBrandAsync(key,requestDto);
+
+                return Ok(new { message = "Brand updated successfully!" });
             }
-
-            // Map User information
-            /*var userModel = new User
+            catch (Exception ex)
             {
-                Email = brand.User.Email,
-                Avatar = brand.User.Avatar,
-                Bio = brand.User.Bio,
-                Phonenumber = brand.User.Phonenumber,
-                Address = brand.User.Address
-            };*/
-
-            // Call repository to update the brand and user
-            var result = await _brandRepo.UpdateAsync(key,brand);
-
-            if (result.Item1 == null)
-            {
-                return NotFound("Brand not found.");
+                return StatusCode(500,new { message = ex.Message });
             }
-
-            return NoContent();
         }
 
         [HttpPost]
