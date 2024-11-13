@@ -1,0 +1,92 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+</head>
+
+<body>
+    <div class="bg-dark text-white">
+        <nav class="rounded-3 navbar navbar-expand-sm navbar-dark border border-1 border-secondary ">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Active</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="#">Disabled</a>
+                </li>
+            </ul>
+        </nav>
+        <div class="p-3">
+            <form action="/action_page.php">
+                <h5>Thông tin chung</h5>
+                <p>Ảnh sản phẩm, nhẫn hàng <span class="text-danger">*</span></p>
+                <button class="d-flex justify-content-center bg-dark btn_hover">
+                    <img class="p-3" style="width: 10%;" src="/images/Asset 8.png" alt="Ảnh nhãn hàng">
+                </button>
+                <div class="py-3">
+                    <div class="row">
+                        <div class="col-4 form-group">
+                            <label for="title">Tiêu đề <span class="text-danger">*</span></label>
+                            <input type="text" id="title" class="form-control" required placeholder="Enter email">
+                        </div>
+                        <div class="col-4 form-group">
+                            <label for="number">Số lượng tuyển <span class="text-danger">*</span></label>
+                            <input type="number" id="number" class="form-control" required placeholder="Enter email">
+                        </div>
+                        <div class="col-4 form-group">
+                            <label for="major">Lĩnh vực: <span class="text-danger">*</span></label>
+                            <select name="major" id="major" class="w-100 p-2" style="border-radius: 5px;">
+                                <option value="title" disabled selected>
+                                    Lĩnh vực <span class="text-danger">*</span>
+                                </option>
+                                <option value="math">Toán</option>
+                                <option value="literature">Văn</option>
+                                <option value="english">Anh</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4 form-group">
+                            <label for="address">Địa điểm <span class="text-danger">*</span></label>
+                            <select name="address" id="address" class="w-100 p-2" style="border-radius: 5px;">
+                                <option value="title" disabled selected>Vui lòng chọn</option>
+                                <option value="math">Toán</option>
+                                <option value="literature">Văn</option>
+                                <option value="english">Anh</option>
+                            </select>
+                        </div>
+                        <div class="col-4 form-group">
+                            <label for="deadline">Hạn nộp hồ sơ <span class="text-danger">*</span></label>
+                            <input type="date" class="form-control" required id="deadline">
+                        </div>
+                        <div class="col-4 form-group row p-4">
+                            <label class="form-check-label py-3 px-4 col-7">
+                                <input type="checkbox" class="bg-dark form-check-input" value=""> Có sản phẩm mẫu miễn phí
+                            </label>
+                            <label class="form-check-label py-3 px-4 col-5">
+                                <input type="checkbox" class="form-check-input" value=""> Có Cát-xê
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- link script bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
