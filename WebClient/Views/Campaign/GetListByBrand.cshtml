@@ -1,0 +1,71 @@
+﻿@model List<api.Models.Campaign>
+
+@{
+    ViewData["Title"] = "Campaigns by Brand";
+}
+
+<div class="container mt-8">
+    <h2 class="mb-4">Campaign List</h2>
+
+    @if (Model != null && Model.Any())
+    {
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Tiêu đề</th>
+                    <th>Hết hạn lúc</th>
+                    <th>Thời gian tạo</th>
+                    <th>Thao tác</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var campaign in Model)
+                {
+                    <tr>
+                        <td>@campaign.Title</td>
+                        <td>@campaign.EndDate.ToString("HH:mm dd/MM/yyyy")</td>
+                        <td>@campaign.CreatedDate.ToString("dd/MM/yyyy")</td>
+                        <td>
+                            <a href="@Url.Action("Details", "Campaign", new { id = campaign.CampaignId })" class="btn btn-info btn-sm">Xem</a>
+                            @* <a href="@Url.Action("Edit", "Campaign", new { id = campaign.CampaignId })" class="btn btn-warning btn-sm">Edit</a> *@
+                            <a href="@Url.Action("ProposalList", "Proposal", new { id = campaign.CampaignId })" class="btn btn-success btn-sm"> Danh sách ứng tuyển</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <!-- Pagination -->
+        <div class="d-flex justify-content-between mt-4">
+            <div>
+                Showing @Model.Count() to @Model.Count() of @Model.Count() entries
+            </div>
+            <div>
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination">
+                        <li class="page-item disabled">
+                            <a class="page-link" href="#" tabindex="-1">&laquo;</a>
+                        </li>
+                        <li class="page-item active">
+                            <a class="page-link" href="#">1</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="#">2</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="#">3</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="#">»</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+
+    }
+    else
+    {
+        <p>No campaigns found for this brand.</p>
+    }
+</div>

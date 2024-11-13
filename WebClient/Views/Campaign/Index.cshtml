@@ -37,9 +37,9 @@
                             }
                         </p>
                         <p class="card-text"><strong><i class="fa-solid fa-location-dot"></i></strong> @Html.DisplayFor(modelItem => item.Brand.User.Address)</p>
-                        <p class="card-text"><strong>Cast:</strong> @Html.DisplayFor(modelItem => item.Budget)</p>
+                        <p class="card-text"><strong>Cast:</strong> @string.Format("{0:C0}",item.Budget)</p>
                         <p class="card-text"><strong>Yêu cầu:</strong> @Html.DisplayFor(modelItem => item.Requirements)</p>
-                        <p class="card-text"><strong>Hạn chót:</strong>  <span class="category-button"> @item.EndDate</span></p>
+                        <p class="card-text"><strong>Hạn chót:</strong>  <span class="category-button"> @item.EndDate.ToString("dd/MM/yyyy HH:mm")</span></p>
                     </div>
                 </div>
             </div>
