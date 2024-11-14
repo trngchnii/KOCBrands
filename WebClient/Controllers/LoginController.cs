@@ -176,22 +176,26 @@ namespace WebClient.Controllers
             {
                 var influencer = _context.Influencers.FirstOrDefault(i => i.UserId == user.UserId);
                 var brand = _context.Brands.FirstOrDefault(i => i.UserId == user.UserId);
+                HttpContext.Session.SetInt32("UserId",user.UserId);
+                HttpContext.Session.SetString("Role",user.Role);
 
                 var cookieOptions = new CookieOptions
                 {
                     Expires = DateTimeOffset.Now.AddDays(30),
                     IsEssential = true
                 };
-                HttpContext.Response.Cookies.Append("UserId", user.UserId.ToString(), cookieOptions);
+                HttpContext.Response.Cookies.Append("UserId",user.UserId.ToString(),cookieOptions);
 
                 if (influencer != null)
                 {
-                    HttpContext.Response.Cookies.Append("InfluencerId", influencer.InfluencerId.ToString(), cookieOptions);
+                    HttpContext.Response.Cookies.Append("InfluencerId",influencer.InfluencerId.ToString(),cookieOptions);
+                    HttpContext.Session.SetInt32("InfluencerId",influencer.InfluencerId);
                 }
-                //if (brand != null)
-                //{
-                //    HttpContext.Response.Cookies.Append("BrandId", brand.BrandId.ToString(), cookieOptions);
-                //}
+                if (brand != null)
+                { 
+                   HttpContext.Response.Cookies.Append("BrandId", brand.BrandId.ToString(), cookieOptions);
+                    HttpContext.Session.SetInt32("BrandId",brand.BrandId);
+                }
 
                 if (user.Role == "user")
                 {
@@ -384,6 +388,17 @@ namespace WebClient.Controllers
             user.Password = newPassWord.ToString();
             _context.SaveChanges();
             return Json(new { success = true });
+        }
+
+        public async Task<IActionResult> Logout()
+        {
+            // Xóa session
+            HttpContext.Session.Clear();
+
+            // Đăng xuất và xóa cookie
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+
+            return RedirectToAction("Index","Home"); // Hoặc trang bạn muốn chuyển hướng
         }
     }
 }

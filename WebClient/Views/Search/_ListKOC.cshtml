@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<api.DTOs.InfluencerDto>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 	<div class="p-toast p-component p-toast-top-right">
 		<div></div>
 	</div>
@@ -32,26 +33,37 @@
 						<i class="pi pi-heart heart-icon like-kol" data-id="@influencer.InfluencerId" onclick="addToFavorites(@influencer.InfluencerId)"></i>
 						<a target="_blank" class="block" href="/components/detail-candidate/?mask=@influencer.Name&amp;id=@influencer.PersonalIdentificationNumber" title="@influencer.Name">
 							<div class="image text-center relative border-round-xl overflow-hidden">
-									@if (influencer.SocialMedias != null)
+								@if (influencer.SocialMedias != null)
+								{
+									@foreach (var socialMedia in influencer.SocialMedias)
 									{
-										@foreach (var socialMedia in influencer.SocialMedias)
-										{
-											<div class="followers align-items-center text-white absolute border-round-3xl flex">
-												<i class="fa-brands fa-facebook" style="color: #74C0FC;"></i>   @socialMedia.FollowersCount
-												
-											</div>
-										}
+										<div class="followers align-items-center text-white absolute border-round-3xl flex">
+											<i class="fa-brands fa-facebook" style="color: #74C0FC;"></i>
+											@if (socialMedia.FollowersCount >= 1000)
+											{
+												@((socialMedia.FollowersCount / 1000000.0).ToString("0.#"))
+
+												<text>K</text>
+											}
+											else
+											{
+												@socialMedia.FollowersCount.ToString("N0")
+											}
+										</div>
 									}
+								}
+
 									@if (influencer.User != null)
 									{
 										var avatarUrl = influencer.User.Avatar ?? "default-avatar.jpg";
 										<img width="270" height="330" class="max-w-full w-full vertical-align-middle"
-											 src="https://localhost:7290/uploads/avatars/@avatarUrl"
+											 src="https://localhost:7290/@avatarUrl"
 											 loading="lazy" alt="@influencer.Name">
 									}
 								<div class="title text-left px-4 pb-4 w-full absolute">
-									<h3 class="name text-white capitalize mb-0 line-clamp-1">@influencer.Name</h3>
-									<span class="city text-white">@influencer.DateOfBirth.ToString("d")</span>
+									<h3 style="border-left: 5px solid #fd4c5c;" class="name text-white capitalize mb-0 line-clamp-1">@influencer.Name</h3>
+									<i class="fa-solid fa-location-dot"></i>
+									<span class="city text-white">@influencer.User.Address</span>
 								</div>
 							</div>
 						</a>
@@ -73,14 +85,15 @@
 							</div> 
 							<div class="price">@influencer.BookingPrice.ToString("N0") VNĐ</div>
 						</div>
-						<div class="careers line-clamp-2">@influencer.Gender</div>
+						@* <div class="careers line-clamp-2">@influencer.Gender</div> *@
 						<div class="contact-info">
 							@if (influencer.User != null)
 							{
-								<h5>Thông tin liên lạc</h5>
+								<h5>@influencer.Name</h5>
+								@* <h5>Thông tin liên lạc</h5>
 								<p>Email: @influencer.User.Email</p>
 								<p>Số điện thoại: @influencer.User.Phonenumber</p>
-								<p>Thành Phố: @influencer.User.Address</p>
+								<p>Thành Phố: @influencer.User.Address</p> *@
 							}
 							else
 							{
