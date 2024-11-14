@@ -186,11 +186,11 @@ namespace WebClient.Controllers
 
                 if (influencer != null)
                 {
-                    HttpContext.Response.Cookies.Append("InfluencerId",influencer.InfluencerId.ToString(),cookieOptions);
+                    HttpContext.Response.Cookies.Append("InfluencerId", influencer.InfluencerId.ToString(), cookieOptions);
                 }
-                if(brand != null)
+                if (brand != null)
                 {
-                    HttpContext.Response.Cookies.Append("BrandId",brand.BrandId.ToString(),cookieOptions);
+                    HttpContext.Response.Cookies.Append("BrandId", brand.BrandId.ToString(), cookieOptions);
                 }
 
                 if (user.Role == "user")
@@ -204,7 +204,7 @@ namespace WebClient.Controllers
             }
             else
             {
-                ModelState.AddModelError("","Email hoặc mật khẩu không đúng. Vui lòng thử lại!");
+                ModelState.AddModelError("", "Email hoặc mật khẩu không đúng. Vui lòng thử lại!");
                 return View();
             }
             return View();
@@ -269,7 +269,7 @@ namespace WebClient.Controllers
                         Influencer = null,
                         Brand = null,
                         Favourite = null
-                    }; 
+                    };
 
                     _context.Users.Add(newUser);
                     _context.SaveChanges();
@@ -307,7 +307,7 @@ namespace WebClient.Controllers
                         };
                         _context.Brands.Add(newBrand);
                         _context.SaveChanges();
-                    }    
+                    }
                     return Json(new { success = true });
                 }
                 else
