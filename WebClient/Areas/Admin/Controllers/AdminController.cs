@@ -17,9 +17,11 @@ namespace WebClient.Areas.Admin.Controllers
     [Area("Admin")]
     [Route("Admin/{action=Dashboard}")]
 
+
     public class AdminController : Controller
     {
         private readonly HttpClient _httpClient;
+    
         private readonly string CategoryAPIURL = "https://localhost:7290/odata/Category";
         private readonly string CampaignAPIURL = "https://localhost:7290/odata/Campaigns";
         private readonly PayOS _payOS;

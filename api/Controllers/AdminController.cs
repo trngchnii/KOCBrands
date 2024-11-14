@@ -14,6 +14,7 @@ namespace api.Controllers
     {
         private readonly ApplicationDbContext _db;
        
+
         public AdminController(ApplicationDbContext db)
         {
             _db = db;

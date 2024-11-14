@@ -31,6 +31,7 @@ internal class Program
         modelBuilder.EntityType<Influencer>()
             .HasMany(p => p.Proposals);
 
+
         builder.Services.AddCors(options =>
         {
             options.AddPolicy("AllowAll", policy =>
