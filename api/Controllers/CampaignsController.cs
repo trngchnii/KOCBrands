@@ -19,6 +19,7 @@ namespace api.Controllers
             _campainRepository = campainRepository;
         }
 
+
         [EnableQuery]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Campaign>>> Get()

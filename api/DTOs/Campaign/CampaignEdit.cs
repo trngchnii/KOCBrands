@@ -1,4 +1,6 @@
-﻿namespace api.DTOs.Campaign
+﻿
+
+namespace api.DTOs.Campaign
 {
     public class CampaignEdit
     {
@@ -12,6 +14,7 @@
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public bool Status { get; set; }
+
         public DateTime CreatedDate { get; set; }
         public DateTime? UpdatedDate { get; set; } = DateTime.Now;
 
