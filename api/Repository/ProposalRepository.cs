@@ -31,8 +31,8 @@ namespace api.Repository
 
 		public async Task<IEnumerable<Proposal>> GetAllAsync()
 		{
-			return await _context.Proposals.ToListAsync();
-		}
+            return await _context.Proposals.Include(p => p.Influencer).ToListAsync();
+        }
 
 		public async Task<Proposal> GetByIdAsync(int id)
 		{

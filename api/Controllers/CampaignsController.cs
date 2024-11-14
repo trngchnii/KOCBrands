@@ -39,15 +39,32 @@ namespace api.Controllers
 
             return Ok(campaign);
         }
-
-        [HttpPut("{key}")]
-        public async Task<IActionResult> Put([FromODataUri] int key, [FromBody] UpdateCampaignDto campaign)
+        [HttpPost("create-campaign")]
+        public async Task<ActionResult> CreateCampaign([FromBody] Campaign campaign)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            try
+            {
+                await _campainRepository.AddAsync(campaign);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error while adding campaign: " + ex.Message);
+                return StatusCode(500,"Đã xảy ra lỗi trong quá trình xử lý yêu cầu.");
+            }
+        }
+        [HttpPut]
+        public async Task<IActionResult> Put([FromODataUri] int key,[FromBody] Campaign campaign)
         {
             if (!ModelState.IsValid || campaign == null)
             {
                 return BadRequest(ModelState);
             }
-            var result = await _campainRepository.UpdateAsync(key, campaign);
+            var result = await _campainRepository.UpdateAsync(campaign);
 
             return NoContent();
         }

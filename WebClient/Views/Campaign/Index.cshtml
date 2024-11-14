@@ -1,0 +1,48 @@
+﻿@model IEnumerable<api.Models.Campaign>
+
+@{
+    ViewData["Title"] = "Campaigns";
+}
+<style>
+    .category-button {
+        display: inline-block;
+        padding: 2px 5px;
+        background-color: #e0e0e0;
+        color: #333;
+        border-radius: 5px;
+        margin: 5px 5px 5px 0;
+        font-size: 10px;
+        text-align: center;
+        cursor: default;
+    }
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<h1 class="mt-8">Tin tuyển dụng</h1>
+<div class="container">
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <!-- Fixed Image at the top of each card -->
+                    <img src="https://cached.imagescaler.hbpl.co.uk/resize/scaleWidth/743/cached.offlinehbpl.hbpl.co.uk/news/OMC/campaigndigital2amended.jpg"
+                         class="card-img-top" alt="Campaign Image">
+
+                    <div class="card-body">
+                        <h5 class="card-title">@Html.ActionLink(item.Title,"Details","Campaign",new { id = item.CampaignId },new { @class = "text-decoration-none" })</h5>
+                        <p class="card-text">
+                            @foreach (var category in item.Categories)
+                            {
+                                <span class="category-button">@category.CategoryName</span>
+                            }
+                        </p>
+                        <p class="card-text"><strong><i class="fa-solid fa-location-dot"></i></strong> @Html.DisplayFor(modelItem => item.Brand.User.Address)</p>
+                        <p class="card-text"><strong>Cast:</strong> @string.Format("{0:C0}",item.Budget)</p>
+                        <p class="card-text"><strong>Yêu cầu:</strong> @Html.DisplayFor(modelItem => item.Requirements)</p>
+                        <p class="card-text"><strong>Hạn chót:</strong>  <span class="category-button"> @item.EndDate.ToString("dd/MM/yyyy HH:mm")</span></p>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
