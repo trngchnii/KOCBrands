@@ -40,14 +40,14 @@ namespace api.Controllers
             return Ok(campaign);
         }
 
-        [HttpPut("{key}")]
-        public async Task<IActionResult> Put([FromODataUri] int key, [FromBody] UpdateCampaignDto campaign)
+        [HttpPut]
+        public async Task<IActionResult> Put([FromODataUri] int key, [FromBody] Campaign campaign)
         {
             if (!ModelState.IsValid || campaign == null)
             {
                 return BadRequest(ModelState);
             }
-            var result = await _campainRepository.UpdateAsync(key, campaign);
+            var result = await _campainRepository.UpdateAsync(campaign);
 
             return NoContent();
         }

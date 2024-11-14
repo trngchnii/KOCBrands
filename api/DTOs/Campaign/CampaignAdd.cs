@@ -1,9 +1,8 @@
-﻿using api.Models;
-
-namespace WebClient.Models
+﻿namespace api.DTOs.Campaign
 {
-    public class CreateCampaignVM
+    public class CampaignAdd
     {
+        public int BrandId { get; set; }
 
         public string Title { get; set; }
         public string Description { get; set; }
@@ -11,9 +10,9 @@ namespace WebClient.Models
         public int Budget { get; set; }
         public DateTime StartDate { get; set; } = DateTime.Now;
         public DateTime EndDate { get; set; }
-        public List<Category> Categories { get; set; }
-
-        public int CategoryID { get; set; }
+        public bool Status { get; set; }
+        public DateTime CreatedDate { get; set; } = DateTime.Now;
+        public DateTime? UpdatedDate { get; set; } = DateTime.Now;
 
     }
 }

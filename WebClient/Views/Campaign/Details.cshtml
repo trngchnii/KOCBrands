@@ -1,5 +1,207 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chi tiết chiến dịch</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+
+        .container {
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .header, .section {
+            margin-bottom: 20px;
+        }
+
+            .header h1 {
+                font-size: 24px;
+                margin: 0;
+            }
+
+        .row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .column {
+            width: 48%;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+        }
+
+        .column {
+            padding: 15px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+        }
+
+        .left-column {
+            flex-basis: 30%; /* Chiếm 3 phần */
+        }
+
+        .right-column {
+            flex-basis: 68%; /* Chiếm 7 phần */
+        }
+
+        .row {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .section-content {
+            line-height: 1.6;
+        }
+
+        .button-group {
+            text-align: left;
+            margin-top: 20px;
+        }
+
+        .button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+
+            .button:hover {
+                background-color: #0056b3;
+            }
+
+        .important {
+            color: red;
+            font-weight: bold;
+        }
+
+        a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+            a:hover {
+                text-decoration: underline;
+            }
+
+        .header h1 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        .contact-info {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 8px;
+        }
+
+            .contact-item i {
+                font-size: 8px;
+                color: #007bff;
+            }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="container mt-8">
+        <!-- Title -->
+        <div class="header">
+            <h1>TUYỂN KOC/UGC REVIEW DẦU GỘI - XÃ CNMOFAXIN</h1>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <i class="fas fa-building"></i>
+                    <p><strong>Brand Name:</strong> Chava Beauty</p>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <p><strong>Email:</strong> matrix049101@gmail.com</p>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-phone"></i>
+                    <p><strong>Phone Number:</strong> 0528403406</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Content Row -->
+        <div class="row">
+            <!-- Left Column -->
+            <div class="column left-column">
+                <div class="section">
+                    <div class="section-title">Tổng quan</div>
+                    <div class="section-content">
+                        <p><strong>Cast:</strong> 0 - 10000000</p>
+                        <p><strong>Độ Tuổi:</strong> 18 - 40</p>
+                        <p><strong>Địa điểm:</strong> Hà Nội, Thành phố Hồ Chí Minh, An Giang, Bà Rịa – Vũng Tàu, và các tỉnh khác...</p>
+                        <p><strong>Lĩnh vực:</strong> Life & Style, Mẹ & bé</p>
+                        <p><strong>Mạng xã hội:</strong> No social networks available</p>
+                        <p><strong>Thời gian tạo:</strong> 08:28 17/09/2024</p>
+                        <p><strong>Hết hạn lúc:</strong> 17:00 29/11/2024</p>
+                    </div>
+                </div>
+                <!-- Button Actions -->
+                <div class="button-group">
+                    <button class="button">Ứng tuyển ngay</button>
+                    <button class="button">Báo xấu</button>
+                </div>
+            </div>
+
+            <!-- Right Column -->
+            <div class="column right-column">
+                <div class="section">
+                    <div class="section-title">Mô tả</div>
+                    <div class="section-content">
+                        🌸 <strong>GÓC TÌM KOC REVIEW CÓ CAST</strong> 🌸<br>
+                        - Mình đang cần tìm các bạn KOC/UGC review về sản phẩm Cặp dầu gội - xả Gừng CN-MOFAXIN
+                    </div>
+                </div>
+                <div class="section">
+                    <div class="section-title">Thông tin hợp tác</div>
+                    <div class="section-content">
+                        <p><strong>Hình thức hợp tác:</strong> Nhận sản phẩm mẫu miễn phí + Hoa hồng 15%</p>
+                        <p><strong>Hoàn sản phẩm mẫu + CÓ CAST</strong></p>
+                    </div>
+                </div>
+                <div class="section">
+                    <div class="section-title">Yêu cầu</div>
+                    <div class="section-content">
+                        <p><span class="important">★ YÊU CẦU:</span></p>
+                        <ul>
+                            <li>Hình thức: review sản phẩm</li>
+                            <li>Lên video đúng hạn (có việc bận vui lòng nhắn tin cho bên mình)</li>
+                        </ul>
+                        Tham gia group để nhận nhiều job hơn: <a href="https://zalo.me/g/zarko083">https://zalo.me/g/zarko083</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

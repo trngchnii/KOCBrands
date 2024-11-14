@@ -1,4 +1,4 @@
-﻿@model api.Models.Brand
+﻿@model WebClient.Models.BrandProfileVM
 
 
 <!DOCTYPE html>
@@ -174,7 +174,7 @@
                                 </div>
                             </div>
                             <div class="text-center">
-                                <h5 class="fs-5 mb-0 fw-semibold">@Model.BrandName</h5>
+                                <h5 class="fs-5 mb-0 fw-semibold">@Model.Brand.BrandName</h5>
                                 <p class="mb-0 fs-4">TiktokShop</p>
                             </div>
                         </div>
@@ -214,15 +214,15 @@
                         <div class="card shadow-none border">
                             <div class="card-body">
                                 <h4 class="fw-semibold mb-3">Thông tin liên hệ</h4>
-                                <p>Xin chào, chúng mình là @Model.BrandName, chúng mình đến đây với sứ mệnh kết nối cộng đồng, nếu bạn có hứng thú xin hãy liên hệ để cùng hợp tác </p>
+                                <p>Xin chào, chúng mình là @Model.Brand.BrandName, chúng mình đến đây với sứ mệnh kết nối cộng đồng, nếu bạn có hứng thú xin hãy liên hệ để cùng hợp tác </p>
                                 <ul class="list-unstyled mb-0">
                                     <li class="d-flex align-items-center gap-3 mb-4">
                                         <i class="fa fa-briefcase text-dark fs-6"></i>
-                                        <h6 class="fs-4 fw-semibold mb-0">@Model.User.UserName</h6>
+                                        <h6 class="fs-4 fw-semibold mb-0">@Model.Brand.User.UserName</h6>
                                     </li>
                                     <li class="d-flex align-items-center gap-3 mb-4">
                                         <i class="fa fa-envelope text-dark fs-6"></i>
-                                        <h6 class="fs-4 fw-semibold mb-0">@Model.User.Email</h6>
+                                        <h6 class="fs-4 fw-semibold mb-0">@Model.Brand.User.Email</h6>
                                     </li>
                                     <li class="d-flex align-items-center gap-3 mb-4">
                                         <i class="fa fa-desktop text-dark fs-6"></i>
@@ -230,47 +230,26 @@
                                     </li>
                                     <li class="d-flex align-items-center gap-3 mb-2">
                                         <i class="fa fa-list text-dark fs-6"></i>
-                                        <h6 class="fs-4 fw-semibold mb-0">@Model.User.Bio</h6>
+                                        <h6 class="fs-4 fw-semibold mb-0">@Model.Brand.User.Bio</h6>
                                     </li>
                                 </ul>
                             </div>
                         </div>
                         <div class="card shadow-none border">
-                            <div class="card-body">
-                                <h4 class="fw-semibold mb-3">Mô tả tuyển dụng</h4>
-                                <p>Hello, I am Mathew Anderson. I love making websites and graphics. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                            <div class="card-body">   
+                                <h4 class="fw-semibold mb-3">Chiến dịch nổi bật </h4>
                                 <ul class="list-unstyled mb-0">
-                                    <li class="d-flex align-items-center gap-3 mb-4">
-                                        <i class="fa fa-briefcase text-dark fs-6"></i>
-                                        <h6 class="fs-4 fw-semibold mb-0">Sir, P P Institute Of Science</h6>
-                                    </li>
-                                    <li class="d-flex align-items-center gap-3 mb-4">
-                                        <i class="fa fa-envelope text-dark fs-6"></i>
-                                        <h6 class="fs-4 fw-semibold mb-0">xyzjonathan@gmail.com</h6>
-                                    </li>
-                                    <li class="d-flex align-items-center gap-3 mb-4">
-                                        <i class="fa fa-desktop text-dark fs-6"></i>
-                                        <h6 class="fs-4 fw-semibold mb-0">www.xyz.com</h6>
-                                    </li>
-                                    <li class="d-flex align-items-center gap-3 mb-2">
-                                        <i class="fa fa-list text-dark fs-6"></i>
-                                        <h6 class="fs-4 fw-semibold mb-0">Newyork, USA - 100001</h6>
-                                    </li>
+                                    @foreach(var item in Model.Campaigns)
+                                    {
+                                        <li class="d-flex align-items-center gap-3 mb-2">
+                                            <i class="fa fa-list text-dark fs-6"></i>
+                                            <h6 class="fs-4 fw-semibold mb-0">@item.Title</h6>
+                                        </li>
+                                    }
+                                   
                                 </ul>
                             </div>
-                        </div>
-                        <div class="card shadow-none border">
-                            <div class="card">
-                                <h4 class="fw-semibold mb-3">Chiến dịch nổi bật</h4>
-                                <div class="card-header">
-                                    Chiến dịch 1
-                                </div>
-                                <div class="card-header">
-                                    Chiến dịch 2
-                                </div>
-
-                            </div>
-                        </div>
+                        </div>                       
                     </div>
                     <div class="col-lg-8">
 
@@ -280,7 +259,7 @@
                                     <h2 style="color:orange">Mô tả công việc</h2>             
                                 </div>
                                 <p class="text-dark my-3">
-                                    GMEELAN là Công ty sản xuất sản phẩm chăm sóc da mặt & cơ thể, đã được kiểm nghiệm da liễu (cục quản lý dược đã cấp giấy chứng nhận)
+                                    Chúng tôi  là Công ty sản xuất sản phẩm chăm sóc da mặt & cơ thể, đã được kiểm nghiệm da liễu (cục quản lý dược đã cấp giấy chứng nhận)
                                     https://www.tiktok.com/gmeelan.official
                                     
                                   
@@ -295,14 +274,7 @@
                                     Tôi rất mong nhận được phản hồi sớm từ bạn.
                                     hoặc bạn có thể thêm tài khoản ZALO của tôi，+84 384 347 869
                                 </p>
-                                <hr>
-                                <div class="d-flex align-items-center gap-3">
-                                    <h2 style="color:orange">Link shop, link website, link sản phẩm trên Tiktok Shop</h2>
-                                </div>
-                                <p class="text-dark my-3">
-                                    https://shopee.vn/gmeelanofficialstore.vn?fbclid=IwZXh0bgNhZW0CMTAAAR3_UlBT
-
-                                </p>
+                                
                             </div>
 
 

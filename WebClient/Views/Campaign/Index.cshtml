@@ -1,0 +1,35 @@
+﻿@model IEnumerable<api.Models.Campaign>
+
+@{
+    ViewData["Title"] = "Campaigns";
+}
+
+<h1>Campaigns</h1>
+<div class="container">
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <!-- Fixed Image at the top of each card -->
+                    <img src="https://cached.imagescaler.hbpl.co.uk/resize/scaleWidth/743/cached.offlinehbpl.hbpl.co.uk/news/OMC/campaigndigital2amended.jpg"
+                         class="card-img-top" alt="Campaign Image">
+
+                    <div class="card-body">
+                        <h5 class="card-title">@Html.DisplayFor(modelItem => item.Title)</h5>
+                        <p class="card-text"><strong>Description:</strong> @Html.DisplayFor(modelItem => item.Description)</p>
+                        <p class="card-text"><strong>Budget:</strong> @Html.DisplayFor(modelItem => item.Budget)</p>
+                        <p class="card-text"><strong>Requirements:</strong> @Html.DisplayFor(modelItem => item.Requirements)</p>
+                        <p class="card-text"><strong>Status:</strong> @Html.DisplayFor(modelItem => item.Status)</p>
+                    </div>
+                    <div class="card-footer">
+                        <small class="text-muted">
+                            <strong>Start:</strong> @Html.DisplayFor(modelItem => item.StartDate)
+                            | <strong>End:</strong> @Html.DisplayFor(modelItem => item.EndDate)
+                        </small>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

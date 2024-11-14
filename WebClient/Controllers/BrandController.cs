@@ -23,6 +23,15 @@ namespace WebClient.Controllers
         {
             [JsonProperty("value")]
             public List<Brand> Brands { get; set; } = new();
+
+            
+        }
+
+        public class CampaignResponse
+        {
+            [JsonProperty("value")]
+            public List<Campaign> Campaigns { get; set; } = new();
+
         }
 
         public async Task<IActionResult> BrandProfile()
@@ -38,7 +47,7 @@ namespace WebClient.Controllers
 
             
             string str = BrandAPIURL;
-            HttpResponseMessage res = await _httpClient.GetAsync("https://localhost:7290/odata/Brands/?key="+brandId+ "&$expand=User");
+            HttpResponseMessage res = await _httpClient.GetAsync($"https://localhost:7290/odata/Brands?$filter=BrandId eq {brandId}&$expand=User,Campaigns");
 
             if (!res.IsSuccessStatusCode)
             {
@@ -47,9 +56,28 @@ namespace WebClient.Controllers
 
             string rData = await res.Content.ReadAsStringAsync();
             var response = JsonConvert.DeserializeObject<BrandResponse>(rData);
-            var brand = response.Brands.FirstOrDefault(); 
+            var brand = response.Brands.FirstOrDefault();
 
-            return View(brand);
+
+            
+            HttpResponseMessage resCam = await _httpClient.GetAsync($"https://localhost:7290/odata/Campaigns?$filter=BrandId eq {brandId}");
+
+            if (!res.IsSuccessStatusCode)
+            {
+                return View("Error", new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            }
+
+            string cData = await resCam.Content.ReadAsStringAsync();
+            var responseCam = JsonConvert.DeserializeObject<CampaignResponse>(cData);
+            var campaign = responseCam.Campaigns;
+
+
+            var profile = new BrandProfileVM()  
+            {
+                Brand = brand,
+                Campaigns = campaign
+            };
+            return View(profile);
         }
         public IActionResult EditProfile()
         {
