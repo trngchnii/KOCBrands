@@ -13,7 +13,7 @@ public class HomeController : Controller
         _logger = logger;
     }
 
-    public IActionResult Index()
+    public IActionResult Index(string? code = null, string? id = null, string? cancel = null, string? status = null, string? orderCode = null)
     {
         return View();
     }
