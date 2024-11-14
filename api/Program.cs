@@ -2,11 +2,15 @@
 using api.Models;
 using api.Repository;
 using api.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.OData;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileProviders;
+using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OData.ModelBuilder;
 using Microsoft.OpenApi.Models;
+using System.Text;
 using System.Text.Json.Serialization;
 
 internal class Program
@@ -63,6 +67,8 @@ internal class Program
         builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
         builder.Services.AddScoped<IProposalRepository, ProposalRepository>();
         builder.Services.AddTransient<IFileService, FileService>();
+        builder.Services.AddScoped<IUserAccountRepository, UserAccountRepository>();
+        builder.Services.AddScoped<ITokenService, TokenService>();
         builder.Services.AddCors(options =>
         {
             options.AddDefaultPolicy(
@@ -85,12 +91,62 @@ internal class Program
     o => o.Select().Filter().OrderBy().Expand().Count().SetMaxTop(null).AddRouteComponents("odata", modelBuilder.GetEdmModel())
     );
 
+        IConfiguration configuration = new ConfigurationBuilder()
+        .SetBasePath(Directory.GetCurrentDirectory())
+        .AddJsonFile("appsettings.json", true, true).Build();
+        // Setup JWT
+        builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            .AddJwtBearer(options =>
+            {
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
+                    ValidIssuer = configuration["JWT:Issuer"],
+                    ValidAudience = configuration["JWT:Audience"],
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JWT:SecretKey"]))
+                };
+            });
+
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen(options =>
         {
             options.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
 
             options.ResolveConflictingActions(apiDescriptions => apiDescriptions.First());
+
+            options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
+            {
+                Name = "Authorization",
+                Type = SecuritySchemeType.ApiKey,
+                Scheme = "Bearer",
+                BearerFormat = "JWT",
+                In = ParameterLocation.Header,
+                Description = "JWT Authorization header using the Bearer scheme",
+            });
+
+            options.AddSecurityRequirement(new OpenApiSecurityRequirement() {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                {
+                    Type = ReferenceType.SecurityScheme,
+                    Id = "Bearer"
+                }
+            },
+            new string[] {}
+                }
+    });
+        });
+
+        // Authorization
+        builder.Services.AddAuthorization(options =>
+        {
+            options.AddPolicy("AdminOnly", policy => policy.RequireClaim("Role", "admin"));
+            options.AddPolicy("UserOnly", policy => policy.RequireClaim("Role", "user"));
         });
 
         var app = builder.Build();
@@ -120,6 +176,8 @@ internal class Program
             RequestPath = "/Resources"
         });*/
         app.UseCors();
+        app.UseAuthentication();
+        app.UseAuthorization();
 
         //app.MapControllers();
         app.UseEndpoints(endpoints =>
