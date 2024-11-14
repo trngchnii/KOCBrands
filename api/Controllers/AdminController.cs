@@ -13,15 +13,22 @@ namespace api.Controllers
     public class AdminController : ControllerBase
     {
         private readonly ApplicationDbContext _db;
-       
+
 
         public AdminController(ApplicationDbContext db)
         {
             _db = db;
         }
         [HttpGet]
+        [Route("getalluser")]   
+        public IActionResult Get()
+        {
+            IEnumerable<User> list = _db.Users.ToList();
+            return Ok(list);
+        }
+        [HttpGet]
         [Route("getuser")]
-        public IActionResult Get(string? searchString, int pageNumber = 1, int pageSize = 5)
+        public IActionResult Get(string? searchString,int pageNumber = 1,int pageSize = 5)
         {
             IEnumerable<User> list = _db.Users;
             if (!string.IsNullOrEmpty(searchString))
@@ -50,10 +57,10 @@ namespace api.Controllers
             var user = await _db.Users.FirstOrDefaultAsync(u => u.UserId == id);
             if (user == null)
             {
-                return NotFound(); 
+                return NotFound();
             }
 
-            return Ok(user); 
+            return Ok(user);
         }
 
         [HttpDelete]
@@ -73,7 +80,7 @@ namespace api.Controllers
         [Route("createuser")]
         public async Task<IActionResult> Create([FromBody] UserAdd useradd)
         {
-          
+
             if (ModelState.IsValid)
             {
                 User user = new User
@@ -112,7 +119,7 @@ namespace api.Controllers
             user.Password = userEdit.Password;
             user.Role = userEdit.Role;
             user.Address = userEdit.Address;
-            user.Avatar = userEdit.Avatar;  
+            user.Avatar = userEdit.Avatar;
             user.Bio = userEdit.Bio;
             user.Status = userEdit.Status;
             user.UpdatedAt = DateTime.UtcNow;
@@ -127,7 +134,7 @@ namespace api.Controllers
         public async Task<IActionResult> GetCategories()
         {
             var categories = await _db.Categories
-                                      .Include(c => c.Campaigns)   
+                                      .Include(c => c.Campaigns)
                                       .Include(c => c.Influencers)
                                       .Include(c => c.Brands)
                                       .ToListAsync();
@@ -137,7 +144,7 @@ namespace api.Controllers
         [Route("deletecategory")]
         public async Task<IActionResult> DeleteCate(int id)
         {
-           var category = await _db.Categories.FirstOrDefaultAsync(c => c.CategoryId == id);
+            var category = await _db.Categories.FirstOrDefaultAsync(c => c.CategoryId == id);
             if (category == null)
             {
                 return NotFound();
@@ -146,5 +153,7 @@ namespace api.Controllers
             await _db.SaveChangesAsync();
             return Ok();
         }
+
+
     }
 }

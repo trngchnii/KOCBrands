@@ -199,7 +199,7 @@ namespace WebClient.Controllers
                 }
                 else if (user.Role == "admin")
                 {
-                    return RedirectToAction("Index", "Login");
+                    return RedirectToAction("DashBoard", "Admin");
                 }
             }
             else

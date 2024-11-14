@@ -41,7 +41,7 @@ namespace WebClient.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateCampaign(CreateCampaignVM campaign)
         {
-            var brandId = HttpContext.Request.Cookies["BrandId"];
+            var brandId = HttpContext.Request.Cookies["BrandId"];   
             HttpResponseMessage response = await _httpClient.GetAsync($"https://localhost:7290/odata/Category/detail?key={campaign.CategoryID}");
 
             Category category = new();
