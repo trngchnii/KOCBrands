@@ -10,7 +10,6 @@ using Microsoft.AspNetCore.OData.Routing.Controllers;
 namespace api.Controllers
 {
     [Route("odata/[controller]")]
-    [ApiController]
     public class SeachKOLController : ODataController
     {
         private readonly ISearchKOLRepository _searchKOLRepository;
@@ -22,9 +21,9 @@ namespace api.Controllers
 
         [EnableQuery]
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Influencer>>> Get()
+        public ActionResult<IEnumerable<InfluencerDto>> GetAll()
         {
-            var influencers =  await _searchKOLRepository.GetAllKOCs();
+            var influencers = _searchKOLRepository.GetAllKOCs();
 
             if(influencers == null)
             {
@@ -36,7 +35,7 @@ namespace api.Controllers
 
         [EnableQuery]
         [HttpGet("{key:int}")]
-        public async Task<ActionResult> Get([FromODataUri] int key)
+        public async Task<ActionResult> GetById([FromODataUri] int key)
         {
             var influencers = await _searchKOLRepository.GetByIdAsync(key);
 
@@ -48,10 +47,11 @@ namespace api.Controllers
             return Ok(influencers);
         }
 
+        [EnableQuery]
         [HttpGet("search")]
-        public IActionResult Search([FromQuery] string name, [FromQuery] string? gender, [FromQuery] DateTime? dateOfBirth, [FromQuery] decimal? bookingPrice, [FromQuery] int? personalIdentificationNumber)
+        public IActionResult Search([FromQuery] string name, [FromQuery] string? gender, [FromQuery] DateTime? dateOfBirth, [FromQuery] decimal? bookingPrice, [FromQuery] int? personalIdentificationNumber, [FromQuery] string? sorting)
         {
-            var results = _searchKOLRepository.SearchKOL(name, gender, dateOfBirth, bookingPrice, personalIdentificationNumber);
+            var results = _searchKOLRepository.SearchKOL(name, gender, dateOfBirth, bookingPrice, personalIdentificationNumber, sorting);
 
             if( results == null)
             {

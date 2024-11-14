@@ -1,7 +1,11 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
- 
+<style>
+    .heart-icon.liked {
+    color: red;
+    }
+</style> 
 </head>
 
 <body>
@@ -9,8 +13,8 @@
     <div id="__next" data-reactroot="">
         <div class="layout-wrapper layout-theme-light layout-static layout-static-inactive p-ripple-disabled">
             <div class="layout-topbar">
-                <a class="layout-topbar-logo" href="../index.html">
-                    <img src="../layout/images/logo.jpg" width="70" height="60" alt="logo" />
+                <a class="layout-topbar-logo" href="/Home/Index">
+                    <img src="https://mykol.com.vn/layout/images/logo.jpg" width="70" height="60" alt="logo" />
                 </a>
                 <div class="btn-header-topbar"></div>
                 <div class="nav-menu-top-bar">
@@ -130,15 +134,17 @@
                                         </select>
                                     </div>
                                     <div class="footer-search gap-2 flex justify-content-end pr-3 md:mt-3 mt-2">
-                                        <button aria-label="Lọc" type="submit" style="width:80px" id="btn-search"
-                                                class="p-button p-component" >
-                                            <span class="p-button-icon p-c p-button-icon-left pi pi-search"></span><span class="p-button-label p-c">Lọc</span><span role="presentation"
-                                                                                                                                                                    class="p-ink"></span>
+                                        <button aria-label="Yêu thích" type="button" class="p-button p-component p-button remove-filter ml-2" onclick="window.location.href='/Favourites/Index';">
+                                            <span><i class="fa-solid fa-heart-circle-check"></i></span>
+                                            <span class="p-button-label p-c">Yêu thích</span>
                                         </button>
-                                        <button aria-label="Xóa chọn"
-                                                type="button" class="p-button p-component p-button remove-filter ml-2" id="btn-clear">
-                                            <span class="p-button-icon p-c p-button-icon-left pi pi-reply"></span><span class="p-button-label p-c">Xóa chọn</span><span role="presentation"
-                                                                                                                                                                        class="p-ink"></span>
+                                        <button aria-label="Lọc" type="submit" style="width:80px" id="btn-search" class="p-button p-component" >
+                                            <span class="p-button-icon p-c p-button-icon-left pi pi-search"></span>
+                                            <span class="p-button-label p-c">Lọc</span><span role="presentation"</span>
+                                        </button>
+                                        <button aria-label="Xóa chọn" type="button" class="p-button p-component p-button remove-filter ml-2" id="btn-clear">
+                                            <span class="p-button-icon p-c p-button-icon-left pi pi-reply"></span>
+                                            <span class="p-button-label p-c">Xóa chọn</span><span role="presentation"</span>
                                         </button>
                                     </div>
                                 </form>
@@ -156,90 +162,6 @@
                         </a>
                     </div>
                 </div>
-                <footer class="bg-white shadow-1 pt-3 pb-5">
-                    <div class="layout-footer grid">
-                        <div class="col-12 md:col-4">
-                            <img src="../layout/images/logo.jpg" alt="InfluX" width="300" />
-                            <p class="mb-2 text-xl"></p>
-                            <p class="mb-2 text-xl"></p>
-                            <p class="mb-2 text-xl"></p>
-                            <p class="mb-2 text-xl">Hotline: <a href="tel:0383050533">0908.141.233</a></p>
-                            <p class="mb-2 text-xl">Email: boonygroup1@gmail.com</p>
-                            <p class="mb-2 text-xl"></p>
-                            <div class="flex mt-3 gap-3">
-                                <a href="../../www.youtube.com/channel/UCGTfOtd_pxJXIk8wYZyKyBg.html"
-                                   target="_blank">
-                                    <img src="../demo/images/social/icon-youtube.svg" alt="youtube"
-                                         width="50" />
-                                </a><a href="../../www.tiktok.com/%40mykol.html"
-                                       target="_blank">
-                                    <img src="../demo/images/social/icon-tiktok.svg" alt="tiktok"
-                                         width="50" />
-                                </a><a href="../../zalo.me/0908141233.html" target="_blank">
-                                    <img src="../demo/images/social/zalo-icon.png" alt="zalo" width="50" />
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-12 md:col-8 md:pl-8 info-footer">
-                            <h3 class="w-full uppercase md:mb-5 text-center text-4xl title-info-footer">Về mykol</h3>
-                            <div class="grid">
-                                <div class="col-12 md:col-6">
-                                    <ul class="list-none my-0 pl-0 text-xl">
-                                        <li class="mb-4">
-                                            <a class="text-color" href="../landing/introduce.html"
-                                               title="Giới thiệu">Giới thiệu</a>
-                                        </li>
-                                        <li class="mb-4">
-                                            <a class="text-color" href="contact.html" title="Liên hệ">
-                                                Liên
-                                                hệ
-                                            </a>
-                                        </li>
-                                        <li class="mb-4">
-                                            <a class="text-color"
-                                               href="../landing/answer-and-question.html" title="Hỏi đáp">Hỏi đáp</a>
-                                        </li>
-                                        <li class="mb-4">
-                                            <a class="text-color"
-                                               href="../landing/operating-regulations.html"
-                                               title="Quy chế hoạt động">Quy chế hoạt động</a>
-                                        </li>
-                                        <li>
-                                            <a class="text-color" href="../landing/instructions-creating-profile.html"
-                                               title="Hướng dẫn tạo profile">Hướng dẫn tạo profile</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="col-12 md:col-6">
-                                    <ul class="list-none my-0 pl-0 text-xl">
-                                        <li class="mb-4">
-                                            <a class="text-color" href="../landing/privacy-policy.html"
-                                               title="Chính sách bảo mật">Chính sách bảo mật</a>
-                                        </li>
-                                        <li class="mb-4">
-                                            <a class="text-color" href="../landing/terms-of-use.html"
-                                               title="Điều khoản sử dụng">Điều khoản sử dụng</a>
-                                        </li>
-                                        <li class="mb-4">
-                                            <a class="text-color" href="../landing/dispute-resolution.html"
-                                               title="Giải quyết tranh chấp">Giải quyết tranh chấp</a>
-                                        </li>
-                                        <li class="mb-4">
-                                            <a class="text-color" href="#"
-                                               title="Chương trình Referrals">Chương trình Referrals</a>
-                                        </li>
-                                        <li class="mb-4">
-                                            <a class="text-color"
-                                               href="../landing/information-protection-policy.html"
-                                               title="Chính sách bảo vệ thông tin">Chính sách bảo vệ thông tin</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="px-3 text-center pt-2"></div>
-                </footer>
             </div>
             <div class="layout-mask"></div>
         </div>
@@ -248,5 +170,48 @@
     
 <script id="__NEXT_DATA__" type="application/json">{"props":{"pageProps":{}},"page":"/components/search-kocs","query":{},"buildId":"1hnPLuHKtEE3djqGttqdh","runtimeConfig":{"contextPath":"","uploadPath":"/api/upload","url":"https://api.mykol.vn","siteSEO":"https://mykol.vn","path":"/api/kols/","pathV2":"/api/v2/kols/"},"nextExport":true,"autoExport":true,"isFallback":false,"scriptLoader":[]}</script>
 <script src="~/js/search.js"></script>
+<script>
+    function addToFavorites(influencerId) {
+    // Tạo URL cho yêu cầu API
+    var url = 'https://localhost:7290/api/Favourites/add/' + influencerId;
+
+    // Sử dụng fetch API để gửi yêu cầu POST
+    fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            // Thêm token JWT nếu cần thiết cho xác thực
+            'Authorization': 'Bearer ' + localStorage.getItem('jwtToken')
+        }
+    })
+        .then(response => {
+            if (!response.ok) {
+                // Kiểm tra nếu response không phải là 200 OK
+                throw new Error('Failed to add to favorites. Status: ' + response.status);
+            }
+            return response.json();  // Chuyển đổi phản hồi thành JSON
+        })
+        .then(data => {
+            console.log('Success:', data); // Log phản hồi từ API
+
+            // Kiểm tra nếu phản hồi trả về thông báo lỗi hoặc thành công
+            if (data && data.message === "This influencer is already in your favorites.") {
+                alert("This influencer is already in your favorites.");
+            } else {
+                // Cập nhật giao diện hoặc trạng thái của nút yêu thích
+                var heartIcon = document.querySelector(`.like-kol[data-id='${influencerId}']`);
+                heartIcon.classList.add('liked');
+                heartIcon.classList.remove('pi-heart');
+                heartIcon.classList.add('pi-heart-fill');
+                alert("Added to favorites successfully!");
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('An error occurred. Please try again.');
+        });
+}
+
+</script>
 </body>
 </html>

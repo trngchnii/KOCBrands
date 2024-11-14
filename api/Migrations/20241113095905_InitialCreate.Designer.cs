@@ -12,8 +12,8 @@ using api.Data;
 namespace api.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241110191737_Initial1")]
-    partial class Initial1
+    [Migration("20241113095905_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -105,7 +105,7 @@ namespace api.Migrations
                         {
                             BrandId = 1,
                             BrandName = "Brand ABC",
-                            ImageCover = "brand_abc_cover.jpg",
+                            ImageCover = "NULL",
                             TaxCode = "1234567890",
                             UserId = 2
                         });
@@ -403,28 +403,28 @@ namespace api.Migrations
                         {
                             UserId = 1,
                             Address = "123 Main St, City, Country",
-                            Avatar = "avatar1.jpg",
+                            Avatar = "NULL",
                             Bio = "Bio of John Doe",
-                            CreatedAt = new DateTime(2024, 11, 11, 2, 17, 37, 85, DateTimeKind.Local).AddTicks(453),
+                            CreatedAt = new DateTime(2024, 11, 13, 16, 59, 5, 158, DateTimeKind.Local).AddTicks(2076),
                             Email = "ni.trnh59@gmail.com",
                             Password = "Abc123#",
                             Phonenumber = "123456789",
                             Status = "Active",
-                            UpdatedAt = new DateTime(2024, 11, 11, 2, 17, 37, 85, DateTimeKind.Local).AddTicks(468),
+                            UpdatedAt = new DateTime(2024, 11, 13, 16, 59, 5, 158, DateTimeKind.Local).AddTicks(2091),
                             UserName = "hanni_44"
                         },
                         new
                         {
                             UserId = 2,
                             Address = "456 Brand St, City, Country",
-                            Avatar = "avatar2.jpg",
+                            Avatar = "NULL",
                             Bio = "Brand ABC official account",
-                            CreatedAt = new DateTime(2024, 11, 11, 2, 17, 37, 85, DateTimeKind.Local).AddTicks(471),
+                            CreatedAt = new DateTime(2024, 11, 13, 16, 59, 5, 158, DateTimeKind.Local).AddTicks(2094),
                             Email = "contact@brandabc.com",
                             Password = "password123",
                             Phonenumber = "987654321",
                             Status = "Active",
-                            UpdatedAt = new DateTime(2024, 11, 11, 2, 17, 37, 85, DateTimeKind.Local).AddTicks(472),
+                            UpdatedAt = new DateTime(2024, 11, 13, 16, 59, 5, 158, DateTimeKind.Local).AddTicks(2094),
                             UserName = "brand_abc"
                         });
                 });

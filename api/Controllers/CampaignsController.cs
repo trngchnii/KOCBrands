@@ -40,35 +40,40 @@ namespace api.Controllers
             return Ok(campaign);
         }
 
-        [HttpPut]
-        public async Task<IActionResult> Put([FromODataUri] int key, [FromBody] Campaign campaign)
+        [HttpPut("{key}")]
+        public async Task<IActionResult> Put([FromODataUri] int key, [FromBody] UpdateCampaignDto campaign)
         {
             if (!ModelState.IsValid || campaign == null)
             {
                 return BadRequest(ModelState);
             }
-            var result = await _campainRepository.UpdateAsync(campaign);
+            var result = await _campainRepository.UpdateAsync(key, campaign);
 
             return NoContent();
         }
 
-        [HttpPost("create-campaign")]
-        public async Task<ActionResult> CreateCampaign([FromBody] Campaign campaign)
+        [HttpPost]
+        public async Task<ActionResult> Post([FromBody] CreateCampaingDTO campaign)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            try
+            var newCampaign = new Campaign()
             {
-                await _campainRepository.AddAsync(campaign);
-                return Ok();
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Error while adding campaign: " + ex.Message);
-                return StatusCode(500, "Đã xảy ra lỗi trong quá trình xử lý yêu cầu.");
-            }
+                BrandId = campaign.BrandId,
+                Description = campaign.Description,
+                Title = campaign.Title,
+                Budget = campaign.Budget,
+                StartDate = campaign.StartDate,
+                Requirements = campaign.Requirements,
+                EndDate = campaign.EndDate,
+                FaviconId = campaign.FaviconId,
+                Status = campaign.Status,
+
+            };
+            await _campainRepository.AddAsync(newCampaign);
+            return Created(newCampaign);
         }
 
         [HttpDelete("{key}")]

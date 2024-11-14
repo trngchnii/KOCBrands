@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.OData.Routing.Controllers;
 
 namespace api.Controllers
 {
-    [Route("odata/Proposals")]
+    [Route("odata/Proposal")]
     [ApiController]
     public class ProposalController : ODataController
     {

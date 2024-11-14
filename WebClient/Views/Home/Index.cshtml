@@ -1,12 +1,39 @@
-﻿@{
+﻿@model IEnumerable<api.DTOs.InfluencerDto>
+@{
     ViewData["Title"] = "Home Page";
+}
+@section ListKOCHome{
+    <style>
+        .custom-grid-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0px;
+        }
+
+        .horizontal-md {
+            flex: 1 1 calc(33.33% - 20px);
+            box-sizing: border-box;
+        }
+
+        .horizontal-sm {
+            flex: 1 1 calc(50% - 20px);
+        }
+
+        .horizontal-full {
+            flex: 1 1 1%;
+        }
+
+        img.max-w-full.w-full.vertical-align-middle {
+            object-fit: cover;
+        }
+    </style>
 }
 
 
 <body>
     <div id="__next" data-reactroot="">
         <div class="layout-wrapper layout-theme-light layout-static layout-static-inactive p-ripple-disabled">
-   
+
             <div class="ml-0 layout-main-container">
                 <div class="layout-main">
                     <div class="grid m-0 index-homepage">
@@ -17,28 +44,28 @@
                                     <a class="item-quick-search" title="KOC thời trang"
                                        href="components/search-kocs0f11.html?careerCodes=3">
                                         <div class="img">
-                                            <img alt="KOC thời trang" src="https://mykol.vn/demo/images/home/Top1.png" />
+                                            <img style="object-fit: cover;width: 152px; height: 152px;margin-left: 30%;" alt="KOC thời trang" src="https://kenh14cdn.com/thumb_w/620/203336854389633024/2022/4/5/18-16491337377962085852811.png" />
                                         </div>
                                         <div class="name">KOC thời trang</div>
                                     </a><a class="item-quick-search" title="KOC làm đẹp"
                                            href="components/search-kocs09b8.html?careerCodes=2">
-                                        <div class="img"><img alt="KOC làm đẹp" src="https://mykol.vn/demo/images/home/Top2.png" /></div>
+                                        <div class="img"><img style="object-fit: cover;width: 152px; height: 152px;margin-left: 30%;" alt="KOC làm đẹp" src="https://medialabs.asia/cms/assets/6c86cc0a-f177-4215-ad08-cc38ea5c204b?width=800&height=450" /></div>
                                         <div class="name">KOC làm đẹp</div>
                                     </a><a class="item-quick-search" title="Mẫu ảnh/Livesteam"
                                            href="components/search-kocsc330.html?careerCodes=20">
                                         <div class="img">
-                                            <img alt="Mẫu ảnh/Livesteam" src="https://mykol.vn/demo/images/home/Top3.png" />
+                                            <img style="object-fit: cover;width: 152px; height: 152px;margin-left: 35%;" alt="Mẫu ảnh/Livesteam" src="https://cdnphoto.dantri.com.vn/DCsVPea6V7wfj_hQ4wSYyohTBDA=/thumb_w/1020/2024/10/31/hot-girl-gen-z-xinh-dep-kiem-tien-gioi-nho-cong-viec-mau-anh-livestream-1-edited-1730376139394.jpeg" />
                                         </div>
                                         <div class="name">Mẫu ảnh/Livesteam</div>
                                     </a><a class="item-quick-search" title="KOC Mẹ và bé"
                                            href="components/search-kocse664.html?careerCodes=6">
                                         <div class="img">
-                                            <img alt="KOC Mẹ và bé" src="https://mykol.vn/demo/images/home/Top4.png" />
+                                            <img style="object-fit: cover;width: 152px; height: 152px;margin-left: 30%;" alt="KOC Mẹ và bé" src="https://afamilycdn.com/150157425591193600/2023/11/1/longbeomap33929619710153729194273064674481850905872928n-16988117530471729661006-1698840321925-1698840322278176582143.jpg" />
                                         </div>
                                         <div class="name">KOC Mẹ và bé</div>
                                     </a><a class="item-quick-search" title="Xem tất cả"
                                            href="components/search-kocs.html">
-                                        <div class="img"><img alt="Xem tất cả" src="https://mykol.vn/demo/images/home/Top5.png" /></div>
+                                        <div class="img"><img style="object-fit: cover;width: 152px; height: 152px;margin-left: 30%;" alt="Xem tất cả" src="https://marketingai.mediacdn.vn/zoom/700_438/603488451643117568/2024/7/11/danh-sach-cac-kol-noi-tieng-viet-nam-172069649889725344152-0-36-675-1116-crop-1720696597627777645510.jpg" /></div>
                                         <div class="name">Xem tất cả</div>
                                     </a>
                                 </div>
@@ -477,11 +504,6 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="text-center" style="background-color:#F5F5F5">
-                            <img class="max-w-full vertical-align-middle" src="https://mykol.vn/demo/images/banner/banner-2.png"
-                                 alt="Banner" /><img class="max-w-full vertical-align-middle"
-                                                     src="https://mykol.vn/demo/images/banner/banner-1.png" alt="Banner" />
-                        </div>
                         <div class="form-search text-center md:my-6 my-2">
                             <div class="title-gradient">Tìm Kiếm Influencer</div>
                             <div class="title-form-search shadow-1">
@@ -494,24 +516,85 @@
                                 </div>
                                 <div class="item-form-search bookingPrice cursor-pointer text-left relative">
                                     <div class="absolute w-full h-full left-0 top-0" style="z-index:15"></div><label class="cursor-pointer">Giá booking</label><span>Chọn giá Booking</span>
-                                </div><button class="btn cursor-pointer" type="submit"></button>
+                                </div>
+                                <button class="btn cursor-pointer" type="button" onclick="window.location.href='/Search/Index';"></button>
                             </form>
                         </div>
                         <div id="search-kol-home" class="w-full bg-white">
                             <div class="container">
                                 <div class="card md:pb-6 pb-3 pl-3 pr-3 shadow-1 md:mt-6 mt-3 md:mb-3 my-3 border-round-2xl w-full">
-                                    <div class="p-dataview p-component p-dataview-list">
-                                        <div class="p-dataview-content">
-                                            <div class="p-grid grid p-nogutter grid-nogutter">
-                                                <div class="p-col-12 col-12 p-dataview-emptymessage">
-                                                    No results found
-                                                </div>
+                                    <div class="custom-dataview p-component p-dataview-list">
+                                        <div class="custom-dataview-content">
+                                            <div class="custom-grid-container">
+                                                @if (Model != null && Model.Any())
+                                                {
+                                                    @foreach (var influencer in Model.Take(4))
+                                                    {
+                                                        <div class="custom-col horizontal-md cursor-pointer horizontal-sm horizontal-full p-3 relative">
+                                                            <a target="_blank" class="block" href="/components/detail-candidate/?mask=@influencer.Name&amp;id=@influencer.PersonalIdentificationNumber" title="@influencer.Name">
+                                                                <div class="image text-center relative border-round-xl overflow-hidden">
+                                                                    @if (influencer.SocialMedias != null)
+                                                                    {
+                                                                        @foreach (var socialMedia in influencer.SocialMedias)
+                                                                        {
+                                                                            <div class="followers align-items-center text-white absolute border-round-3xl flex">
+                                                                                <i class="fa-brands fa-facebook" style="color: #74C0FC;"></i>
+                                                                            </div>
+                                                                            <img width="270" height="330" class="max-w-full w-full vertical-align-middle"
+                                                                                 src="https://localhost:7290/uploads/avatars/@(socialMedia.SocialMediaImg ?? "default-avatar.jpg")"
+                                                                                 loading="lazy" alt="@influencer.Name">
+                                                                        }
+                                                                    }
+                                                                    <div class="title text-left px-4 pb-4 w-full absolute">
+                                                                        <h3 class="name text-white capitalize mb-0 line-clamp-1">@influencer.Name</h3>
+                                                                        <span class="city text-white">@influencer.DateOfBirth.ToString("d")</span>
+                                                                    </div>
+                                                                </div>
+                                                            </a>
+                                                            <div class="info mt-2 flex justify-content-between flex-wrap align-items-center">
+                                                                <div class="social flex align-items-center">
+                                                                    @if (influencer.SocialMedias != null)
+                                                                    {
+                                                                        @foreach (var socialMedia in influencer.SocialMedias)
+                                                                        {
+                                                                            <a href="@socialMedia.SocialMediaLink" target="_blank" title="@socialMedia.SocialMediaName">
+                                                                                <i class="fa-brands fa-facebook" style="color: #74C0FC;"></i>
+                                                                            </a>
+                                                                        }
+                                                                    }
+                                                                    <span class="ml-1">
+                                                                        <i class="fa-brands fa-tiktok" style="color: #000000;"></i>
+                                                                    </span>
+                                                                </div>
+                                                                <div class="price">@influencer.BookingPrice.ToString("N0") VNĐ</div>
+                                                            </div>
+                                                            <div class="careers line-clamp-2">@influencer.Gender</div>
+                                                            <div class="contact-info">
+                                                                @if (influencer.User != null)
+                                                                {
+                                                                    <h5>Thông tin liên lạc</h5>
+                                                                    <p>Email: @influencer.User.Email</p>
+                                                                    <p>Số điện thoại: @influencer.User.Phonenumber</p>
+                                                                    <p>Thành Phố: @influencer.User.Address</p>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <p>Chưa có thông tin cụ thể</p>
+                                                                }
+                                                            </div>
+                                                        </div>
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    <p>No KOCs available to display.</p>
+                                                }
                                             </div>
                                         </div>
                                     </div>
                                     <div class="text-right mt-4 mr-3">
-                                        <a class="view-all-koc inline-block"
-                                           href="components/search-kocs.html" title="Xem tất cả">
+                                        <a class="view-all-koc inline-block" onclick="window.location.href='/Search/Index';"
+                                            title="Xem tất cả">
                                             <span>
                                                 Xem tất cả <i class="pi pi-angle-double-right"></i>
                                             </span>
@@ -857,14 +940,14 @@
                         </a>
                     </div>
                 </div>
-              
+
             </div>
             <div class="layout-mask"></div>
         </div>
     </div>
-@*     <script id="__NEXT_DATA__"
-            type="application/json">{"props":{"pageProps":{}},"page":"/","query":{},"buildId":"1hnPLuHKtEE3djqGttqdh","runtimeConfig":{"contextPath":"","uploadPath":"/api/upload","url":"https://api.mykol.vn","siteSEO":"https://mykol.vn","path":"/api/kols/","pathV2":"/api/v2/kols/"},"nextExport":true,"autoExport":true,"isFallback":false,"scriptLoader":[]}
-        </script> *@
+    @*     <script id="__NEXT_DATA__"
+    type="application/json">{"props":{"pageProps":{}},"page":"/","query":{},"buildId":"1hnPLuHKtEE3djqGttqdh","runtimeConfig":{"contextPath":"","uploadPath":"/api/upload","url":"https://api.mykol.vn","siteSEO":"https://mykol.vn","path":"/api/kols/","pathV2":"/api/v2/kols/"},"nextExport":true,"autoExport":true,"isFallback":false,"scriptLoader":[]}
+    </script> *@
 </body>
 
 </html>

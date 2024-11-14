@@ -19,13 +19,6 @@ namespace api.Controllers
             _db = db;
         }
         [HttpGet]
-        [Route("getalluser")]
-        public IActionResult Get()
-        {
-            IEnumerable<User> list = _db.Users.ToList();
-            return Ok(list);
-        }
-        [HttpGet]
         [Route("getuser")]
         public IActionResult Get(string? searchString, int pageNumber = 1, int pageSize = 5)
         {
@@ -152,7 +145,5 @@ namespace api.Controllers
             await _db.SaveChangesAsync();
             return Ok();
         }
-
-
     }
 }
