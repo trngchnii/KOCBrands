@@ -4,6 +4,7 @@ using System.Net.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using WebClient.Models;
+using api.Models;
 
 namespace WebClient.Controllers;
 
@@ -28,6 +29,24 @@ public class HomeController : Controller
         {
             var jsonResponse = await response.Content.ReadAsStringAsync();
             var kocs = JsonConvert.DeserializeObject<IEnumerable<InfluencerDto>>(jsonResponse);
+
+            foreach (var influencer in kocs)
+            {
+                if (influencer.User != null && string.IsNullOrEmpty(influencer.User.Avatar))
+                {
+                    influencer.User.Avatar = "default-avatar.jpg";
+                }
+                if (influencer.SocialMedias != null)
+                {
+                    foreach (var socialMedia in influencer.SocialMedias)
+                    {
+                        if (socialMedia.FollowersCount == null || socialMedia.FollowersCount == 0)
+                        {
+                            socialMedia.FollowersCount = 1000;
+                        }
+                    }
+                }
+            }
 
             return View(kocs);
         }

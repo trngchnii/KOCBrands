@@ -188,10 +188,10 @@ namespace WebClient.Controllers
                 {
                     HttpContext.Response.Cookies.Append("InfluencerId", influencer.InfluencerId.ToString(), cookieOptions);
                 }
-                if (brand != null)
-                {
-                    HttpContext.Response.Cookies.Append("BrandId", brand.BrandId.ToString(), cookieOptions);
-                }
+                //if (brand != null)
+                //{
+                //    HttpContext.Response.Cookies.Append("BrandId", brand.BrandId.ToString(), cookieOptions);
+                //}
 
                 if (user.Role == "user")
                 {

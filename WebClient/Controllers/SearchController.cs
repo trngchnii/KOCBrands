@@ -27,6 +27,24 @@ namespace WebClient.Controllers
                 var jsonResponse = await response.Content.ReadAsStringAsync();
                 var kocs = JsonConvert.DeserializeObject<IEnumerable<InfluencerDto>>(jsonResponse);
 
+				foreach (var influencer in kocs)
+				{
+					if (influencer.User != null && string.IsNullOrEmpty(influencer.User.Avatar))
+					{
+						influencer.User.Avatar = "default-avatar.jpg";
+					}
+                    if (influencer.SocialMedias != null)
+                    {
+                        foreach (var socialMedia in influencer.SocialMedias)
+                        {
+                            if (socialMedia.FollowersCount == null || socialMedia.FollowersCount == 0)
+                            {
+                                socialMedia.FollowersCount = 1000;
+                            }
+                        }
+                    }
+                }
+                
                 return View(kocs);
             }
 
@@ -45,7 +63,25 @@ namespace WebClient.Controllers
             {
                 var jsonResponse = await response.Content.ReadAsStringAsync();
                 influencers = JsonConvert.DeserializeObject<IEnumerable<InfluencerDto>>(jsonResponse);
-            }
+
+				foreach(var influencer in influencers)
+				{
+					if (influencer.User != null && string.IsNullOrEmpty(influencer.User.Avatar))
+					{
+						influencer.User.Avatar = "default-avatar.jpg";
+					}
+                    if (influencer.SocialMedias != null)
+                    {
+                        foreach (var socialMedia in influencer.SocialMedias)
+                        {
+                            if (socialMedia.FollowersCount == null || socialMedia.FollowersCount == 0)
+                            {
+                                socialMedia.FollowersCount = 1000;
+                            }
+                        }
+                    }
+                }
+			}
 
             return View("Index", influencers);
         }
