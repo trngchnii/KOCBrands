@@ -45,40 +45,47 @@ namespace api.Repository
 
         public async Task UpdateInfluencerAsync(int influencerId,UpdateInfluencerRequestDto requestDto)
         {
-            // Tìm influencer theo InfluencerId
-            var influencer = await _context.Influencers
-                .Include(i => i.User) // Include User để cập nhật Avatar
-                .FirstOrDefaultAsync(i => i.InfluencerId == influencerId);
-
-            if (influencer == null)
+            try
             {
-                throw new Exception("Influencer not found");
+                // Tìm influencer theo InfluencerId
+                var influencer = await _context.Influencers
+                    .Include(i => i.User) // Include User để cập nhật Avatar
+                    .FirstOrDefaultAsync(i => i.InfluencerId == influencerId);
+
+                if (influencer == null)
+                {
+                    throw new Exception("Influencer not found");
+                }
+
+                // Cập nhật các thuộc tính của Influencer và User từ DTO
+                influencer.Name = requestDto.Name;
+                influencer.Gender = requestDto.Gender ?? "Nam";
+                influencer.DateOfBirth = requestDto.DateOfBirth;
+                influencer.BookingPrice = requestDto.BookingPrice;
+                influencer.PersonalIdentificationNumber = requestDto.PersonalIdentificationNumber;
+                influencer.User.Email = requestDto.Email;
+                influencer.User.Bio = requestDto.Bio;
+                influencer.User.Phonenumber = requestDto.PhoneNumber;
+                influencer.User.Address = requestDto.Address;
+
+                // Xử lý avatar
+                if (requestDto.AvatarFile != null && requestDto.AvatarFile.Length > 0)
+                {
+                    // Upload ảnh mới và lấy đường dẫn
+                    var avatarPath = await UploadAvatarAsync(influencer.User.Avatar,requestDto.AvatarFile);
+                    influencer.User.Avatar = avatarPath; // Cập nhật đường dẫn avatar vào User
+                }
+
+                // Cập nhật thời gian sửa đổi
+                influencer.User.UpdatedAt = DateTime.Now;
+
+                // Lưu thay đổi vào database
+                await _context.SaveChangesAsync();
             }
-
-            // Cập nhật các thuộc tính của Influencer và User từ DTO
-            influencer.Name = requestDto.Name;
-            influencer.Gender = requestDto.Gender;
-            influencer.DateOfBirth = requestDto.DateOfBirth;
-            influencer.BookingPrice = requestDto.BookingPrice;
-            influencer.PersonalIdentificationNumber = requestDto.PersonalIdentificationNumber;
-            influencer.User.Email = requestDto.Email;
-            influencer.User.Bio = requestDto.Bio;
-            influencer.User.Phonenumber = requestDto.PhoneNumber;
-            influencer.User.Address = requestDto.Address;
-
-            // Xử lý avatar
-            if (requestDto.AvatarFile != null && requestDto.AvatarFile.Length > 0)
+            catch (Exception ex)
             {
-                // Upload ảnh mới và lấy đường dẫn
-                var avatarPath = await UploadAvatarAsync(influencer.User.Avatar,requestDto.AvatarFile);
-                influencer.User.Avatar = avatarPath; // Cập nhật đường dẫn avatar vào User
+                throw ex;
             }
-
-            // Cập nhật thời gian sửa đổi
-            influencer.User.UpdatedAt = DateTime.Now;
-
-            // Lưu thay đổi vào database
-            await _context.SaveChangesAsync();
         }
 
         // Phương thức riêng xử lý việc upload avatar

@@ -4,6 +4,8 @@
     var role = HttpContextAccessor.HttpContext.Session.GetString("Role");
     var influencerId = HttpContextAccessor.HttpContext.Session.GetInt32("InfluencerId");
     var brandId = HttpContextAccessor.HttpContext.Session.GetInt32("BrandId");
+    var influName = HttpContextAccessor.HttpContext.Session.GetString("InfluencerName");
+    var brandName = HttpContextAccessor.HttpContext.Session.GetString("BrandName");
 }
 
 <!DOCTYPE html>
@@ -88,14 +90,7 @@
                         <i class="pi pi-briefcase mr-1"></i><span>Tin tuyển dụng</span>
                     </a>
                 </li>
-                @if (brandId != null)
-                {
-                    <li role="none" class="p-menuitem" data-pc-section="menuitem">
-                        <a class="p-menuitem-link" href="/Campaign/GetListByBrand">
-                            <i class="pi pi-briefcase mr-1"></i><span>Danh sách tuyển dụng</span>
-                        </a>
-                    </li>
-                }
+                
 
                
             </ul>
@@ -118,15 +113,33 @@
                 }
 
                 <div>
-                        @if (userId != null)
-                        {
-                        <a href="/Login/Logout" aria-label="Đăng nhập" class="p-button p-component p-button-text"
-                           data-pc-name="button" data-pc-section="root">
-                            <span class="p-button-icon p-c p-button-icon-left pi pi-sign-in"
-                                  data-pc-section="icon"></span><span class="p-button-label p-c" data-pc-section="label">Đăng xuất</span><span role="presentation" class="p-ink" style="height: 148.25px; width: 148.25px;"></span>
-                        </a>
-                            
-                        }
+                    @if (userId != null)
+                    {
+                        <div class="dropdown">
+                            <button class="btn dropdown-toggle" style="color: #FD4C5C; font-weight: 600;" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                                @if (brandId != null)
+                                {
+                                    <span>@brandName</span>
+                                }
+                                else
+                                {
+                                    <span>@influName</span>
+                                }
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                @if (influencerId != null)
+                                {
+                                    <li><a class="dropdown-item" href="@Url.Action("EditProfile", "Influencer")">Chỉnh sửa thông tin</a></li>
+                                }
+                                else
+                                {
+                                    <li><a class="dropdown-item" href="@Url.Action("EditProfile", "Brand")">Chỉnh sửa thông tin</a></li>
+                                    <li><a class="dropdown-item" href="/Campaign/GetListByBrand">Danh sách tuyển dụng</a></li>
+                                }
+                                <li><a class="dropdown-item" href="/Login/Logout">Đăng xuất</a></li>
+                            </ul>
+                        </div>
+                    }
                 </div>
             </div>
 
@@ -220,3 +233,18 @@
 </body>
 
 </html>
+<style>
+    .dropdown-menu .dropdown-item {
+        color: #6c757d !important; /* Màu xám */
+        font-weight: 500; /* Tăng độ đậm */
+        padding: 10px 15px; /* Khoảng cách bên trong */
+        transition: color 0.3s ease, background-color 0.3s ease;
+    }
+
+        .dropdown-menu .dropdown-item:hover {
+            color: #fff !important; /* Màu trắng khi di chuột */
+            background-color: #FD4C5C; /* Màu nền đỏ nhạt khi di chuột */
+            border-radius: 5px; /* Góc bo tròn nhẹ */
+        }
+
+</style>

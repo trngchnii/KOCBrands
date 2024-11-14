@@ -168,51 +168,63 @@ namespace WebClient.Controllers
         }
 
         [HttpPost]
-        public ActionResult Login(string EmailLogin, string PasswordLogin)
+        public ActionResult Login(string EmailLogin,string PasswordLogin)
         {
-            var user = _context.Users.FirstOrDefault(u => u.Email == EmailLogin && u.Password == PasswordLogin);
+            var user = _context.Users
+                .Include(i => i.Influencer)
+                .Include(b => b.Brand)
+                .FirstOrDefault(u => u.Email == EmailLogin && u.Password == PasswordLogin);
 
             if (user != null)
             {
-                var influencer = _context.Influencers.FirstOrDefault(i => i.UserId == user.UserId);
-                var brand = _context.Brands.FirstOrDefault(i => i.UserId == user.UserId);
+                // Đặt session cho User
                 HttpContext.Session.SetInt32("UserId",user.UserId);
                 HttpContext.Session.SetString("Role",user.Role);
 
-                var cookieOptions = new CookieOptions
+                // Thiết lập các giá trị session và cookie nếu Influencer tồn tại
+                if (user.Influencer != null)
                 {
-                    Expires = DateTimeOffset.Now.AddDays(30),
-                    IsEssential = true
-                };
-                HttpContext.Response.Cookies.Append("UserId",user.UserId.ToString(),cookieOptions);
-
-                if (influencer != null)
-                {
-                    HttpContext.Response.Cookies.Append("InfluencerId",influencer.InfluencerId.ToString(),cookieOptions);
-                    HttpContext.Session.SetInt32("InfluencerId",influencer.InfluencerId);
-                }
-                if (brand != null)
-                { 
-                   HttpContext.Response.Cookies.Append("BrandId", brand.BrandId.ToString(), cookieOptions);
-                    HttpContext.Session.SetInt32("BrandId",brand.BrandId);
+                    HttpContext.Session.SetString("InfluencerName",user.Influencer.Name);
+                    var cookieOptions = new CookieOptions
+                    {
+                        Expires = DateTimeOffset.Now.AddDays(30),
+                        IsEssential = true
+                    };
+                    HttpContext.Response.Cookies.Append("InfluencerId",user.Influencer.InfluencerId.ToString(),cookieOptions);
+                    HttpContext.Session.SetInt32("InfluencerId",user.Influencer.InfluencerId);
                 }
 
+                // Thiết lập các giá trị session và cookie nếu Brand tồn tại
+                if (user.Brand != null)
+                {
+                    HttpContext.Session.SetString("BrandName",user.Brand.BrandName);
+                    var cookieOptions = new CookieOptions
+                    {
+                        Expires = DateTimeOffset.Now.AddDays(30),
+                        IsEssential = true
+                    };
+                    HttpContext.Response.Cookies.Append("BrandId",user.Brand.BrandId.ToString(),cookieOptions);
+                    HttpContext.Session.SetInt32("BrandId",user.Brand.BrandId);
+                }
+
+                // Điều hướng theo vai trò của người dùng
                 if (user.Role == "user")
                 {
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index","Home");
                 }
                 else if (user.Role == "admin")
                 {
-                    return RedirectToAction("DashBoard", "Admin");
+                    return RedirectToAction("DashBoard","Admin");
                 }
             }
             else
             {
-                ModelState.AddModelError("", "Email hoặc mật khẩu không đúng. Vui lòng thử lại!");
+                ModelState.AddModelError("","Email hoặc mật khẩu không đúng. Vui lòng thử lại!");
                 return View();
             }
             return View();
         }
+
 
         [HttpPost]
         public async Task<IActionResult> SendOTP([FromBody] string EmailRegister)
