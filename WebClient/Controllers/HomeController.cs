@@ -18,7 +18,7 @@ public class HomeController : Controller
         _httpClient = httpClient;
     }
 
-    public async Task<IActionResult> IndexAsync()
+    public IActionResult Index(string? code = null, string? id = null, string? cancel = null, string? status = null, string? orderCode = null)
     {
         string apiUrl = "https://localhost:7290/odata/SeachKOL/";
 

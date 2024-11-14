@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@model api.Models.Influencer
+
+<!DOCTYPE html>
 <html lang="vi">
 
 <head>
@@ -171,7 +173,7 @@
                                 </div>
                             </div>
                             <div class="text-center">
-                                <h5 class="fs-5 mb-0 fw-semibold">Tên KOL</h5>
+                                <h5 class="fs-5 mb-0 fw-semibold">@Model.Name</h5>
                                 <p class="mb-0 fs-4">KOL Tiktok</p>
                             </div>
                         </div>
@@ -211,23 +213,23 @@
                         <div class="card shadow-none border">
                             <div class="card-body">
                                 <h4 class="fw-semibold mb-3">Thông tin liên hệ</h4>
-                                <p>Hello, I am Mathew Anderson. I love making websites and graphics. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                <p>Xin chào tớ là @Model.Name , chào mừng bạn ghé thăm trang cá nhân của mình, rất vui nếu chúng ta có cơ hội hợp tác</p>
                                 <ul class="list-unstyled mb-0">
                                     <li class="d-flex align-items-center gap-3 mb-4">
                                         <i class="fa fa-briefcase text-dark fs-6"></i>
-                                        <h6 class="fs-4 fw-semibold mb-0">Sir, P P Institute Of Science</h6>
+                                        <h6 class="fs-4 fw-semibold mb-0">@Model.User.UserName</h6>
                                     </li>
                                     <li class="d-flex align-items-center gap-3 mb-4">
                                         <i class="fa fa-envelope text-dark fs-6"></i>
-                                        <h6 class="fs-4 fw-semibold mb-0">xyzjonathan@gmail.com</h6>
+                                        <h6 class="fs-4 fw-semibold mb-0">@Model.User.Email</h6>
                                     </li>
                                     <li class="d-flex align-items-center gap-3 mb-4">
                                         <i class="fa fa-desktop text-dark fs-6"></i>
-                                        <h6 class="fs-4 fw-semibold mb-0">www.xyz.com</h6>
+                                        <h6 class="fs-4 fw-semibold mb-0">@Model.User.Bio</h6>
                                     </li>
                                     <li class="d-flex align-items-center gap-3 mb-2">
                                         <i class="fa fa-list text-dark fs-6"></i>
-                                        <h6 class="fs-4 fw-semibold mb-0">Newyork, USA - 100001</h6>
+                                        <h6 class="fs-4 fw-semibold mb-0">@Model.User.Phonenumber</h6>
                                     </li>
                                 </ul>
                             </div>
@@ -236,36 +238,35 @@
                             <div class="card">
                                 <h4 class="fw-semibold mb-3">Chiến dịch nổi bật</h4>
                                 <div class="card-header">
-                                    Chiến dịch 1
+                                    Super Friday
                                 </div>
                                 <div class="card-header">
-                                    Chiến dịch 2
+                                    Mega Tech
                                 </div>
 
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-8">
-
                         <div class="card">
                             <div class="card-body border-bottom">
                                 <div class="d-flex align-items-center gap-3">
-                                    <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="" class="rounded-circle" width="40" height="40">
-                                    <h6 class="fw-semibold mb-0 fs-4">Mathew Anderson</h6>
-                                    <span class="fs-2"><span class="p-1 bg-light rounded-circle d-inline-block"></span> 15 min ago</span>
+                                    <h2 style="color:orange">Chào mừng đến với Trang cá nhân của @Model.Name</h2>
                                 </div>
                                 <p class="text-dark my-3">
-                                    Nu kek vuzkibsu mooruno ejepogojo uzjon gag fa ezik disan he nah. Wij wo pevhij tumbug rohsa ahpi ujisapse lo vap labkez eddu suk.
+                                    Tôi tự hào là gương mặt thương hiệu tiên phong trong ngành sản phẩm chăm sóc da mặt và cơ thể, tất cả sản phẩm đều được kiểm nghiệm da liễu và cấp phép bởi Cục Quản lý Dược. Được biết đến qua những sản phẩm nổi bật như Gel tẩy tế bào chết, Kem dưỡng da toàn thân, Kem dưỡng trắng vùng nách, và Tinh chất trị mụn.
                                 </p>
-                                <img src="https://www.bootdey.com/image/680x380/FF7F50/000000" alt="" class="img-fluid rounded-4 w-100 object-fit-cover" style="height: 360px;">
-                                <div class="d-flex align-items-center my-3">
-                                </div>
-
+                                <p>
+                                     Tôi nhận thấy sự ảnh hưởng mạnh mẽ của bạn trong cộng đồng trên nền tảng Tiktok, và rất mong được hợp tác với bạn. Chúng tôi tin rằng sự kết hợp giữa sản phẩm chất lượng của GMEELAN và khả năng kết nối của bạn sẽ mang lại những trải nghiệm tuyệt vời cho người tiêu dùng. Cùng nhau, chúng ta có thể giới thiệu những sản phẩm bán chạy nhất của GMEELAN đến gần hơn với người tiêu dùng.
+                                </p>
+                                <p class="text-dark my-3">
+                                    Rất mong nhận được phản hồi từ bạn để bắt đầu cuộc thảo luận về cơ hội hợp tác này. Bạn có thể liên hệ trực tiếp với chúng tôi qua Zalo theo số điện thoại <strong>@Model.User.Phonenumber</strong> để trao đổi chi tiết thêm.
+                                </p>
                             </div>
-
                         </div>
-
                     </div>
+
+
                 </div>
             </div>
 

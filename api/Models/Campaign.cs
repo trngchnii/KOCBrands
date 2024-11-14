@@ -20,8 +20,8 @@ namespace api.Models
 		public DateTime CreatedDate { get; set; } = DateTime.Now;
 		public DateTime UpdatedDate { get; set; } = DateTime.Now;
 		public Brand? Brand { get; set; }
-		public List<Category> Categories { get; set; } = new List<Category>();
-		public List<Proposal> Proposals { get; set; } = new List<Proposal>();
+		public List<Category>? Categories { get; set; } = new List<Category>();
+		public List<Proposal>? Proposals { get; set; } = new List<Proposal>();
 		public Favourite? Favourite { get; set; }
 	}
 }
