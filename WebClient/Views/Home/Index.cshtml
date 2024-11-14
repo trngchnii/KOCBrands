@@ -538,7 +538,7 @@
                                                                         @foreach (var socialMedia in influencer.SocialMedias)
                                                                         {
                                                                             <div class="followers align-items-center text-white absolute border-round-3xl flex">
-                                                                                <i class="fa-brands fa-facebook" style="color: #74C0FC;"></i>
+                                                                                <i class="fa-brands fa-facebook" style="color: #74C0FC;"></i> @socialMedia.FollowersCount
                                                                             </div>
                                                                             <img width="270" height="330" class="max-w-full w-full vertical-align-middle"
                                                                                  src="https://localhost:7290/uploads/avatars/@(socialMedia.SocialMediaImg ?? "default-avatar.jpg")"
