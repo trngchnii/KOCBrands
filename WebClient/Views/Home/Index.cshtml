@@ -528,7 +528,7 @@
                                             <div class="custom-grid-container">
                                                 @if (Model != null && Model.Any())
                                                 {
-                                                    @foreach (var influencer in Model)
+                                                    @foreach (var influencer in Model.Take(4))
                                                     {
                                                         <div class="custom-col horizontal-md cursor-pointer horizontal-sm horizontal-full p-3 relative">
                                                             <a target="_blank" class="block" href="/components/detail-candidate/?mask=@influencer.Name&amp;id=@influencer.PersonalIdentificationNumber" title="@influencer.Name">
