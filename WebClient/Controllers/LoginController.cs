@@ -175,7 +175,6 @@ namespace WebClient.Controllers
             if (user != null)
             {
                 var influencer = _context.Influencers.FirstOrDefault(i => i.UserId == user.UserId);
-                var brand = _context.Brands.FirstOrDefault(i => i.UserId == user.UserId);
 
                 var cookieOptions = new CookieOptions
                 {

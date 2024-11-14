@@ -48,6 +48,7 @@ namespace WebClient.Controllers
         }
         public class InfluencerEditViewModel
         {
+            public Influencer Influencer { get; set; } // Dùng cho GET
             public UpdateInfluencerRequestDto InfluencerEditDto { get; set; } // Dùng cho POST
         }
 
@@ -65,9 +66,6 @@ namespace WebClient.Controllers
         }
         private UpdateInfluencerRequestDto MapInfluencerToDto(Influencer influencer)
         {
-            //ham gìiformFile TỪ ANH
-            var file = "https://localhost:7290/" + influencer?.User?.Avatar;
-
             return new UpdateInfluencerRequestDto
             {
                 Name = influencer.Name,
@@ -79,28 +77,15 @@ namespace WebClient.Controllers
                 Bio = influencer.User?.Bio ?? string.Empty,
                 PhoneNumber = influencer.User?.Phonenumber ?? string.Empty,
                 Address = influencer.User?.Address ?? string.Empty,
-                AvatarFile = null,
-                RealAvatar = file
+                AvatarFile = null
             };
         }
 
-        public IFormFile GetIFormFileFromPath(string filePath)
-        {
-            // Mở file từ đường dẫn
-            var fileStream = new FileStream(filePath,FileMode.Open,FileAccess.Read);
-
-            // Tạo một IFormFile từ FileStream
-            IFormFile formFile = new FormFile(fileStream,0,fileStream.Length,"file",Path.GetFileName(filePath))
-            {
-                Headers = new HeaderDictionary(),
-                ContentType = "application/octet-stream" // Hoặc bạn có thể chỉ định loại MIME tương ứng
-            };
-
-            return formFile;
-        }
 
         // GET EditProfile
         public async Task<IActionResult> EditProfile()
+
+
         {
             var influencerId = HttpContext.Request.Cookies["InfluencerId"];
 
@@ -134,6 +119,7 @@ namespace WebClient.Controllers
             // Tạo ViewModel để truyền cả Influencer và DTO cho View
             var viewModel = new InfluencerEditViewModel
             {
+                Influencer = influencer,
                 InfluencerEditDto = influencerEditDto
             };
 
@@ -142,63 +128,48 @@ namespace WebClient.Controllers
 
         // POST EditProfile
         [HttpPost]
-        public async Task<IActionResult> EditProfile(InfluencerEditViewModel influencer) 
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditProfile([FromForm] UpdateInfluencerRequestDto influencer)
         {
-            try
+            if (ModelState.IsValid)
             {
-                if (ModelState.IsValid )
+                var influencerId = HttpContext.Request.Cookies["InfluencerId"];
+                if (string.IsNullOrEmpty(influencerId))
                 {
-                    var influencerId = HttpContext.Request.Cookies["InfluencerId"];
-                    if (string.IsNullOrEmpty(influencerId))
-                    {
-                        return View("Error",new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-                    }
+                    return View("Error",new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+                }
 
-                    var formData = new MultipartFormDataContent();
-                    formData.Add(new StringContent(influencer.InfluencerEditDto.Name ?? ""),"Name");
-                    formData.Add(new StringContent(influencer.InfluencerEditDto.Gender ?? ""),"Gender");
-                    formData.Add(new StringContent(influencer.InfluencerEditDto.DateOfBirth.ToString("yyyy-MM-dd") ?? ""),"DateOfBirth");
-                    formData.Add(new StringContent(influencer.InfluencerEditDto.BookingPrice.ToString() ?? ""),"BookingPrice");
-                    formData.Add(new StringContent(influencer.InfluencerEditDto.PersonalIdentificationNumber.ToString() ?? ""),"PersonalIdentificationNumber");
-                    formData.Add(new StringContent(influencer.InfluencerEditDto.Email ?? ""),"Email");
-                    formData.Add(new StringContent(influencer.InfluencerEditDto.Bio ?? ""),"Bio");
-                    formData.Add(new StringContent(influencer.InfluencerEditDto.PhoneNumber ?? ""),"PhoneNumber");
-                    formData.Add(new StringContent(influencer.InfluencerEditDto.Address ?? ""),"Address");
+                var json = JsonConvert.SerializeObject(influencer);
+                var content = new StringContent(json,Encoding.UTF8,"application/json");
 
-                    if (influencer.InfluencerEditDto.AvatarFile != null)
-                    {
-                        var avatarContent = new StreamContent(influencer.InfluencerEditDto.AvatarFile.OpenReadStream());
-                        avatarContent.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue(influencer.InfluencerEditDto.AvatarFile.ContentType);
-                        formData.Add(avatarContent,"AvatarFile",influencer.InfluencerEditDto.AvatarFile.FileName);
-                    }
+                HttpResponseMessage res = await _httpClient.PutAsync($"{InfluencerAPIURL}/{influencerId}",content);
 
-                    HttpResponseMessage res = await _httpClient.PutAsync($"https://localhost:7290/odata/Influencers/{influencerId}",formData);
-
-
-                    if (res.IsSuccessStatusCode)
-                    {
-                        return RedirectToAction("Index","Home");
-                    }
-                    else
-                    {
-                        var errorContent = await res.Content.ReadAsStringAsync();
-                        ModelState.AddModelError(string.Empty,$"Có lỗi xảy ra khi cập nhật: {errorContent}");
-                    }
+                if (res.IsSuccessStatusCode)
+                {
+                    return RedirectToAction(nameof(Index));
                 }
                 else
                 {
-                    ModelState.AddModelError(string.Empty,"Dữ liệu nhập vào không hợp lệ. Vui lòng kiểm tra lại.");
+                    var errorContent = await res.Content.ReadAsStringAsync();
+                    ModelState.AddModelError(string.Empty,$"Có lỗi xảy ra khi cập nhật: {errorContent}");
                 }
-
-                // Initialize Influencer to avoid null reference issues in the view
-                var viewModel = new InfluencerEditViewModel{
-                    InfluencerEditDto =  influencer.InfluencerEditDto
-                };
-                return View(viewModel);
-            }catch(Exception e)
-            {
-                throw;
             }
+            else
+            {
+                ModelState.AddModelError(string.Empty,"Dữ liệu nhập vào không hợp lệ. Vui lòng kiểm tra lại.");
+            }
+
+            // Initialize Influencer to avoid null reference issues in the view
+            var viewModel = new InfluencerEditViewModel
+            {
+                InfluencerEditDto = influencer,
+                Influencer = new Influencer
+                {
+                    User = new User() // Initialize User to prevent null reference issues
+                }
+            };
+
+            return View(viewModel);
         }
     }
 }

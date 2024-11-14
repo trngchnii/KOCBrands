@@ -33,19 +33,15 @@ namespace api.Repository
 
         public async Task<IEnumerable<Campaign>> GetAllAsync()
         {
-            return await _context.Campaigns.Include(c => c.Brand)            
-                                            .ThenInclude(b => b.User)
-                                            .Include(c => c.Categories).ToListAsync();  
+            return await _context.Campaigns.Include(campaign => campaign.Categories).ToListAsync();  
         }
 
         public async Task<Campaign> GetByIdAsync(int id)
         {
-            return await _context.Campaigns.Include(c => c.Brand)
-                                            .ThenInclude(b => b.User)
-                                            .Include(c => c.Categories).FirstOrDefaultAsync(c => c.CampaignId == id);
+            return await _context.Campaigns.FirstOrDefaultAsync(c => c.CampaignId == id);
         }
 
-        public async Task<Campaign> UpdateAsync(Campaign model)
+        public async Task<Campaign> UpdateAsync(int id, UpdateCampaignDto model)
         {
             using var transaction = await _context.Database.BeginTransactionAsync();
             try
@@ -56,7 +52,7 @@ namespace api.Repository
                     .Include(b => b.Categories)
                     .Include(b => b.Brand)
                     .Include(b => b.Favourite)
-                    .FirstOrDefaultAsync(b => b.CampaignId == model.CampaignId);
+                    .FirstOrDefaultAsync(b => b.CampaignId == id);
 
                 if (existingCampaign == null)
                 {

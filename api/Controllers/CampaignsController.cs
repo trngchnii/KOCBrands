@@ -40,14 +40,14 @@ namespace api.Controllers
             return Ok(campaign);
         }
 
-        [HttpPut]
-        public async Task<IActionResult> Put([FromODataUri] int key, [FromBody] Campaign campaign)
+        [HttpPut("{key}")]
+        public async Task<IActionResult> Put([FromODataUri] int key, [FromBody] UpdateCampaignDto campaign)
         {
             if (!ModelState.IsValid || campaign == null)
             {
                 return BadRequest(ModelState);
             }
-            var result = await _campainRepository.UpdateAsync(campaign);
+            var result = await _campainRepository.UpdateAsync(key, campaign);
 
             return NoContent();
         }
@@ -67,10 +67,10 @@ namespace api.Controllers
                 Budget = campaign.Budget,
                 StartDate = campaign.StartDate,
                 Requirements = campaign.Requirements,
-                EndDate = campaign.EndDate, 
+                EndDate = campaign.EndDate,
                 FaviconId = campaign.FaviconId,
                 Status = campaign.Status,
-                
+
             };
             await _campainRepository.AddAsync(newCampaign);
             return Created(newCampaign);

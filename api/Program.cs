@@ -35,18 +35,6 @@ internal class Program
         modelBuilder.EntityType<Influencer>()
             .HasMany(p => p.Proposals);
 
-        builder.Services.AddCors(options =>
-        {
-            options.AddPolicy("AllowAll", policy =>
-            {
-                policy.AllowAnyOrigin()          // Cho phép tất cả các nguồn (origins)
-                      .AllowAnyMethod()          // Cho phép tất cả các phương thức HTTP (GET, POST, PUT, DELETE, ...)
-                      .AllowAnyHeader();         // Cho phép tất cả các headers
-            });
-        });
-        modelBuilder.EntityType<Campaign>().HasRequired(p => p.Brand);
-        modelBuilder.EntityType<Campaign>().HasMany(p => p.Categories);
-
 
         // Add services to the container.
         builder.Services.AddControllers()
